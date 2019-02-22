@@ -1,0 +1,94 @@
+%\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=43, 10.5pt, t]{beamer}
+
+\title{Serious Statistics: The Aliasing Adventure}
+\author{Jim Pitchford}
+\subtitle{\footnotesize	A review and analysis of various anti-aliasing methods used in video games, along with related technologies and methods}
+%\institute{Where You're From}
+%\date{Date of Presentation}
+\titlegraphic{
+	{\changeurlcolor{black}\qrcode[height=2cm, level=Quality]{https://1drv.ms/f/s!Alx_Ljviaz9bkimuJId0rZxyqD7r}}
+	
+	\vspace{0.25cm}
+	\href{https://1drv.ms/f/s!Alx_Ljviaz9bkimuJId0rZxyqD7r}{Presentation and Article}
+}
+
+\input{"Preamble - Presentation.tex"}
+
+\newcommand{\cfbox}[2]{
+	\colorlet{currentcolor}{.}
+	{\color{#1}
+	\fbox{\color{currentcolor}#2}}
+}
+
+\mode<presentation>
+{
+	\usetheme{Hannover}		%or try Darmstadt, Madrid, Warsaw, ...
+	\usecolortheme{default}	%or try albatross, beaver, crane, ...
+	\usefonttheme{default}	%or try serif, structurebold, ...
+	\setbeamertemplate{frametitle}[default][left]
+	\setbeamertemplate{navigation symbols}{}
+	\setbeamertemplate{caption}[numbered]
+}
+
+\definecolor{GRAY}{HTML}{c0c0c0}
+\definecolor{RED}{HTML}{ff0000}
+\definecolor{CYAN}{HTML}{00ffff}
+\definecolor{BLUE}{HTML}{0000ff}
+\definecolor{MAGENTA}{HTML}{ff00ff}
+
+\renewcommand{\image}[2][width=0.95\textwidth, height=\textheight]{
+
+	\noindent	{\centering	\includegraphics[keepaspectratio, #1]{{#2}}}
+	
+}
+
+\usepackage{qrcode}
+\newcommand{\changeurlcolor}[1]{\hypersetup{urlcolor=#1}}
+
+\setcounter{tocdepth}{4}
+%	with this the subsubsection on Stochastic Sampling will be in the PDF bookmarks too
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{Sources.bib}
+\renewcommand*{\bibfont}{\small}
+
+\begin{document}
+\graphicspath{{Media/}}
+
+\begin{frame}
+	\maketitle
+\end{frame}
+%	doing this instead of \titlepage so it will be top aligned
+
+\input{"Sections - Presentation/01 Introduction.ltx"}
+
+\input{"Sections - Presentation/02 Sampling.ltx"}
+
+\input{"Sections - Presentation/03 Rasterization.ltx"}
+
+\input{"Sections - Presentation/04 Super-Sampling and Multi-Sampling.ltx"}
+
+\input{"Sections - Presentation/05 Post Processing.ltx"}
+
+\input{"Sections - Presentation/06 Screenshots.ltx"}
+
+\input{"Sections - Presentation/99 Software.ltx"}
+
+\begin{frame}[allowframebreaks]{References}
+	\phantomsection
+	\pdfbookmark{References}{toc}
+
+	\nocite{*}
+	\printbibliography
+	
+	\begin{center}
+	\vfill
+		{\changeurlcolor{black}\qrcode[height=2cm, level=Quality]{https://1drv.ms/f/s!Alx_Ljviaz9bkimuJId0rZxyqD7r}}
+		
+		\vspace{0.25cm}
+		\href{https://1drv.ms/f/s!Alx_Ljviaz9bkimuJId0rZxyqD7r}{Presentation and Article}
+	\end{center}
+\end{frame}
+
+\end{document}

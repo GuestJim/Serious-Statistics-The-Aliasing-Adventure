@@ -1,0 +1,91 @@
+\usepackage{indentfirst}
+%	adds indent to first paragraph (something Latex does not normally do)
+
+\usepackage{csquotes}
+%	Context Sensitive Quotes - will convert straight quotes to the appropriate smart quotes automatically.
+
+\usepackage{titletoc,tocloft}
+
+\setcounter{secnumdepth}{0}
+
+\setlength{\parindent}{2em}
+%	adds an indent to the paragraphs
+
+\linespread{1.25}
+%	line spacing
+
+\usepackage{ragged2e}
+
+\usepackage{geometry}
+\geometry{
+	margin=1.0in,
+%	top=0.75in,
+	headheight=1.80cm,
+	headsep=0.75ex,
+	%footsep=0.5in,
+	footskip=0.5in,
+	bottom=1.0in
+}
+\savegeometry{normal}
+
+\usepackage{graphicx}
+\usepackage[space]{grffile}
+%	this allows spaces to be used the file names and paths of images
+
+\DeclareGraphicsExtensions{.png,.pdf}
+
+\usepackage{float}
+\renewcommand*\listfigurename{Images}
+%cof changing list of figures title, but not necessary when creating own float type
+\floatstyle{plaintop}
+\newfloat{imageflt}{H}{loi}
+
+\usepackage{caption}
+\captionsetup{
+	skip=-0.5\baselineskip,
+	labelformat=empty,
+}
+%this will set the skip between the caption and figure to be effectively missing for all floats
+
+\DeclareCaptionStyle{imageflt}{
+	listformat=empty,
+	justification=centering,
+}
+\captionsetup[imageflt]{
+	style=imageflt,
+}
+
+\newcommand{\image}[2][width=1.0\textwidth,totalheight=0.33\textheight]{
+%	the first argument is optional with the default value given above in the second set of square brackets, so no if/then statement is needed
+	\def\options{#1}
+	\def\file{#2}
+	
+	\begin{imageflt}[H]
+		\caption*{\textbf{#2}}
+		%\captionlistentry{#2}
+%
+		\vspace{2ex}	\hrule	\nobreak	\vspace{2pt}
+	%	puts space above and below the rule, while also preventing there from being a page break between the rule and the image
+		\hfill	%\hspace{-2em}
+	%	subtracting 2em as this is the indent length that I cannot otherwise remove
+			\includegraphics[keepaspectratio,#1]{{#2}}	\nobreak
+		\hspace*{\fill}
+	%	for some reason this works better than hfill
+		\vspace{2pt}	\hrule	\vspace{2ex}
+	\end{imageflt}
+}
+%by using Figures I can have the titles easily added and add \listoffigures to show all of the figures in a section
+
+\usepackage{hyperref}
+%	the package for hyperlinks and setting their color, highlight, etc.
+
+\hypersetup{
+	colorlinks,	%removes the box around links
+	linkcolor=black,
+	filecolor=black,
+	urlcolor=blue,
+%	linktoc=all,	%makes the name and page numbers links
+}
+\newcommand{\changeurlcolor}[1]{\hypersetup{urlcolor=#1}}
+
+\usepackage{qrcode}
