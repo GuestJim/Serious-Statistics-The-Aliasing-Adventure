@@ -1,0 +1,20 @@
+\section{Fast Approximate Filtering, a Fast But Simple Approach}
+
+Fast approximate anti-aliasing, or FXAA, is a rather common post-processing anti-aliasing method in use today, and if you are using an NVIDIA GPU, you can force it on through the drivers.
+As its name suggests, it is fast, but from what I have read it appears to lack some intelligence, at least for how it attempts to remove aliasing.
+By the way, I am going to try to refer to all of the post-processing methods as filtering rather than anti-aliasing, because they are in fact filters and I feel it is a fair distinction for only the rasterization-based methods to be labeled anti-aliasing.
+
+The way this fast approximate filtering works is it takes the output image and searches for edges by looking for changes in colors, like morphological filtering does.
+It then determines if the edges it finds are horizontal or vertical and finds the ends of the edge.
+Taking the pixels constituting these edges, it shifts them a sub-pixel distance perpendicularly to the edge, so a horizontal edge will be moved vertically and vice-versa.
+At this point, the image is re-sampled, so the offset pixels are, to some degree, applied as an overlay to the original.
+Basically the edges are smudged to remove the aliasing, but this is not all as a low-pass filter is also applied, if sub-pixel aliasing, like polygon popping, is present enough.
+A low-pass allows lower-frequency signals to get through, so applying it to an image means any sharply discontinuous feature will be removed, as these are high-frequency objects.
+If you remember back to the sine waves I shared earlier, a low-pass filter might remove the $y = sin(0.9 * x + 0.5)$ function but it would keep the $y = sin(0.1 * x + 0.5)$ function.
+In this specific case, the filter will use a low-pass value derived from a box filter of the 3x3 pixel neighborhood.
+A box filter has no weighting based on distance, so all of the samples are just averaged together.
+
+While this method works and is fast, because it only works with as many samples as there are pixels, it only seeks out edges to blur and then sharp and small features (high frequency features) to remove.
+It does appear there is a means for 'early exit' that will prevent pixels from being blurred if they do not need it, based on their luminance.
+Additionally, some elements like the HUD can always be applied after this filtering is done, protecting their content.
+There are also multiple presets for FXAA, making it possible to adjust its speed and quality.

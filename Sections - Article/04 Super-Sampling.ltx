@@ -1,0 +1,150 @@
+\section{Super-Sampling, the Ultimate Solution}
+
+Without a doubt, super-sampling is the best method of reducing spatial aliasing in an image, but it is also the most intensive as it multiples the number of samples made to create an image, growing the number of the fragments. 
+That not only means more work is being done to make those measurements but also more memory is needed to store the data and more memory bandwidth is necessary to feed the GPU the data.
+
+Now to challenge what I suspect is a widely held, but not fully correct idea of super-sampling: It is NOT rendering a scene at a higher resolution and then scaling the result down. 
+In some cases it may work exactly like that, but this over-sampling would not be even close to the best implementation of super-sampling for anti-aliasing. 
+To understand this we need to understand sampling pattern and filtering.
+
+The sampling pattern is what it sounds like; the pattern for taking the samples. 
+Without any modification to how samples are taken, they will fall at the center of the final pixels. 
+When you apply a modification, like super-sampling or multi-sampling, new source and corresponding end locations are necessary for these rays, though another way to visualize this is that the whole of the frustum is shifted by a sub-pixel offset, in addition to there being additional samples. 
+The placement of these sources within a pixel-sized window is the sampling pattern.
+
+When enabling either super- or multi-sampling you typically get choices like 2x, 4x, 8x, and sometimes 16x. 
+These numbers correspond to the number of samples made for each pixel, so now for the question; where within the box of a pixel do you place these samples?
+For 4x and 16x you might think a 2x2 or 4x4 grid would be good, but what about the non-square numbers; 2x and 8x?
+
+Considering just 2x for now, there are a number of options for the placement of these sample locations, and very generally they fall under Ordered Grid and Jittered Grid. 
+With Ordered Grid, the samples fall on a horizontal and vertical grid aligning with the horizontal and vertical axes of the pixel, while a Jittered Grid places these locations off this grid. 
+A Jittered Grid can have certain advantages to it, as any artifacting caused by this pattern will be better tolerated than the artifacts from an Ordered Grid, but that is not so relevant for 2x. 
+(I will share what I found about this in a later section.) Thinking about where to place these two samples, we can easily picture them being on a vertical line, horizontal line, or diagonal line, all of which would be passing through the pixel center.
+
+Moving to 4x we have some additional choices with the sampling pattern. 
+If we placed a sample at the center of each quadrant, we would have an Ordered Grid pattern, which is functional but has a couple disadvantages. 
+One is that our eyes and brains are very good at identifying patterns, so we may start noticing this pattern and any associated artifacts. 
+The other disadvantage is aligning the samples on vertical and horizontal lines mean we effective only get two vertical samples and two horizontal samples. 
+Jittered Grid patterns address both of these issues, and there are a couple patterns, or pattern types, in particular that appear to be used; Rotated Grid and Sparse Grid.
+
+For Rotated Grid you just take the ordered grid and rotate the positions about some point, so now the positions do not share horizontal or vertical components. 
+A Sparse Grid pattern does not necessarily have so easy a translation from the ordered grid. 
+An example of a Sparse Grid pattern for 4x would be to divide the pixel box into a 4x4 grid and place the samples in the grid such that no two sampling positions are in the same column or row. 
+These patterns are solutions to the 4-Rook problem, which is a placement of chess Rooks such that one cannot take another. 
+There are also a couple 4-Queen solutions that can be used (one is a 90° rotation of the other), which are similar in concept but with Queens instead, so the positions cannot be on the same diagonal line, in addition to not sharing a horizontal or vertical line. 
+In either case, we have the maximum number of horizontal and vertical samples while also having a less obvious pattern, so our brains will be less likely to notice it.
+
+Coming back to 2x, this would be a reason to place the samples on a diagonal line, as you then get two vertical and horizontal samples per pixel and a solution to the 2-Rook problem.
+
+%2X
+\image{{2x}}
+
+%4X
+\image{{4x}}
+
+There are undoubtedly more potential sampling patterns than those I have discussed and created in these two graphics. 
+You may notice a couple odd patterns in those graphics too, which have cyan dots on them, in addition to the red dots elsewhere. 
+These are Quincunx patterns, which I have seen reference to NVIDIA offering, and they offer an interesting efficiency advantage to others. 
+First I want to explain the red dots are samples while the cyan dots are 'taps.' The difference between samples and taps are, from my understanding, the pixel they are associated with. 
+When using the 2x Quincunx pattern, the samples for every pixel are at the center of the pixel and the upper left corner. 
+(I believe it is not arbitrary for the upper left corner to be used here as a top-left rule is used, at least for DirectX, to determine if a pixel center is within a triangle.) The efficiency advantage for this pattern comes from the fact that the corners are shared between pixels, so one 'upper left' corner for one pixel is the upper right corner of another, and lower left and lower right of another two. 
+By still only sampling each pixel twice, you can have the center and corner of each pixel sampled, which is a total of five positions. 
+Only two of those positions are considered samples though, with the other three being taps.
+
+While I am very confident my graphic of the 2x Quincunx pattern is correct, I am less confident in my 4x Quincunx pattern. 
+However, I believe it is still accurate to the concept of these patterns.
+
+While Quincunx patterns are definitely clever, as they increase the amount of information for shading each pixel without increasing the amount of rasterization work required, they do have the potential issue of creating a more blurry image. 
+Remember, with this type of pattern there is only one sample unique to each pixel, and all of the others are shared. 
+This sharing can lead to that blurring, depending on how the samples are blended together, which is actually the next topic after sampling pattern I will cover, but there are some more points here I want to cover.
+
+Before moving on I want to cover what I consider to be over-sampling and distinct from super-sampling; super resolutions. 
+Both NVIDIA and AMD have driver features to enable super resolutions, with the NVIDIA implementation being Dynamic Super Resolution (DSR) and AMD's being Virtual Super Resolution (VSR). 
+My crude understanding for how these work, in part at least, is to augment the list of hardware-supported resolutions supplied to a game. 
+A very common if not universal setting in PC games is the resolution, and often the option is the native resolution of your display, but there are other resolutions below it. 
+I think the way this list works is it is a longer list of resolutions and the game is fed at least the native resolution of the monitor (or perhaps the resolution the drivers are set to, if these are different) and then only that resolution and the lower ones are shown in the game. 
+What both DSR and VSR will do is pass the game a higher supported resolution, or if the entire list is provided by the drivers, a longer list with these higher above-native resolution, which can appropriately be called super resolutions. 
+When one of these super resolutions are selected, the game will internally be rendered at that resolution, and the drivers then scale the result down to your monitor's native resolution.
+
+Because the game is being rendered at a higher resolution, as though your monitor were a higher resolution, the sampling pattern should be an ordered grid, since the game thinks the samples are the centers of pixels. 
+Unfortunately this ordered grid cannot always align with the monitor's actual grid of pixels, which is partly why I only consider this over-sampling and not super-sampling. 
+This distinction might not be technically accepted, but is how I have them separated in my head. 
+Anyway, because the two grids do not necessarily align, this means the pixels of your monitor may be shaded based on varying numbers of samples across the display. 
+Some may only have one sample within the area the pixel represents, while other pixels may have multiple, and this can lead to artifacting. 
+In fact the first time I tried using DSR it actually introduced aliasing that was not originally there, and so I have not used it in the years since. 
+Now I am running an AMD GPU and I do keep VSR enabled (it is a simple toggle, unlike DSR) but I have only ever used it rarely. 
+(This is partially because it requires running in exclusive fullscreen for the frame to be downscaled, and I prefer to play in borderless windows, in case I need to Alt-Tab, but also for fear of aliasing being added.)
+
+Actually this brief mention of the super resolution technologies is a perfect transition to the next topic I wish to cover; sample filtering. 
+In this case, filtering refers to how the information of samples or fragments that contribute to one pixel is combined for the shading process. 
+The most simple and crude would be the Point filter, but I do not think any game uses it, though there are some that, contextually, people want it used. 
+The Point filter does no blending at all, instead just takes the information of the nearest sample and uses that. 
+You would likely not see this used in conjunction with super-sampling or multi-sampling, as those need to apply the samples to a smaller number of locations, but with up-scaling. 
+If you have a game that would normally run at 640x480, some want Point filtering used to scale it up to say 1280x960, as this will preserve hard edges and colors, and for some games would be very appropriate.
+
+Outside of that filter though, the most simple and crude that would be used for super-sampling and multi-sampling is the Box filter. 
+The way this filter works is to just average the information of samples across the pixel area equally. 
+It does not matter how near or far a sample is from the center of the pixel, it will have the same weight on the shading of the pixel.
+
+The next filter is still pretty simple and crude, but can still be an improvement, and it is called the Tent or Triangle filter or function. 
+With this the distance from the center of the pixel is used to weight the samples. 
+Those samples closer to the center have great weight than those farther away. 
+Something possible with the Tent/Triangle filter is it can be set to actually reach outside of the area of a pixel, so these taps can influence the final color. 
+I am unsure how common this may or may not be, but the other filters I have to mention also have this capability and I believe some are meant to reach outside the pixel.
+
+Next we have the Quadratic and Cubic filters, which are defined by quadratic and cubic functions, respectively. 
+The next three are more complicated distributions, but like the quadratic and cubic are all smooth, unlike Tent/Triangle. 
+These next three are Gaussian, which resembles the Gaussian or Normal curve, Catmul-Rom, and Mitchell-Netravali. 
+From what I discovered, Catmul-Rom appears to be a special version of the Mitchell-Netravali distribution, as different inputs for the Mitchell-Netravali function can produce it. 
+There are undoubtedly more filters than these, but they are the ones Blender offers when it is rendering a scene and identify in its documentation. 
+I have put together a graphic of the shapes of these filter functions that I think will help you understand how they work:
+
+%BLEND_FILTERS
+\image{{Blend Filters}}
+
+The height of these functions would be the weighting of a sample, based on the X-value as this would be the distance from the center of the pixel.
+
+I want to point out something about the last two functions, which is the negative lobes they have. 
+In the Blender documentation I mentioned, Catmull-Rom is described as the most sharpening, which makes sense as its lobes are the more negative, compared to Mitchell-Netravali. 
+It make sense that these negative lobes would sharpen the image, as it means the samples from adjacent pixels are actually being subtracted from the pixel being shaded, which should then increase the contrast between them. 
+Returning to the Blender documentation, Gaussian was described as the most blurring between these three, which makes sense as it lacks the negative lobes, does cover the samples of adjacent pixels, and is also rather tall, so the weighting is great. 
+Mitchell-Netravali was described as in between Gaussian and Catmull-Rom for sharpening.
+
+Coming back to DSR, NVIDIA's documentation for it stats it uses a 13-tap Gaussian distribution. 
+That would make sense if the placement of the taps were a 3x3 grid (getting us to nine) with another four placed center-top, center-bottom, center-left, and center-right, giving a diamond or rotated-square shape. 
+I do not know if that is the geometry being used, but it would make sense as the functions I show in the graphic above would be rotated about the center of the pixel being shaded, resulting in a circle for the cross section. 
+A large enough circle centered on one sample would cover the 12 around it in the geometry I described, resulting in 13 taps. 
+A different geometry might be used though.
+
+To demonstrate the impact the sample filter can have on an image, I have put together some examples that will demonstrate a Moire pattern and took advantage of Imagemagick to, well, work some image magic. 
+Imagemagick is a utility I have actually been using for some years for image conversion and it also has the ability to rasterize graphics at specific resolutions and then scale the resulting image using filters you can set. 
+This is actually what I used to produce the Polygon Popping example in the previous section. 
+Because it is rasterizing the graphics I made at specific resolutions, it is using an ordered grid, but I have been careful to ensure these resolutions are always integer multiples of the original graphic so there are no artifacts from a misaligned rasterization process. 
+The differences between the filters are not always apparent, depending on the original graphic, so you may need to zoom in to spot them.
+
+{\graphicspath{{Media/Filters/}}
+\image{{Composite - Circles - 01 Point}}
+\image{{Composite - Circles - 02 Box}}
+\image{{Composite - Circles - 03 Triangle}}
+\image{{Composite - Circles - 04 Quadratic}}
+\image{{Composite - Circles - 05 Cubic}}
+\image{{Composite - Circles - 06 Gaussian}}
+\image{{Composite - Circles - 07 Catrom}}
+\image{{Composite - Circles - 08 Mitchell}}
+}
+
+It may be difficult to spot some of the differences with these circles, which is why I made a second graphic that can also show the Moire pattern and did the same kind of processing on it. 
+I think this second pattern does a better job showing differences between the filters, but the circles do demonstrate how large an impact the filters can have compared to not being used.
+
+{\graphicspath{{Media/Filters/}}
+\image{{Composite - Waves - 01 Point}}
+\image{{Composite - Waves - 02 Box}}
+\image{{Composite - Waves - 03 Triangle}}
+\image{{Composite - Waves - 04 Quadratic}}
+\image{{Composite - Waves - 05 Cubic}}
+\image{{Composite - Waves - 06 Gaussian}}
+\image{{Composite - Waves - 07 Catrom}}
+\image{{Composite - Waves - 08 Mitchell}}
+}
+
+With all of that covered, time to get to multi-sampling, which is a pretty clever optimization to super-sampling.

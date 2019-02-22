@@ -1,0 +1,68 @@
+\section{Stochastic Sampling, a Tolerable Solution}
+
+Initially I went from multi-sampling directly to post-processing filters, but as happened multiple times while working on this article, I came across 'new' literature to read and felt it appropriate to add.
+For this topic it is very necessary I put the 'new' in quotes because the research paper is actually from 1986, but it was new to me.
+
+Over three decades ago a solution to reducing aliasing was put forward, and while initially I was unaware of any example of the concept being used, I discovered one from within my research for this and then another by coincidence.
+The one discovered within my research has actually been shared already, which makes me wonder if you spotted them, but I should probably cover what this solution is first.
+
+This old solution for aliasing is Stochastic sampling, and a quick look-up of what stochastic means tells us it is randomly determined, so we are talking about random sampling.
+Instead of always sampling on the nice neat patterns shown before, Stochastic sampling will sample in random locations and this will significantly diminish the presence of aliasing.
+Even when just one sample is used, by not sampling at what corresponds to the center of each pixel, aliasing can be reduced.
+However, while the aliasing is reduced, that does not mean there is not still artifacting, it is just a different kind of artifacting we more easily tolerate; noise.
+
+An interesting and relevant quirk to human vision is it is very good at finding and identifying patterns, so the low frequency patterns of aliasing are easy to spot.
+Noise, however, with its lack of patterns stands out far less to us, so by replacing aliasing with noise the psychovisual quality of the image will improve.
+Actually, human vision has developed in such a way to achieve this same goal.
+Though there are many differences between the human eye and the way images are rendered by and on computers, both are limited to a certain number of samples, with the limit for the eye being based on the number of photosensitive cells present.
+If that is the case, why do we not see aliasing in the environment?
+Because the cells have a stochastic pattern; more specifically they exhibit a Poisson disk pattern.
+
+Poisson disk patterns are still a form of a Stochastic, and therefore random, pattern, but there is the important requirement of a minimum distance between any two points.
+This makes sense in our eyes as the cells sensing light have a certain size to them, so they cannot be packed in tighter than that, and potentially create a sampling bias for one area.
+It is Poisson disks I realized were being applied in a couple examples I supplied earlier, so here they are again:
+
+%MS_STANDARD_PATTERNS
+\image{{MS Standard Patterns}}
+
+If you look at these standard sampling patterns from Microsoft, you can see the 2x pattern satisfies the 2-Rook problem, and the 4x pattern satisfies the 4-Queen problem, but both the 8x and 16x patterns make less sense.
+After I started reading the paper on Stochastic sampling and got to Poisson disks, I decided to pull up the graphic I made and try something.
+
+%POISSON_DISKS
+\image{{Poisson Disks}}
+
+As you can see here, both the 8x and 16x patterns are examples of a Poisson disk pattern, though it helps to have the pattern repeated into a quad.
+We can see the 16x pattern does a better job packing the samples and taps together than the 8x pattern, but both show the samples being a certain minimum distance apart.
+Interestingly it appears the samples are paired together in both patterns, though the packing of 16x hides this better.
+Still, this indicates Microsoft at least has chosen to apply a form of Stochastic sampling, but it also appears to be limited to the highest two sampling patterns the company requires.
+
+So why, if Stochastic sampling can reduce the visual presence of aliasing is it not more common than just MSAA 8x and 16x?
+I am not certain, but I have an idea for why that I have arrived at from two directions, and one I am less confident in.
+My lower confidence one is that to use stochastic sampling positions at low sampling counts, like 1x for normal rendering, will require keeping track of the random offsets for each sample in each pixel.
+You cannot just repeat the position of one pixel or a pixel quad and still say it is random when you are using just one position or even two, but at eight and sixteen, it seems you can.
+The reason I am less confident in this answer is because a modern GPU should have no issue handling this offset data.
+Perhaps its processing would increase the time to render a frame, but if it also means you can use fewer samples than the benefit may be worth it.
+The other answer, however, comes from a different direction, and from that source I coincidentally encountered.
+
+I started working on this article quite a while ago, and since then a number of games have released.
+At the point in time I am writing this paragraph, \href{https://www.overclockersclub.com/reviews/metro_exodus_review/}{\textit{Metro Exodus}} with its highly anticipated gameplay, graphics, and ray tracing implementation.
+To serve its community of readers, Eurogamer/Digital Foundry interviewed a couple employees at the game's developer, 4A Games and they talk about not just using stochastic algorithms, but even reference the same 1986 paper I mentioned at the start of this section.
+Based on what is written in the interview, stochastic sampling as described in the research paper is not being used, but the concept for it is.
+The sampling positions for the pixels are not necessarily changing, but the sampling positions for different effects are following stochastic algorithms.
+The reason is to significantly reduce the amount of data needed to generate these effects.
+
+Random sampling has a great many applications because in many cases it is too resource expensive to measure and/or test every single thing you are interested in.
+For these cases, random sampling is used because, if correctly selected, the random sample should be representative of the whole.
+This is not ideal, but it is optimal for speed and resource use because most of the time, the hypothesis is correct and the whole has been accurately represented.
+
+Coming back to graphics and what the 4A Games developers describe, stochastic algorithms are used so less data is needed to generate certain effects, and by using less data the process is significantly faster, but the end result is also noisy.
+There is a limit to our tolerance for noise though, so there is another component to this process to reduce noise, and together this is still a faster process than trying to use all of the data.
+
+Reading this interview, I think I have a better understanding of why we are not seeing stochastic sampling used, except for those 8x and 16x patterns.
+Considering just those two patterns, the sample counts are high enough for avoid noise, so the Poisson disc pattern is to better avoid aliasing artifacts.
+If we were to go to a lower sample count, the noise may be too evident for gamers to tolerate, compared to the normal aliasing artifacts.
+Also this other process for reducing noise was potentially not developed until 2007 or 2009, depending on which research paper you want to consider its origin, and if you assume I am correct that either are its origin.
+The concepts and methods of these two papers I discuss in the Temporal Filtering section, as they both concern TAA.
+
+I do want to mention that while this use of stochastic algorithms in \textit{Metro Exodus} is the first and only example I am aware of in modern games, it is very possible there are more.
+If there are not though, I suspect we may see it used more in the future.

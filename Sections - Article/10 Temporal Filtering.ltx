@@ -1,0 +1,75 @@
+\section{Temporal Filtering, Going Forward by Looking Back}
+
+Initially I was unable to find much information on temporal filtering, but I gave it another go and found some relevant papers on it, which makes me rather happy as this family of technologies is an option in a number games.
+Unfortunately I do still feel I should describe it as a family of technologies because the TAA option in one game can produce quite different results from another due to how they are implemented.
+Additionally you have the likes of TXAA and TSSAA that are both a temporal solution but operate in different ways.
+While the various implementations of TAA can be found in a variety of games and engines, TXAA is an NVIDIA technology, and thus limited to supporting games and graphics cards (GTX 600 series and newer) and TSSAA is not too common either, but is in id Tech 6 games, such as \textit{DOOM (2016)} and \href{https://www.overclockersclub.com/reviews/wolfenstein_new_colossus_review/}{\textit{Wolfenstein 2: The New Colossus}}, and Wargaming added it to its BigWorld engine for \textit{World of Tanks}.
+While both of these engines use the same label, TSSAA, for their technologies, it is possible they still operate in different ways.
+By the way, the two papers I found for these temporal solutions are from 2007 and 2009, with the 2009 paper coming out just months after the MLAA paper.
+Most of the information I will share comes from the 2009 paper, though it references the 2007 paper at times.
+
+Starting with the 2009 paper, it describes a means of using the reprojection of temporal super-sampling to achieve anti-aliasing without a significant hit to performance, and without introducing significant blurring.
+I think a good place to start is to address what is meant by reprojection.
+If you remember back to how rasterization works, it produces fragments that contain many types of samples, which contribute the information needed to correctly shade an object, including its depth, material, normal, and color.
+This information is then passed on to the actual shaders that do the math to determine what the color for a pixel should be.
+While this is not necessarily always the case, very often the shading information for an object will not change much between frames.
+With reprojection, a screen-size buffer is kept with the information from the previous frame and the position of the current pixel is reprojected back onto it.
+If the surface was present in that previous frame, then the GPU can reuse the cached result instead of needing to recalculate it.
+This reprojection is the topic of the 2007 paper and is actually for the purpose of improving performance.
+
+Just in case, I also want to explain that the term is 'temporal super-sampling' because additional temporal samples are used.
+The super-sampling discussed in earlier sections was spatial super-sampling.
+
+The title of the 2009 paper is Amortized Supersampling, which is also the name of the technique it describes, and this naming is appropriate as it is meant as a way to achieve (spatial) super-sampling equivalent quality by using information from previous frames, at decreasing weights.
+The way it works (to the best of my understanding) is the frustum for each frame is jittered slightly, so the sample for one frame is not at the pixel center but in a quadrant of the pixel, and the next frame is at a different quadrant, and so forth producing four sub-pixel buffers at the screen resolution.
+If we combined these buffers we would have samples for a screen-space of quadruple the resolution (double the horizontal and double the vertical samples), but because we are not trying to get all of these samples in time for a single frame, we do not have the performance hit of a 2x2 ordered-grid SSAA implementation.
+However, if there is no movement on the screen, we would have that quality of image, and based on what I have seen concerning TSSAA in id Tech 6, this is the concept for how it works, but the information I have seen is limited.
+
+To determine the final color of a given pixel, a tent filter is used, so those farther from the center of the quadrant or pixel (I will explain that in just a moment) will have a lower weight on the result.
+This is important because the whole idea is to improve image quality using temporal information, and if you did not weight based on distance, so farther samples due to high speed have a lower impact, you would blur the image much more than desired.
+
+What I want to explain about the tent filter is that it is used in more than one step, but in both cases to do the same thing.
+For getting the final color we see for a pixel, it is used like normal to reduce the weighting of pixels farther from the center of the pixel.
+It is also applied for each buffer though, as the sample for each buffer also gets the temporal treatment with the most recent sample being combined with the information from that in the other buffers, using the tent function to appropriately weight them.
+As these samples are only to cover a quadrant of the pixel, the tent filter is only large enough to cover the quadrant, effectively ensuring only the nearest samples are used and fed into the function.
+To determine the final pixel color the tent is larger, covering the entire pixel.
+
+There are a few interesting features of this technique that I want to cover.
+One is that the buffers are not updated in sequence.
+When developing this method, the researchers noticed signal drift occurred, which can cause lines to blur, so an irregular sequence is used instead.
+Another feature is to limit the tolerance for blur, but because the whole process is complicated, the math involved has to be pre-computed with an off-line simulation, meaning this calculation is not done in real-time as you game.
+On the plus side, the method used should help limit both blur and drift.
+The third feature I want to mention is how it handles surfaces that only recently become visible, which means there is no valid information in the buffers.
+Obviously this means a new sample needs to be made, but this can lead to aliasing if left on its own, so when it detects this happens, the process can get as many as five samples to improve the image quality.
+
+Unfortunately we know from experience that not all TAA implementations are equal, with some producing significant blurring and even ghosting in the final image.
+I am unsure how related these implementations are to that described in the paper I read though, so perhaps these implementations are based on a different method also referred to as TAA, or there are more advanced versions of the method that not all developers and/or game engines are using.
+My guess would be the blurring TAA methods might just be using temporal reprojection but not in a way to achieve this spatial super-sampling level of quality.
+Reprojection on its own could reduce at least some forms of aliasing, or just temporal aliasing, but depending on how this is done the result can be blurry and even add residue we would recognize as ghosting.
+It is also possible that tweaks to the positions of the samples (different offsets for the frustum jitter) and/or tweaks to the width of the tent function for filtering may also be present, as such differences could also impact image quality.
+I do think it is interesting how there are many implementations of TAA out there and some are clearly superior to others.
+
+Though I am not certain and this is not necessarily an example for addressing aliasing, I do want to share what I think is an example of amortized super-sampling.
+One of the graphics technologies in \href{http://www.overclockersclub.com/reviews/hitman_2_review/}{\textit{HITMAN 2}} is real-time reflections that work even around corners.
+This is not an easy task and after patch 2.12 was released, which added options for controlling reflection quality, I did some experimenting with the options and developed a theory.
+What I noticed is that when moving, the definition of the reflections appeared to increase, and they were the most clear and detailed when the camera was not moving.
+This behavior immediately made me think of amortized super-sampling, because I could see it being used to improve the performance of what is normally a challenging rendering task.
+
+%HITMAN_2-MIRROR
+{\graphicspath{{Screenshots/HITMAN 2/}}
+\image{{Hitman 2 - Mirror}}
+}
+
+My theory is that instead of the temporal super-samples being used to create a more detailed frame, the reflections are actually all being rendered at a sub-native resolution.
+The temporal super-samples are then used to produce native resolution reflections.
+My hypothesis could easily be wrong here, but it makes some sense to me as a means to improve performance, as realistic, real-time reflections are not easy, and fits with the how the detail appears to fade in after a few frames.
+(By the way, the Low option does not see the detail fade in, so it appears the temporal component is disabled, and on High it seemed to start at a higher resolution than Low or Medium.)
+
+Though not strictly amortized super-sampling, this concept of collecting samples from different positions over time is the process I mentioned in the Stochastic Sampling section while discussing how \href{https://www.overclockersclub.com/reviews/metro_exodus_review/}{\textit{Metro Exodus}} uses stochastic algorithms.
+It uses the stochastic algorithms to create a random sample from all of the data needed for accurately render certain effects, and then with a temporal component it combines information from multiple frames, multiple collections of random samples, to make the effect more accurate.
+Depending on what specific effects utilize this stochastic-temporal process, the lower-accuracy of the random samples might not be as visible in that game as the initially low resolution reflections are in \textit{HITMAN 2}.
+
+I do want to quickly mention NVIDIA's TXAA, which I have tried a few times in the past, but in all but one game (\textit{Batman: Arkham Origins} specifically) there was a halo effect around characters, and in one game I also noticed the lighting being disturbed.
+(Without TXAA an overhead light illuminated the room but with TXAA the light was only visible around the character.
+This game was \href{https://www.overclockersclub.com/reviews/assassins_creed_unity_review/}{\textit{Assassin's Creed: Unity}}.) While I will acknowledge TXAA is an interesting technology, combining some kind of temporal super-sampling with traditional multi-sampling, it has routinely left me unimpressed.
+Unfortunately I have never found a technical description of how it works, so I cannot go into any greater detail than that.

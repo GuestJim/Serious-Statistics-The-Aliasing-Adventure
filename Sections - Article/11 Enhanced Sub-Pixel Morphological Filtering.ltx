@@ -1,0 +1,55 @@
+\section{Enhanced Sub-Pixel Morphological Filtering, a Combination of Solutions}
+
+Enhanced sub-pixel morphological filtering (SMAA) is among newest of the methods I have been researching and also appears to be the most advanced, at least of the post-processing methods, but then, it is not always post-processing.
+Just as its name suggest, enhanced sub-pixel morphological filtering applies morphological filtering, which was already covered.
+Its name also indicates it features a number of enhancements over morphological filtering, and indeed it does, making this solution more efficient and accurate, while also preventing some artifacts that can occur with other methods.
+
+Starting from morphological filtering, this method improves upon it in just about every way, according to the paper on it.
+One of these ways is to have larger libraries of patterns that are for sharp geometric features that should be preserved, but also to more reliably classify edges.
+It has diagonal pattern detection, which is not found in many other post-processing methods and is why there can still be aliasing of diagonal lines with those methods.
+Another enhancement is the use of pre-computed textures for how pixels should be blended together.
+Instead of having the computer always determine the blending along a reconstructed line, it can look it up to save time.
+
+Something else the name suggests is that it somehow does a better job handling sub-pixel features than morphological filtering.
+If one wanted to ensure an implementation of MLAA were aware of sub-pixel features, one might try applying it to the output of MSAA, but this will not work well and blur the results.
+The reason is because MLAA makes certain assumptions about the situation, including the position of the samples it is working on.
+To address this, the offset positions of these sub-samples are actually taken into account in the SMAA algorithm, so they can be accurately blended together.
+This improvement makes the morphological filtering modular and allows it to accept the offsets we see with multi-sampling but also temporal super-sampling.
+
+Temporal super-sampling has already been covered, but it is possible this technology uses a different approach than that described earlier.
+However, we still see it using reprojection to apply previously determined shading information onto the current frame.
+Like what is done with the multi-sampling above though, the offset of these temporal super-samples are used to better inform the morphological filtering.
+Additionally, tweaks have been made to the temporal super-sampling method to avoid ghosting and other artifacts.
+This includes considering velocity when weighting the temporal sample and also applying the morphological filter to the velocity information as well.
+As morphological filtering will blend pixels on both sides of the edge the velocity information is for, there can be artifacting, but this application of the filtering on the velocity information addresses this.
+(Interestingly, this is done in such a way to be free, be placing the information in the alpha or transparency channel of the color buffer, which the filtering will already be run on.)
+
+Multi-sampling has also already been addressed, both in how it works and that the offset for the sub-pixel samples can be taken into account by the morphological filtering method.
+This does mean then that even though this is a post-processing method, there are some implementations that will utilize multi-sampling and thus result in a more significant performance hit.
+However, it, as well as the temporal super-sampling, gives this method awareness of sub-pixel features, which will improve its ability to preserve them.
+
+The base implementation of enhanced sub-pixel morphological filtering is SMAA 1x, and only applies the improved morphological filtering.
+With the addition of temporal super-sampling we get SMAA T2x, so-called because it uses two temporal samples (or at least it appears to only use two, from what I can gather from the paper).
+Using spatial multi-sampling we have SMAA S2x, and if we use both temporal super-sampling and spatial multi-sampling we have SMAA 4x, which has a total of four samples feeding into the morphological algorithms.
+It is more of a performance drag than a pure post-processing method, but it should also be more effective than MSAA 2x at removing aliasing and I would think it would not be much more expensive to run with either.
+
+Initially I transitioned to the next section here, but before 'finishing' this (finishing this is like a farewell tour, as I just keep coming back to it with more to add) I found I think an excellent example of what the temporal module for SMAA can achieve.
+It is in \href{http://www.overclockersclub.com/reviews/just_cause_4_review/}{\textit{Just Cause 4}}, which offers Temporal SMAA as an option, along with FXAA and None for the Anti-Aliasing setting.
+What I discovered were some locations where you could have a view of a railing in the distance and with both None and FXAA as the option, the railing looked broken.
+This is because the diagonal lines of the railing were small enough to be sub-pixel, resulting in polygon popping aliasing, so sections were missing.
+With Temporal SMAA selected though, the railing is connected again.
+While I cannot disable the temporal module here to confirm, my guess is the temporal super-samples are being fed into the morphological module, informing it the diagonal lines of the railing do stretch the entire length.
+This, along with the reprojection I would guess, allows the method to continue the yellow lines across the length, addressing the popping that was otherwise present.
+
+%JC4_POPPING
+{\graphicspath{{Screenshots/JC4/}}
+\image{{Just Cause 4 - Popping}}
+}
+
+It is also possible the morphological module is correctly guessing the railings extend the full length, and so is restoring the detail that is otherwise lost.
+
+Before moving on I want to quickly mention another variation of morphological filtering that I have encountered since I started working on this article: CMAA or Conservative Morphological Anti-Aliasing.
+It was developed by Intel, as was its updated version CMAA2, with its original performance and quality target being between FXAA and SMAA.
+With CMAA2, it now supports integration with MSAA, like SMAA.
+I will leave it to you to investigate, and I have included both the CMAA and CMAA2 articles in the reference so you can find them easily, but also want to let you know that the CMAA article has a utility you can download and play with that can apply CMAA, FXAA, and SMAA to arbitrary PNG images you provide it.
+If you want to do your own comparisons, it might be worth checking out.

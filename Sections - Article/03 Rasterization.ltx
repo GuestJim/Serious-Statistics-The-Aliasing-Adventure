@@ -1,0 +1,120 @@
+\section{Rasterization, More Complicated Than You Thought}
+
+My apologies for potentially implying super-sampling and multi-sampling would be next, but I feel time needs to be spent with rasterization first. 
+It is necessary to understand rasterization to understand those two anti-aliasing methods, and like anti-aliasing I suspect it is something not many understand very well. 
+I certainly do not believe my understanding of it was accurate prior to this.
+
+Before starting the research for this article I thought rasterization was the process of sampling the primitives in a game to get the pixel color. 
+While this is kind of true, it is also kind of wrong because there is more going on at this step, and it is relevant to both super-sampling and multi-sampling, as well as forward and deferred rendering. 
+You may have heard about forward and deferred rendering or shading before without really knowing what this meant, so I will try to explain them here, as it is not too much of a detour.
+
+To understand rasterization I want you to visualize the world of any game. 
+Within that world a shape called a frustum is created, which for games is typically something like a pyramid with its top cut off; there are two similar rectangles parallel with each other and their vertices connected. 
+What is contained within the frustum is what will be shown by the camera, so everything outside of it can and often is culled or removed by the game engine or GPU itself. 
+This is why turning away from some effects or animations may improve performance in a game, because it is no longer being rendered. 
+From the front, smaller rectangle a ray is cast out to the back rectangle. 
+This ray will not bounce, which would be the defining characteristic of ray tracing, but it is cast and whatever it intersects with it measures or samples at the point of intersection.
+
+%FRUSTUM
+\image{{Frustum}}
+
+If I wanted to keep it really simple I would stop here and say those samples are used to determine the color of the pixel you see then move on to super-sampling, but I want to be more accurate than that. 
+When these rays intersect with something, the information from this sampling is collected together as a fragment, which is one of the two definitions for fragment I have encountered. 
+The other refers to the portion of a primitive that is contained within the frustum, so a group of fragments following the previous definition. 
+These two definitions are related, but there can be cases when it is a single set of samples being referred to, instead of the larger group for a primitive or its portion contained in the frustum.
+
+Something important here is that the measurements made when the ray intersects the object cover more than just color. 
+Information like color, material, normal, stencil, and Z are all measured and stored in the appropriate buffers, and all of this information can then be used to determine the final color of the pixel through a process called shading. 
+This is the work that shaders do on a GPU and additional effects can be applied by them, which influence the final color of the pixel. 
+
+
+It is in the shading process, or specifically a portion of it, that the differences between forward and deferred rendering, or shading exist. 
+This shading step, or a portion of it, is where forward and deferred rendering, or shading, differ. 
+With forward shading, all fragments are used for the lighting calculations while deferred shading waits to do the lighting until a pass identifies the non-occluded fragments. 
+This means only as many lighting calculations are done as there are pixels in the final image with deferred, improving performance, but the process also hits memory bandwidth harder and risks mistakes due to a lack of information. 
+You see, by only using non-occluded fragments, if a blocked fragment should influence the lighting of another, like with a transparent texture, the information is not there for deferred shading.
+
+The way the Z buffer works is it stores a value between 0 and 1 for the position of the fragment between the front and back of the frustum. 
+This would also be the depth of the fragment, which is why this is sometimes called the depth buffer. 
+If multiple fragments have the same X and Y positions, this Z value will determine which should be shown, which is very important because you may otherwise have the back of an object shown to you, instead of the front. 
+This next graphic is meant to illustrate rasterization of a simple group of three shapes. 
+The resulting fragments are shown as are the fragments after Z-culling, and while this example should have no difference between forward and deferred rendering, I hope you can imagine how it could have an impact. 
+I have some examples for later on that might do a better job demonstrating the difference, but these will be in reference to post-processing methods.
+
+%Fragments
+\image{{Fragments}}
+
+Fortunately, it appears a number of solutions have been developed to overcome some of the potential disadvantages of deferred shading, including that multi-sampling could not be used with it, but there are still certain advantages to using forward shading instead. 
+Developers do need to make a decision from the beginning of which method to use. 
+(The solutions I have seen described for multi-sampling are to identify locations that have multiples samples, such as along the edge of the triangle, and identifying them as 'complex pixels' so they can be handled appropriately.)
+
+Coming back to rasterization itself for a bit, there is a specific kind of aliasing artifact that can occur when rasterizing a scene called polygon popping. 
+The idea is very simple and is really what the name itself describes, with polygons popping in and out.
+
+%POLYGON_POPPING
+\image{{Polygon Popping}}
+
+In this image I had the same reference image rendered out at the different resolutions labelled above each example, and then scaled them up to match. 
+(This was done with point sampling and it is integer scaling, so there are no distortions from this step.) At the lowest resolution shown of 32x32, you can see a number of the primitives are very different from the reference, being in different positions, and even vanishing because of the positioning of the sampling rays. 
+If the objects of the same colors were in motion, from one position or orientation, to another, you would see details or the object themselves popping in and out, hence the name.
+
+Another example I have uses the stacked shapes from earlier and I refer to it as color popping instead. 
+While what is happening is exactly polygon popping, the most obvious impact is on the colors. 
+This is especially true in the lower row as one example goes from just blue to just red and yellow (and white for empty). 
+Because the polygons popping in and out are stacked, the result is the colors popping in and out.
+
+%COLOR_POPPING
+\image{{Color Popping - H}}
+
+It is also possible to demonstrate this with the sine waves from earlier, by applying an offset to the sampling positions of just 0.25, both positive and negative. 
+
+
+%SIN_POPPING-GRAD
+\image{{Alias Example - Sin Popping - Grad}}
+
+Despite the offset being a quarter the distance between samples, the gradients appear to shift by double the sampling distance. 
+I think this does a pretty good job of demonstrating popping but also a kind of temporal aliasing. 
+A shift of just 0.25, which you know by my statement but also by the color-matching rug plot at the bottom of the graph, results in the gradients shifting by 2. 
+If instead of the sampling position shifting by 0.25 it was the signal itself moving by 0.25 per unit time, the resulting gradient would appear to be moving eight times faster ($2 / 0.25$)!
+
+For this next graph I combined the three of the datasets so they can be drawn and connected in the proper order. 
+As you can see the result is much better at representing the original function:
+
+%SIN_SUPER
+\image{{Alias Example - Sin Super}}
+
+I mentioned earlier the Nyquist limit, which is the sampling frequency marking whether a signal can be aliased or not and is double that of the original signal. 
+The original sine function has a frequency of 0.9 so the Nyquist limit would give us a minimum sampling frequency of 0.45, which you can see here. 
+To get the wavelengths, you can just invert these values. 
+Before moving on to the graph of that, I want to come back to the graph immediately above. 
+While the 0.25 distance between samples is better than the Nyquist limit for the function, there are skipped samples, at the integers, so in some places there are 0.5 gaps, and that is longer than the Nyquist limit. 
+The result is the samples of the previous graph can still alias, and indeed they appear to as I can see the pattern of the $y = sin(0.1 * x + 0.5)$ at the 2-3 'pixel; and 7-8 'pixel.' In this graph we see one being closer to the top of the graph, and the other closer to the bottom, matching where the low-frequency graph had its crest and trough.
+
+Now coming to the graph at the 0.45 Nyquist limit, this is what we get:
+
+%SIN_NYQUIST_45
+\image{{Alias Example - Sin Nyquist 45}}
+
+Does it perfectly represent the original?
+Not quite, but there is still enough information to reconstruct the original, which is the goal. 
+Looking at it with the gradients in place, it is a bit easier to see that it does align nicely with the original signal. 
+I should point out the 'pixel' width for the gradient is now matching the distance between the samples, with the samples placed at the center.
+
+%SIN_NYQUIST_45_GRAD
+\image{{Alias Example - Sin Nyquist 45 - Grad}}
+
+If we were to instead sample with a distance of 0.5 between the samples though, we get this:
+
+%SIN_NYQUIST_50
+\image{{Alias Example - Sin Nyquist 50}}
+
+This data actually looks like it describes a signal defined by two sine functions, one with a low frequency causing the overall amplitude to cycle, and the other a higher frequency that has the signal crossing 0 rapidly. 
+Looking at it with the gradients also shows it does not match up with the original function very well at x = 0, 5, and 10.
+
+%SIN_NYQUIST_50_GRAD
+\image{{Alias Example - Sin Nyquist 50 - Grad}}
+
+Moving off of the Nyquist limit by just 0.05 is still enough to allow aliasing to occur.
+
+Even with this one failure though, we can still see that increasing the sampling frequency (or reducing the distance between them) can get you closer to an accurate result of the original signal. 
+While these additional samples are called sub-samples, as they are from within the larger sample space (the pixel for a rendered image), this concept itself is called super-sampling.

@@ -1,0 +1,202 @@
+\section{Anti-Aliasing, the Results pt. 2 (Shadow of the Tomb Raider)}
+
+Unlike \textit{Serious Sam Fusion 2017}, the anti-aliasing options for \textit{Shadow of the Tomb Raider} are almost completely limited to post-processing solutions.
+The lone exception is SMAA 4x, as it leverages MSAA 2x as one of its components, but otherwise SMAA, TAA, and SMAA T2x are all filtering solutions.
+For the testing I went in the order None, SMAA, TAA, SMAA T2x, and SMAA 4x and I used DirectX 12 for the graphics API.
+I took the screenshots by finding a location I liked for it and then taking advantage of the fact this game allows you to change almost every graphics setting without any restarts or reloads to cycle through the options.
+I did not use AMD's driver morphological filtering for this.
+
+The performance and VRAM data I have will be shared after the screenshots.
+I used the built-in benchmark to collect performance data, as it is easily repeatable and it can be nice to have results given to me without needing to repeatedly run a course followed by creating and running scripts.
+The original data I collected was impacted by the temperature issue I have mentioned previously, so I have repeated the benchmark.
+I did not bother repeatinig the process to get VRAM usage as this would not have been impacted by the issue.
+
+The first location I collected screenshots of was actually the main menu itself.
+Around and behind the UI is a rendered scene at the currently enabled graphics settings, and there is aliasing and sub-pixel details to be spotted.
+
+%MENU
+\image{{Menu}}
+
+Looking at the full-size screenshot, you may notice the aliasing of the netting over the two soldiers' heads in the upper right.
+While this is definitely a good spot to look for aliasing, these two are animated and moving back and forth, which makes it very hard to impossible to identify any changes coming from the anti-aliasing solution within these screenshots.
+Instead the sections I am using are of the guard's body beneath the Menu UI and of Lara, as both bodies are relatively static.
+
+%BODY
+\image{{AA - 02 - Body}}
+
+Though the highlight ring is focused on the guard's chest, where there is aliasing along seams, you can find aliasing in a number of places, including the vegetation and his arms.
+Sadly to my eyes, all of the AA options seem to add a blurring to everything, and this is especially evident on the plants.
+While there do appear to be some undesirable bright pixels speckled amongst the plants in the None section, you can also see details to the leaves, such as the lighting on folds and ribs.
+Focusing just on the circled area of the body though, you can see a pair of seams running horizontally along it, near the top (if the guard were upright).
+Both the SMAA and TAA options effectively remove this detail, but SMAA T2x still leaves some of it there.
+You can also see it remains in the SMAA 4x section, but I still feel None does the best job of showing the lighting on the nearby leaves.
+
+%LARA
+\image{{AA - 02 - Lara}}
+
+Turning to the other area of the scene, we see Lara and one of the guards hunting for her.
+Unfortunately we do not get a consistent view of his netting, but it still appears it takes at least TAA for the aliasing to be removed.
+Similarly SMAA fails to remove all of the aliasing of Lara's hear, but it is SMAA T2x that looks to be the first option to do a good job overall here.
+If you look on the root Lara is hiding next to, there is detail that is softened away by both SMAA and TAA and while SMAA T2x does still look to soften it some, it is far less soft than the other two.
+Naturally SMAA 4x also preserves this detail rather well.
+
+If you look closely at Lara's knife you may notice what appears to be a serrated edge on it in the None section.
+It is a small detail and so not easy to make out in the screenshots, but when moving in the Menu animation, you can tell it is there.
+All of these methods appear to remove this detail, even when it is moving, and even SMAA 4x, though it does the best job of still suggesting the serration is present.
+SMAA T2x also preserves some hints for it, but this really seems to be a detail largely lost by any AA option.
+Perhaps at a higher resolution it would remain visible.
+
+Overall it appears the best AA option on the game's Main Menu is going to be SMAA T2x, because while it does still blur the details, it does a better job of preserving detail than the others, except for SMAA 4x.
+It should be noted though that SMAA 4x comes with a significant hit to performance.
+
+%KUWAQ_YAKU
+\image{{Kuwaq Yaku}}
+
+The first in-game location I visited to search for aliasing is the village of Kuwaq Yaku, and this specific location is, as I recall, not too far from the bar and nearby campfire.
+As is actually rather often the case, there is aliasing on Lara's bow and hair, but it is that in the background of the bridge that specifically grabbed my attention.
+First though I want to look at the aliasing on Lara:
+
+%BOW_AND_HAIR
+\image{{AA - 01 - Bow and Hair}}
+
+Without zooming in past the native resolution of the image, the aliasing of Lara's hair is not too easy to spot in None, but you can see it on cord used as a grip on here knife and in the feathers comprising her outfit, which are both highlighted.
+There is also aliasing along the top of her bow, though I do not have this marked.
+Going to SMAA, the aliasing of the bow, knife, and feathers are definitely better, but I feel like the feathers are also losing some detail across the whole of the outfit.
+At TAA and above the aliasing on the bow is completely removed and I also think the knife looks better.
+Unfortunately the outfit still looks as softened as earlier, and this remains true for both SMAA T2x and SMAA 4x.
+I do somewhat feel like SMAA T2x is a little better on the knife than TAA, but it might be a tossup for most people.
+
+%PLANK_AND_SHEET
+\image{{AA - 01 - Planks and Sheet}}
+
+Turning our attention to the background, I did not even bother trying to highlight the aliasing because it should be obvious, at least that of the railings.
+There is also aliasing in the corrugated metal plate near the bird on the right, but there is more going on with that than just aliasing.
+Going from None to SMAA, we can clearly see the aliasing has been reduced but is still present, so for this example, SMAA is not enough.
+TAA is doing a better job with the wood railings, but you can still spot aliasing in the area.
+To the right of the bird the edge of a wood plank is still aliased with TAA, but it was not with SMAA.
+Also on the left side of the section TAA does not do as good a job with the aliasing on the planks there either.
+Fortunately, SMAA T2x does a decent job addressing the aliasing missed by both SMAA and TAA, which is actually what this mode is supposed to do.
+Going to SMAA 4x, I am not really seeing an visual benefits, and that aliasing on the right side seems to have returned.
+Not sure why that would happen.
+
+Coming back to the piece of metal, what we do not see in these sections of the screenshots is that the lighting for the entire area changed between them.
+This is important because while the metal appears to mostly be rust-brown, there are white sections and streaks in it, visible in the None section.
+In other sections, however, the white has turned to gray.
+This appears to be due to the change in the lighting, and not related to the anti-aliasing setting.
+That being said though, we can still see some differences that are caused by the setting.
+In both the None and SMAA sections, we can make out these streaks going across the plate, but with TAA these seem to have vanished.
+At SMAA T2x you can make out some subtle detail in the brown, suggestive of the original white streaks.
+With SMAA 4x it is hard to tell how much detail is there, as the lighting has changed enough to make what was white a dark gray.
+However, you can still make out some streaks in the brown, so it appears it is doing a better job of keeping these details than the other methods.
+
+%PERUVIAN_JUNGLE
+\image{{Peruvian Jungle}}
+
+The second place I went searching for aliasing is in the Peruvian Jungle, near where you start the game after the Prologue.
+Initially I thought I had captured several examples of aliasing here, but as I looked more closely, it seemed I was also capturing some other kind of artifacting.
+I only noticed it at a distance so I wonder if it is something about how level of detail is handled by the game's engine, but I felt it inappropriate to focus on these areas, as the artifacting might not be a result of the anti-aliasing setting, but may impact its apparent visual quality.
+
+%SUPPLIES
+\image{{AA - 03 - Supplies}}
+
+Actually, if you look above the highlighted area, you can still make out the artifacting I observed, but I want your focus to be on the supplies themselves, though Lara's hair and bow are also good to look at.
+
+Concerning just the supplies, we can see a fair amount of aliasing in the None section and SMAA does a good job of cleaning up a lot of it.
+Some of this might be related to the artifacting, but I also think some is from environmental shadows on the supplies, and from the shape of the supplies themselves.
+The latter is what I believe is the case with the front-most box and the horizontal line across it.
+When you look to the TAA section though, this line is just a subtle dark blur, instead of something suggestive of the geometry of the object itself.
+Luckily SMAA T2x returns the contrast to this line, making it look more like a part of the object's geometry.
+With SMAA 4x this line looks about the same unless you zoom in really close, then you see it looks a bit better than SMAA T2x.
+Without zooming in past native resolution though, the aliasing along the edges of the boxes looks better.
+
+Turning to Lara's hair, we can see a lot of speckling to it, perhaps a result of how the light of the nearby campfire interacts with the tessellated hair.
+Unfortunately SMAA does not do that great a job of cleaning it up, though it is still better.
+With TAA her hair looks still better, while the improvements from SMAA T2x and SMAA 4x seem more marginal.
+The bow however I feel does benefit some from SMAA T2x, but it is only in a marginal way.
+
+For the bow, SMAA definitely helps with the aliasing and then TAA takes it the rest of the way, but when I zoom in I just like the blending of SMAA T2x better.
+To me it seems the blend is sharper between the bow and the background with SMAA T2x than TAA.
+Curiously SMAA 4x seems a step back in this regard.
+
+%THE_ABANDONED_VILLAGE
+\image{{The Abandoned Village}}
+
+For this last set of screenshots, I did something a little different but I also believe it is worth examining.
+\textit{Shadow of the Tomb Raider}, and many other games for that matter, has a mechanic to highlight various elements in the world.
+Across games and developers, this mechanic appears to intentionally allow for aliasing in the highlights, which I feel is appropriate as a means of making the highlight stand out better, so the aliasing is actually desired.
+However, with post-process anti-aliasing methods, the method does not always have the benefit of knowing if any aliasing is intentional or not.
+I am unsure if SMAA or this implementation of TAA has an 'early exit' function like FXAA does to preserve certain details based on luminance, but there are means, in the abstract at least, of protecting this aliasing.
+
+%VINES
+\image{{AA - 04 - Vines}}
+
+Looking to the highlighted vines, we can see there is a lot of alias artifacting to them, but as I just said, I think this is intentional for the effect.
+When going to SMAA, a lot of the artifacts remain, which I think is appropriate, but sadly TAA does just blur the artifacting away.
+SMAA T2x does return a lot of it, but we can still see a softening of edges.
+I think SMAA 4x is doing alright at keeping the aliasing, but I can also see some softening compared to None.
+
+%WALL
+\image{{AA - 04 - Wall}}
+
+If I am correct about the aliasing in the highlights being desirable, then in this section everything above SMAA is wrong.
+With None we can see a lot of high frequency details and SMAA does not appear to remove much, if any of it.
+Once we get to TAA though, every edge appears to be softened and details within the leaves of the wall are completely turned to a blur.
+I think I can spot some of this detail returned with SMAA T2x, but the mass blurring still appears to be present.
+With SMAA 4x more detail has returned, but it is still SMAA that does the best job of keeping what was there in None.
+
+Granted, I am being hard on these anti-aliasing method by giving them images with details I believe are meant to be aliased.
+On the other hand though, they are removing details and while each game can have its own implementation, there are a lot of games with similar highlighting systems to this.
+Unfortunately there is no rasterization-based anti-aliasing option for \textit{Shadow of the Tomb Raider} to test with, so I cannot confirm if super-sampling and multi-sampling are also impacted like this.
+
+\graphicspath{{Screenshots/SOTTR/Differences/The Hidden City - Abandoned Village/}}
+Now, like I did with the Serious Sam images, I have difference images here, but as there are fewer anti-aliasing methods in \textit{Shadow of the Tomb Raider}, there are much fewer images to go through.
+In fact, I am only going to look at the differences for a single set of images as well, in the Abandoned Village with the highlights.
+The other sets showed less consistency between screenshots, as wind moved objects in the scene and lighting changed.
+For these screenshots though, these environmental differences are far less significant, so the differences caused by the anti-aliasing methods are the most pronounced.
+The reference image used was that with no method applied.
+
+%DIFFERENCE_SMAA
+\image{{Difference 01 - SMAA}}
+
+While it appeared with the original screenshot of SMAA being applied that a lot of detail was preserved in the highlighted areas, we do see here that there was an impact.
+This impact is not enough to remove the noise of the original without filtering, so the impact would be hard to spot if not for this difference image.
+
+%DIFFERENCE_TAA
+\image{{Difference 02 - TAA}}
+
+Moving to the comparison with TAA and we see what we should actually have expected, as this option had removed a lot of the detail.
+Interestingly the orange highlighted vines are shown here, but were not in the SMAA difference image.
+It would seem SMAA fails to impact these vines, but TAA very much does.
+
+%DIFFERENCE_SMAA_T2x
+\image{{Difference 03 - SMAA T2x}}
+
+%DIFFERENCE_SMAA_4x
+\image{{Difference 04 - SMAA 4x}}
+
+We already know from the original versions of these screenshots that we should expect differences similar to that we saw with TAA, and that is clearly the case.
+It seems there is more of the original noise left in these difference images than in the screenshots, which shows both the power of temporal filtering, and how it can remove details that are potentially meant to be there.
+Remember, TAA, SMAA T2x, and SMAA 4x all have temporal components to them, while SMAA does not and it had the smallest impact.
+
+Turning to performance data, as I already explained, this comes from the game's built-in benchmark, which is far more convenient to use than manual runs.
+It might not be perfectly representative of the gameplay experience to expect, but then the focus here is to compare the anti-aliasing options and not to specifically consider gameplay experience.
+Yeah, I might just be justifying laziness, but the data this data is still valid for the purpose of this article.
+
+With the anti-aliasing turned off, the Ultra preset enabled, Exclusive Fullscreen and DX12 selected the benchmark reported and average frame rate of 93 FPS.
+With SMAA enabled we got 87 FPS and TAA gave us 88 FPS, which is really no difference.
+Going to SMAA T2x gave me 84 FPS, which is still really close, so based on the benchmark I think we can nearly say these three options have the same performance impact.
+That is not completely correct, but is so approximately true.
+Of course going to SMAA 4x pulls the performance down noticeably, to an average of 54 FPS.
+It is true I reviewed the game with this as the anti-aliasing option, so it is playable but that is partly because \textit{Shadow of the Tomb Raider} is a game that is not hurt by a sub-60 FPS frame rate.
+For just enjoying the game, I doubt I would use SMAA 4x.
+
+The VRAM usage is not really that interesting, as it basically follows what we have already seen and can predict.
+For every location the VRAM consumption for options None, SMAA, TAA, and SMAA T2x were the same.
+It was only with SMAA 4x that this value changed.
+For the Menu the VRAM usage was 3.9 GB for the non-SMAA 4x options and 4.2 GB for SMAA 4x.
+Kuwaq Yaku's usages were 6.9 GB and 7.1 GB.
+For the Peruvian Jungle setting they were 6.8 GB and 7.1 GB.
+Lastly the Abandoned Village saw 6.8 GB used and 7.2 GB used with SMAA 4x.
+
+The memory impact for using SMAA 4x was not that much, but the performance impact definitely was.
+The other options did not move the VRAM usage at all, which does seem a little odd, as one would expect a little change like the 0.1 GB with FXAA in \textit{Serious Sam Fusion 2017}, but perhaps enough was reserved with None to cover these, or the increase is invisible due to rounding error.
