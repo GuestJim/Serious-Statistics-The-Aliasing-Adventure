@@ -1,0 +1,59 @@
+\section{Post Processing Methods}
+
+\begin{frame}[squeeze]
+\frametitle{Post Processing/Filtering}
+
+\noindent	Instead of addressing the Nyquist limit, some methods try to smooth aliasing artifacts from the image
+
+\only<1>	{
+\begin{itemize}
+	\item	Morphological Filtering (MLAA) among the oldest
+	\begin{itemize}
+		\item	attempts to determine original geometry and blend appropriately
+	\end{itemize}
+	
+	\item	Temporal Filtering (TAA) utilizes \textbf{reprojection} and is also an older method
+	\begin{itemize}
+		\item	\textbf{reprojection} involves reusing already calculated results, allowing for improved performance
+		\item	\textbf{Amortized Super-Sampling} uses sub-pixel jittererd samples to potentially recreate 2x2 SSAA
+	\end{itemize}
+	
+	\item	Fast Approximate (FXAA) focuses on speed over accuracy
+	\begin{itemize}
+		\item	finds edges, applies a perpendicular sub-pixel shift, and resamples
+		\item	does have an early exit to protect some edges and quality levels
+		\item	uses a low-pass filter to remove/reduce high frequency details
+	\end{itemize}	
+\end{itemize}
+}
+
+\only<2>{
+	\begin{itemize}
+		\item	Enhanced Sub-Pixel Morphological Filtering (SMAA) improves upon MLAA
+		\begin{itemize}
+			\item	Improved morphological filtering engine
+			\begin{itemize}
+				\item	pre-computed blending textures
+				\item	supports arbitrary sample positions
+			\end{itemize}
+			
+			\item	Modular design
+			\begin{itemize}
+				\item	SMAA ~1x - morphological engine only
+				\item	SMAA T2x - SMAA 1x with two temporal super-samples
+				\item	SMAA S2x - SMAA 1x with two spatial multi-samples
+				\item	SMAA ~4x - SMAA 1x + SMAA T2x + SMAA S2x
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+}
+\end{frame}
+
+\subsection{Example}
+\begin{frame}
+\frametitle{Post Processing/Filtering}
+\framesubtitle{Example - Just Cause 4}
+
+\graphicspath{{Screenshots/JC4/}}
+	\image{Just Cause 4 - Popping}
+\end{frame}

@@ -1,0 +1,41 @@
+\section{Rasterization}
+
+\begin{frame}
+\frametitle{Rasterization}
+	\begin{itemize}
+		\item	The dominant means of sampling \textbf{primitives} for generating computer graphics is \textbf{Rasterization}		
+		%\item	The dominant means of generating images from computer graphics \textbf{primitives} is \textbf{Rasterization}
+		\begin{itemize}
+			\item	\textbf{Ray Tracing} is another method that can also suffer from aliasing, and other artifacts
+		\end{itemize}
+		\pause
+		\item	Rasterization samples a virtual space, creating \textbf{fragments} of the primitives where they are sampled. These fragments are then used for the \textbf{shading} of the final pixel.
+		\begin{itemize}
+			\item	\textbf{Forward} and \textbf{Deferred Shading} act differently with the rasterization step
+		\end{itemize}
+		\pause
+		\item	This sampling can lead to aliasing, depending on if it satisfies the \textbf{Nyquist limit} from Nyquist/Sampling theory
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[squeeze]
+\frametitle{Rasterization}
+	\image{{Fragments}}
+	
+	\scriptsize
+	The \textbf{frustum} is two similar rectangles; the front and back of the camera view
+		
+	Forward and Deferred shading differ based on when the lighting is calculated
+	
+	\begin{itemize}
+		\item	Forward calculates the lighting on all fragments, including occluded
+		\item	Deferred shading calculates lighting only for non-occluded fragments
+	\end{itemize}
+	
+	Deferred shading can be much faster, by simplifying the lighting calculations but
+	
+	Forward shading can be more accurate, by knowing edges and transparencies
+	
+	Additionally, forward shading offers more capabilities and control over lighting
+	
+\end{frame}

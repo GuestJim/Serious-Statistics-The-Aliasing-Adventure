@@ -1,0 +1,58 @@
+\subsection{Sampling}
+
+\begin{frame}
+\frametitle{Sampling}
+\framesubtitle{Spatial Aliases}
+	\only<1>	{
+		\image{Alias Example - Sin Samples}
+		
+		\footnotesize	\setlength{\tabcolsep}{2pt}	\color{MAGENTA}{
+		\begin{tabular}{lcccccccccccc}
+			X = & \{-0.5~	&	0.5~	&	1.5~	&	 2.5~	&	 3.5~	&	 4.5~	&	5.5~	&	6.5~	&	7.5~	&	8.5~	&	9.5~	&	10.5~\}	\\
+			Y = &	\{-0.39	&	0.48	&	0.99	&	0.75	&	-0.06	&	-0.82	&	-0.96	&	-0.37	&	0.49	&	0.99	&	0.73	&	-0.08\}
+		\end{tabular}
+		}
+	}
+
+	\only<2>	{
+		\image{Alias Example - Sin Waves - 0.1}
+		
+		\vspace{2.0ex}
+		\centering	\color{RED}{$Y = sin(0.1 * X + 0.5)$}
+	}
+
+	\only<3>	{
+		\image{Alias Example - Sin Waves - 0.9}
+		
+		\vspace{2.0ex}
+		\centering	\color{BLUE}{$Y = sin(0.9 * X + 0.5)$}
+	}
+
+	\only<4>	{
+		\centering
+		\includegraphics[keepaspectratio,width=0.95\textwidth, height=\paperheight]{{Alias Example - Sin Waves - Grad}}
+		\vspace{2.0ex}
+		{\color{RED}{$Y = sin(0.1 * X + 0.5)$}}
+		
+		\footnotesize	\setlength{\tabcolsep}{2pt}
+		\begin{tabular}{lcccccccccccc}
+			X = & \{-0.5~	&	0.5~	&	1.5~	&	 2.5~	&	 3.5~	&	 4.5~	&	5.5~	&	6.5~	&	7.5~	&	8.5~	&	9.5~	&	10.5~\}	\\
+			Y = &	\{-0.39	&	0.48	&	0.99	&	0.75	&	-0.06	&	-0.82	&	-0.96	&	-0.37	&	0.49	&	0.99	&	0.73	&	-0.08\}
+		\end{tabular}
+		
+		\normalsize
+		{\color{BLUE}{$Y = sin(0.9 * X + 0.5)$}}
+	}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sampling}
+\framesubtitle{Temporal Aliases}
+Signals are not limited to spatial aliasing artifacts, as \textbf{temporal aliasing} is also possible, like the 'wagon-wheel' effect
+
+\pause
+\image{Alias Example - Sin Popping - Grad}
+
+A 0.25 shift appears as a translation of 2 in the gradients
+
+\end{frame}

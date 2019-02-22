@@ -1,0 +1,194 @@
+\section{Super-Sampling and Multi-Sampling}
+
+\begin{frame}
+	\frametitle{Super-Sampling and Multi-Sampling}
+\begin{itemize}
+	\item	\textbf{Super-sampling} is to use a higher sampling frequency than the output supports
+	\item	Both \textbf{Multi-sampling} and \textbf{Adaptive sampling} are efficiency-optimized methods borrowing from super-sampling
+	\item	Adaptive sampling increases sampling around edges as it finds them
+	\item	Multi-sampling uses a fixed sampling pattern but culls/discards based on stencil, Z, and coverage buffers
+	\item	Critical concepts for these methods:
+	\begin{itemize}
+		\item	\textbf{Sampling pattern}
+		\item	\textbf{Sample filtering}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Sampling Patterns}
+{%\setbeamercolor{normal text}{bg=GRAY}
+\begin{frame}[squeeze]
+\frametitle{Sampling Patterns}
+
+	{\noindent	\color{RED}{\textbullet	Samples}}	\hspace{2em}	{\color{CYAN}{\textbullet	Taps}}
+		
+	\only<1-2>	{\image{{2x}}	}
+	
+	\only<2>	{
+	\footnotesize{
+		\begin{itemize}
+			\item	Using \textbf{n-Rook} solutions is desirable as it increases sampling in two dimensions
+			\item	Quincunx patterns share taps between pixel spaces
+		\end{itemize}
+		\centering	Sampling patterns can be defined for 1 pixel or 2x2 quads of pixels, then repeated for the screen
+	}
+	}
+	
+	\only<3-4>	{\image{{4x}}}
+	
+	\only<4>	{
+	\footnotesize{
+		\begin{itemize}
+			\item	Ordered Grid does not solve n-Rook and is susceptible to patterns
+			\item	Rotated Grid might not solve n-Rook but is less susceptible to patterns
+			\item	n-Rook solutions are efficient by maximizing sampling in X and Y
+			\item	n-Queen solutions are more efficienct by maximizing sampling in X, Y, and diagonals
+		\end{itemize}
+		}
+	}
+\end{frame}
+}
+
+\begin{frame}
+\frametitle{Sampling Patterns}
+	\begin{itemize}
+		\item	Starting with DirectX 10, Microsoft has required hardware acceleration for multi-sampling on GPUs
+		\begin{itemize}
+			\item	Shaders are run once per multi-sampled pixel
+			\item	GPUs have built-in sample patterns
+			\begin{itemize}
+				\item	With DirectX 10.1, \textbf{Standard Sample Patterns} must be included
+				\item	DirectX 12 supports programming custom sampling patterns (single pixel and quads)
+				{\tiny
+
+					\hspace{1em}	\textbullet	AMD support since 2007 (2011 for quads)
+
+					\vspace{-1ex}\hspace{1em}	\textbullet	NVIDIA support since 2014 (MFAA uses it)
+				}
+			\end{itemize}
+		\end{itemize}
+	\end{itemize}
+	
+	\pause
+	\image{MS Standard Patterns}
+	
+	\pause
+	Why are the 8x and 16x patterns not n-Queen solutions?
+\end{frame}
+
+\subsubsection{Stochastic Sampling}
+%\pdfbookmark{Stochastic Sampling}{toc}
+\begin{frame}
+\framesubtitle{Stochastic Sampling}
+	\centering	{\textbf{Why do we not see aliasing in Nature?}}
+
+	\begin{itemize}
+		\item	Limited number of photoreceptors in human eyes
+		\item	Human vision is especially good at finding patterns
+	\end{itemize}
+	
+	\pause
+	\vspace{2ex}
+	\centering	Because Nature and Physics already solved the problem
+	
+	\pause
+	\vspace{2ex}
+	\textbf{Stochastic Sampling} or Random Sampling
+	
+	\pause
+	\begin{itemize}
+		\item	Stochastic sampling will produce \textbf{noise} instead of aliasing patterns		
+		\begin{itemize}
+			\item	Human vision is tolerant of noise
+		\end{itemize}
+		\item	Photoreceptive cells have a size to them, and so must be packed, and can only be packed so densely
+		\begin{itemize}
+			\item	\textbf{Poisson disk} positions are random, but with a minimum distance between points
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Poisson Disks in Sample Patterns}
+	\image{Poisson Disks}
+\end{frame}
+
+\subsection{Sample Filtering}
+\begin{frame}
+\frametitle{Sample Filtering}
+	Once you have the sub-samples, how do you combine them for the final color?
+	\pause
+	\begin{multicols}{3}
+	[\noindent	Example Filters:	\vspace{-12pt}	]
+			\begin{itemize}
+			{	\fontsize{7}{8}\selectfont
+				\item	Point
+				\item	Box
+				\item	Triangle/Tent
+				\item	Quadratic
+				\item	Cubic
+				\item	Gaussian
+				\item	Catmull-Rom
+				\item	Mitchell-Netravali
+			}
+			\end{itemize}
+		\end{multicols}
+	\image{Blend Filters}
+\end{frame}
+
+\subsubsection{Examples}
+\begin{frame}
+\frametitle{Sample Filtering}
+\framesubtitle{Examples - Oversampling}
+	\only<1>	{
+	\graphicspath{{Media/Filters/}}
+		\image[height=0.27\textheight]{Composite - Circles - 01 Point}
+		\image[height=0.27\textheight]{Composite - Circles - 02 Box}
+		\image[height=0.27\textheight]{Composite - Circles - 03 Triangle}
+	}
+	\only<2>	{
+	\graphicspath{{Media/Filters/}}
+		\image[height=0.27\textheight]{Composite - Circles - 04 Quadratic}
+		\image[height=0.27\textheight]{Composite - Circles - 05 Cubic}
+		\image[height=0.27\textheight]{Composite - Circles - 06 Gaussian}
+	}
+	\only<3>	{
+	\graphicspath{{Media/Filters/}}
+		\image[height=0.27\textheight]{Composite - Circles - 07 Catrom}
+		\image[height=0.27\textheight]{Composite - Circles - 08 Mitchell}
+	}
+\end{frame}
+
+\subsubsection{Mipmaps}
+\begin{frame}
+\frametitle{Sample Filtering}
+\framesubtitle{Examples - Mipmaps}
+	\only<1>	{
+		\begin{itemize}
+			\item	Mip from 'multum in parvo' -- Latin for 'many things in a small space'
+			\item	Textures can suffer from spatial aliasing at different scales
+			\item	\textbf{Mipmaps} contain pre-scaled versions of textures that can be prepared to avoid aliasing
+			\begin{itemize}
+				\item	Similar '\textbf{pyramidal parametrics}' schemes are used for other assets too
+				\item	\textbf{Anisotropic filtering} extends the range of texture elements used when interpolation between mipmap levels is necessary
+			\end{itemize}
+			\item	By having the scaling already done, this can also improve performance
+		\end{itemize}
+	}
+
+	\graphicspath{{Media/Mipmaps/}}
+	\only<2>	{
+		\image[height=0.27\textheight]{Mipmaps - 01 Point}
+		\image[height=0.27\textheight]{Mipmaps - 02 Box}
+		\image[height=0.27\textheight]{Mipmaps - 03 Triangle}
+	}
+	\only<3>	{
+		\image[height=0.27\textheight]{Mipmaps - 04 Quadratic}
+		\image[height=0.27\textheight]{Mipmaps - 05 Cubic}
+		\image[height=0.27\textheight]{Mipmaps - 06 Gaussian}
+	}
+	\only<4>	{
+		\image[height=0.27\textheight]{Mipmaps - 07 Catmull-Rom}
+		\image[height=0.27\textheight]{Mipmaps - 08 Mitchell-Netravali}
+	}
+\end{frame}
