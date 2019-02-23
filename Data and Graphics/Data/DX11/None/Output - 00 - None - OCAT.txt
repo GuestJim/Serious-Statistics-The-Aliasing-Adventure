@@ -1,0 +1,50 @@
+00 - None - OCAT
+Serious Sam Fusion 2017 (DX11) - (None)
+
+Mean
+[1] 3.461553
+
+Median
+[1] 3.43
+
+Average of FPS
+[1] 288.8853
+
+Ratio Dropped Frames
+[1] 0
+
+Percentiles (Frame Time)
+0.1%,	1%,	99%,	99.9%
+ 0.1%    1%   99% 99.9% 
+ 2.09  2.36  4.69  5.40 
+
+Percentiles (Frame Rate)
+0.1%,	1%,	99%,	99.9%
+  0.1%     1%    99%  99.9% 
+477.85 423.21 213.17 185.10 
+
+ECDF
+60 FPS,	50 FPS,	30 FPS,	20 FPS,	15 FPS
+[1] 0 0 0 0 0
+
+Median
+[1] 3.43
+
+Standard Deviation
+[1] 0.5020433
+
+Diff Percentiles
+     0.1%        1%       99%     99.9% 
+-1.243248 -0.701000  0.645120  1.232000 
+
+ECDF Diff
+-16.667,	-8.333,	8.333,	16.667
+[1]   0   0 100 100
+
+Diff Balance
+[1] 0.488874
+[1] 0.511126
+
+MsUntilDisplayed - MsUntilRenderComplete
+ 0.1%    1%   50%   99% 99.9% 
+   NA    NA    NA    NA    NA 
