@@ -1,0 +1,3 @@
+I believe HITMAN 2 is using Temporal filtering (potentially the amortized super-sampling concept) to improve the resolution of the reflections (on Medium and High options as Low appears to remain a lower resolution).
+
+What these screenshots capture is some ghosting as a result of the temporal samples being reprojected not-ideally. You can see severe blocking in the reflection as he moves across the mirror.
