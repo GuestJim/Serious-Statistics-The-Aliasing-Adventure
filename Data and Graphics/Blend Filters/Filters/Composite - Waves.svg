@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1058"
+   height="970"
+   viewBox="0 0 1057.9999 970.00002"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="Composite - Waves.svg"
+   style="shape-rendering:crispEdges">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="641.64917"
+     inkscape:cy="-421.65291"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer12"
+     showgrid="false"
+     showborder="false"
+     units="px"
+     inkscape:snap-bbox="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:bbox-nodes="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:snap-bbox-edge-midpoints="false">
+    <sodipodi:guide
+       position="240.14967,945.18221"
+       orientation="0,1"
+       id="guide1168"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="207.96877,900.00001"
+       orientation="0,1"
+       id="guide1170"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="207.96877,674.99993"
+       orientation="0,1"
+       id="guide1172"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="207.96877,449.99993"
+       orientation="0,1"
+       id="guide1174"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="207.96877,225.00005"
+       orientation="0,1"
+       id="guide1176"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="207.99996,700.00002"
+       orientation="1,0"
+       id="guide1178"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="-2.1444735e-005,6.7643869e-005"
+       orientation="1,0"
+       id="guide1180"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="1058,700.00002"
+       orientation="1,0"
+       id="guide1182"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="1907.9999,700.00002"
+       orientation="1,0"
+       id="guide1234"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="27577.999,700.00002"
+       orientation="1,0"
+       id="guide1286"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="3607.9999,700.00002"
+       orientation="1,0"
+       id="guide1332"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="4457.9998,700.00002"
+       orientation="1,0"
+       id="guide1384"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="5307.9685,700.00002"
+       orientation="1,0"
+       id="guide1444"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="6157.9685,700.00002"
+       orientation="1,0"
+       id="guide1496"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="6982.9685,970.18221"
+       orientation="0,1"
+       id="guide1508"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="6982.9685,50.000054"
+       orientation="1,0"
+       id="guide1510"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="-2.1444735e-005,7.7643869e-005"
+       orientation="0,1"
+       id="guide1512"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="2757.9999,700.00001"
+       orientation="1,0"
+       id="guide1514"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer10"
+     inkscape:label="Background"
+     transform="translate(432.16269,-561.34442)"
+     style="display:inline">
+    <g
+       inkscape:groupmode="layer"
+       id="layer11"
+       inkscape:label="Full"
+       style="display:none"
+       sodipodi:insensitive="true">
+      <rect
+         style="display:inline;opacity:1;fill:#c4c4c4;fill-opacity:1;stroke:none;stroke-width:5.00000048;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill;shape-rendering:crispEdges"
+         id="rect1304"
+         width="6983"
+         height="970"
+         x="-432.16269"
+         y="561.34442" />
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="layer12"
+       inkscape:label="Small"
+       style="display:inline"
+       sodipodi:insensitive="true">
+      <rect
+         y="561.34442"
+         x="-432.16269"
+         height="970"
+         width="1058"
+         id="rect1423"
+         style="display:inline;opacity:1;fill:#c4c4c4;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill;shape-rendering:crispEdges" />
+    </g>
+  </g>
+  <g
+     inkscape:label="Mitchell"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(432.16269,-561.34442)"
+     sodipodi:insensitive="true">
+    <g
+       id="g1457">
+      <text
+         id="text1266"
+         y="606.42261"
+         x="5838.2407"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         xml:space="preserve"><tspan
+           y="606.42261"
+           x="5838.2407"
+           id="tspan1264"
+           sodipodi:role="line">Mitchell-Netravali</tspan></text>
+      <g
+         id="g1448">
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\08 Mitchell/Waves - 1x.png"
+           xlink:href="08 Mitchell/Waves - 1x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1408"
+           x="5725.8062"
+           y="631.34436" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\08 Mitchell/Waves - 2x.png"
+           xlink:href="08 Mitchell/Waves - 2x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1419"
+           x="5725.8062"
+           y="856.34448" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\08 Mitchell/Waves - 4x.png"
+           xlink:href="08 Mitchell/Waves - 4x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1430"
+           x="5725.8062"
+           y="1081.3445" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\08 Mitchell/Waves - 8x.png"
+           xlink:href="08 Mitchell/Waves - 8x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1441"
+           x="5725.8062"
+           y="1306.3444" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Catrom"
+     transform="translate(432.16269,-561.34442)"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <g
+       id="g1398">
+      <text
+         id="text1270"
+         y="606.42261"
+         x="4958.0586"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         xml:space="preserve"><tspan
+           y="606.42261"
+           x="4958.0586"
+           id="tspan1268"
+           sodipodi:role="line">Catmull-Rom</tspan></text>
+      <g
+         id="g1389">
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\07 Catrom/Waves - 1x.png"
+           xlink:href="07 Catrom/Waves - 1x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1349"
+           x="4875.8062"
+           y="631.34436" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\07 Catrom/Waves - 2x.png"
+           xlink:href="07 Catrom/Waves - 2x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1360"
+           x="4875.8062"
+           y="856.34448" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\07 Catrom/Waves - 4x.png"
+           xlink:href="07 Catrom/Waves - 4x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1371"
+           x="4875.8062"
+           y="1081.3445" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\07 Catrom/Waves - 8x.png"
+           xlink:href="07 Catrom/Waves - 8x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1382"
+           x="4875.8062"
+           y="1306.3444" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Gaussian"
+     transform="translate(432.16269,-561.34442)"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <g
+       id="g1332">
+      <text
+         id="text1274"
+         y="606.08405"
+         x="4083.0378"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill;shape-rendering:crispEdges"
+         xml:space="preserve"><tspan
+           id="tspan1276"
+           y="606.08405"
+           x="4083.0378"
+           sodipodi:role="line">Gaussian</tspan></text>
+      <g
+         id="g1323">
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\06 Gaussian/Waves - 1x.png"
+           xlink:href="06 Gaussian/Waves - 1x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1283"
+           x="4025.8372"
+           y="631.34436" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\06 Gaussian/Waves - 2x.png"
+           xlink:href="06 Gaussian/Waves - 2x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1294"
+           x="4025.8372"
+           y="856.34448" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\06 Gaussian/Waves - 4x.png"
+           xlink:href="06 Gaussian/Waves - 4x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1305"
+           x="4025.8372"
+           y="1081.3445" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\06 Gaussian/Waves - 8x.png"
+           xlink:href="06 Gaussian/Waves - 8x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1316"
+           x="4025.8372"
+           y="1306.3444" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Cubic"
+     transform="translate(432.16269,-561.34442)"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <g
+       id="g1266">
+      <text
+         id="text1284"
+         y="606.42261"
+         x="3209.8035"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         xml:space="preserve"><tspan
+           y="606.42261"
+           x="3209.8035"
+           id="tspan1282"
+           sodipodi:role="line">Cubic</tspan></text>
+      <g
+         id="g1257">
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\05 Cubic/Waves - 1x.png"
+           xlink:href="05 Cubic/Waves - 1x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1217"
+           x="3175.8374"
+           y="631.34436" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\05 Cubic/Waves - 2x.png"
+           xlink:href="05 Cubic/Waves - 2x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1228"
+           x="3175.8374"
+           y="856.34448" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\05 Cubic/Waves - 4x.png"
+           xlink:href="05 Cubic/Waves - 4x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1239"
+           x="3175.8374"
+           y="1081.3445" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\05 Cubic/Waves - 8x.png"
+           xlink:href="05 Cubic/Waves - 8x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1250"
+           x="3175.8374"
+           y="1306.3444" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Quadratic"
+     style="display:inline"
+     transform="translate(432.16269,-561.34442)"
+     sodipodi:insensitive="true">
+    <g
+       id="g1200">
+      <text
+         id="text1288"
+         y="606.42261"
+         x="2388.293"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         xml:space="preserve"><tspan
+           y="606.42261"
+           x="2388.293"
+           id="tspan1286"
+           sodipodi:role="line">Quadratic</tspan></text>
+      <g
+         id="g1191">
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\04 Quadratic/Waves - 1x.png"
+           xlink:href="04 Quadratic/Waves - 1x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1151"
+           x="2325.8374"
+           y="631.34436" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\04 Quadratic/Waves - 2x.png"
+           xlink:href="04 Quadratic/Waves - 2x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1162"
+           x="2325.8374"
+           y="856.34448" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\04 Quadratic/Waves - 4x.png"
+           xlink:href="04 Quadratic/Waves - 4x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1173"
+           x="2325.8374"
+           y="1081.3445" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\04 Quadratic/Waves - 8x.png"
+           xlink:href="04 Quadratic/Waves - 8x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1184"
+           x="2325.8374"
+           y="1306.3444" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Triangle"
+     transform="translate(432.16269,-561.34442)"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <g
+       id="g1141">
+      <text
+         id="text1292"
+         y="606.42261"
+         x="1561.6263"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         xml:space="preserve"><tspan
+           y="606.42261"
+           x="1561.6263"
+           id="tspan1290"
+           sodipodi:role="line">Triangle/Tent</tspan></text>
+      <g
+         id="g1132">
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\03 Triangle/Waves - 1x.png"
+           xlink:href="03 Triangle/Waves - 1x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1092"
+           x="1475.8373"
+           y="631.34436" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\03 Triangle/Waves - 2x.png"
+           xlink:href="03 Triangle/Waves - 2x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1103"
+           x="1475.8373"
+           y="856.34448" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\03 Triangle/Waves - 4x.png"
+           xlink:href="03 Triangle/Waves - 4x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1114"
+           x="1475.8373"
+           y="1081.3445" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\03 Triangle/Waves - 8x.png"
+           xlink:href="03 Triangle/Waves - 8x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1125"
+           x="1475.8373"
+           y="1306.3444" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="Box"
+     transform="translate(432.16269,-561.34442)"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <g
+       id="g1068">
+      <text
+         id="text1296"
+         y="605.19861"
+         x="647.62115"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         xml:space="preserve"><tspan
+           y="605.19861"
+           x="647.62115"
+           id="tspan1294"
+           sodipodi:role="line">Box</tspan></text>
+      <g
+         id="g1059">
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\02 Box/Waves - 1x.png"
+           xlink:href="02 Box/Waves - 1x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1019"
+           x="625.83734"
+           y="631.34436" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\02 Box/Waves - 2x.png"
+           xlink:href="02 Box/Waves - 2x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1030"
+           x="625.83734"
+           y="856.34448" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\02 Box/Waves - 4x.png"
+           xlink:href="02 Box/Waves - 4x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1041"
+           x="625.83734"
+           y="1081.3445" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\02 Box/Waves - 8x.png"
+           xlink:href="02 Box/Waves - 8x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image1052"
+           x="625.83734"
+           y="1306.3444" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="Point"
+     transform="translate(432.16269,-561.34442)"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <g
+       id="g1002">
+      <text
+         id="text1300"
+         y="606.08405"
+         x="-192.8997"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         xml:space="preserve"><tspan
+           y="606.08405"
+           x="-192.8997"
+           id="tspan1298"
+           sodipodi:role="line">Point</tspan></text>
+      <g
+         id="g993">
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\01 Point/Waves - 2x.png"
+           xlink:href="01 Point/Waves - 2x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image953"
+           x="-224.16272"
+           y="856.34448" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\01 Point/Waves - 1x.png"
+           xlink:href="01 Point/Waves - 1x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image964"
+           x="-224.16272"
+           y="631.34436" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\01 Point/Waves - 4x.png"
+           xlink:href="01 Point/Waves - 4x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image975"
+           x="-224.16272"
+           y="1081.3445" />
+        <image
+           sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Blend Filters\Filters\01 Point/Waves - 8x.png"
+           xlink:href="01 Point/Waves - 8x.png"
+           width="800"
+           height="200"
+           preserveAspectRatio="none"
+           id="image986"
+           x="-224.16272"
+           y="1306.3444" />
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer9"
+     inkscape:label="Samples"
+     transform="translate(432.16269,-561.34442)"
+     style="display:inline">
+    <g
+       id="g1066"
+       transform="translate(0,-0.22520189)">
+      <text
+         id="text866"
+         y="725.84186"
+         x="-357.03772"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.66666603px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         xml:space="preserve"><tspan
+           y="725.84186"
+           x="-357.03772"
+           id="tspan864"
+           sodipodi:role="line">1x</tspan><tspan
+           style="font-size:21.33333397px;line-height:26.66666603px;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+           id="tspan1314"
+           y="752.50854"
+           x="-357.03772"
+           sodipodi:role="line">(No Filter)</tspan></text>
+      <text
+         id="text870"
+         y="950.41608"
+         x="-326.76688"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+         xml:space="preserve"><tspan
+           y="950.41608"
+           x="-326.76688"
+           id="tspan868"
+           sodipodi:role="line">2x</tspan><tspan
+           style="font-size:21.33333397px;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+           id="tspan1316"
+           y="976.45776"
+           x="-326.76688"
+           sodipodi:role="line">(4 Over-sample)</tspan></text>
+      <text
+         id="text870-7"
+         y="1175.3054"
+         x="-320.68353"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill;shape-rendering:crispEdges"
+         xml:space="preserve"><tspan
+           y="1175.3054"
+           x="-320.68353"
+           id="tspan868-1"
+           sodipodi:role="line">4x</tspan><tspan
+           style="font-size:21.33333397px;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+           id="tspan1316-8"
+           y="1201.347"
+           x="-320.68353"
+           sodipodi:role="line">(16 Over-sample)</tspan></text>
+      <text
+         id="text870-5"
+         y="1400.403"
+         x="-320.68353"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill;shape-rendering:crispEdges"
+         xml:space="preserve"><tspan
+           y="1400.403"
+           x="-320.68353"
+           id="tspan868-3"
+           sodipodi:role="line">8x</tspan><tspan
+           style="font-size:21.33333397px;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+           id="tspan1316-3"
+           y="1426.4446"
+           x="-320.68353"
+           sodipodi:role="line">(64 Over-sample)</tspan></text>
+    </g>
+  </g>
+</svg>

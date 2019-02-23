@@ -1,0 +1,71 @@
+Order of screenshots
+00 - None
+01 - SMAA
+02 - TAA
+03 - SMAA T2x
+04 - SMAA 4x
+
+10 - MLAA None
+11 - MLAA SMAA
+12 - MLAA TAA
+13 - MLAA SMAA T2x
+14 - MLAA SMAA 4x
+
+
+Menu
+None
+	VRAM	3.9 GB
+	GPU	760 MHz
+	HBM	500 MHz
+SMAA
+	VRAM	3.9 GB	
+	GPU	800 MHz	
+	HBM	800 Mhz
+TAA	
+	VRAM	3.9 GB
+	GPU	790 MHz
+	HBM	800 MHz
+SMAA T2x
+	VRAM	3.9	GB
+	GPU	810 MHz
+	HBM	800 MHz
+SMAA 4x
+	VRAM	4.2 GB
+	GPU	1325 MHz
+	HBM	945 MHz
+
+Kuwaq Yaku
+None
+	6.9
+SMAA
+	6.9
+TAA
+	6.9
+SMAA T2x
+	6.9
+SMAA 4x
+	7.1
+
+Peruvian Jungle
+None
+	6.8
+SMAA
+	6.8
+TAA
+	6.8
+SMAA T2x
+	6.8
+SMAA 4x
+	7.1
+
+The Hidden City/Abandoned Village
+None
+	6.8
+SMAA
+	6.8
+TAA
+	6.8
+SMAA T2x
+	6.8
+SMAA 4x
+	7.2

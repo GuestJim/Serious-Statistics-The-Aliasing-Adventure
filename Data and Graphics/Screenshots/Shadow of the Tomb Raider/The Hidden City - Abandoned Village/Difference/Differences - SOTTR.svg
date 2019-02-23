@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1302"
+   height="965.99994"
+   viewBox="0 0 1302 965.99998"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="Differences - SOTTR.svg"
+   shape-rendering="crispEdges">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="587.05688"
+     inkscape:cy="557.12629"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer3"
+     showgrid="false"
+     showborder="false"
+     units="px"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true">
+    <sodipodi:guide
+       position="19.999985,19.999934"
+       orientation="0,1262"
+       id="guide962"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="1282,19.999934"
+       orientation="-926,0"
+       id="guide964"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="1282,945.99995"
+       orientation="0,-1262"
+       id="guide966"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="19.999985,945.99995"
+       orientation="926,0"
+       id="guide968"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="1262,-6.1111005e-05"
+       orientation="0,1"
+       id="guide972"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="3.9290269e-07,925.99997"
+       orientation="1,0"
+       id="guide974"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="1302,965.99998"
+       orientation="0,1"
+       id="guide976"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="1302,39.99994"
+       orientation="1,0"
+       id="guide978"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="411.00001,472.99992"
+       orientation="0,1"
+       id="guide1010"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="661.00001,915.99997"
+       orientation="1,0"
+       id="guide1020"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Background"
+     transform="translate(1619.7621,-561.4696)"
+     sodipodi:insensitive="true">
+    <rect
+       style="opacity:1;fill:#c0c0c0;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect970"
+       width="1302"
+       height="965.99994"
+       x="-1619.7621"
+       y="561.4696" />
+  </g>
+  <g
+     inkscape:label="SMAA 4x"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(1619.7621,-561.4696)"
+     style="display:inline">
+    <g
+       id="g948"
+       transform="translate(-946.06582,955.63278)">
+      <image
+         width="230"
+         height="453"
+         preserveAspectRatio="none"
+         style="stroke-width:0.26458332;image-rendering:optimizeSpeed"
+         xlink:href="file:///E:/Users/Jim/My%20Documents/OCC/@Reviews/Serious%20Statistics%20AA/Screenshots/Shadow%20of%20the%20Tomb%20Raider/The%20Hidden%20City%20-%20Abandoned%20Village/Difference/Crop/Vines%20-%20Difference%2004%20-%20SMAA%204x.png"
+         id="image856"
+         x="378.30374"
+         y="98.836845"
+         sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Screenshots\Shadow of the Tomb Raider\The Hidden City - Abandoned Village\Difference\Crop\Vines - Difference 04 - SMAA 4x.png" />
+      <image
+         width="381"
+         height="423"
+         preserveAspectRatio="none"
+         style="stroke-width:0.26458332;image-rendering:optimizeSpeed"
+         xlink:href="file:///E:/Users/Jim/My%20Documents/OCC/@Reviews/Serious%20Statistics%20AA/Screenshots/Shadow%20of%20the%20Tomb%20Raider/The%20Hidden%20City%20-%20Abandoned%20Village/Difference/Crop/Wall%20-%20Difference%2004%20-%20SMAA%204x.png"
+         id="image906"
+         x="-12.696262"
+         y="128.83684"
+         sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Screenshots\Shadow of the Tomb Raider\The Hidden City - Abandoned Village\Difference\Crop\Wall - Difference 04 - SMAA 4x.png" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.33333206px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-960.58502"
+       y="1081.5035"
+       id="text982-54"><tspan
+         sodipodi:role="line"
+         id="tspan980-1"
+         x="-960.58502"
+         y="1081.5035">SMAA 4x</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="SMAA T2x"
+     transform="translate(1619.7621,-561.4696)">
+    <g
+       id="g952"
+       transform="translate(-718.75262,1328.1709)">
+      <image
+         width="230"
+         height="453"
+         preserveAspectRatio="none"
+         style="stroke-width:0.26458332;image-rendering:optimizeSpeed"
+         xlink:href="file:///E:/Users/Jim/My%20Documents/OCC/@Reviews/Serious%20Statistics%20AA/Screenshots/Shadow%20of%20the%20Tomb%20Raider/The%20Hidden%20City%20-%20Abandoned%20Village/Difference/Crop/Vines%20-%20Difference%2003%20-%20SMAA%20T2x.png"
+         id="image845"
+         x="-490.00946"
+         y="-273.70126"
+         sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Screenshots\Shadow of the Tomb Raider\The Hidden City - Abandoned Village\Difference\Crop\Vines - Difference 03 - SMAA T2x.png" />
+      <image
+         width="381"
+         height="423"
+         preserveAspectRatio="none"
+         style="stroke-width:0.26458332;image-rendering:optimizeSpeed"
+         xlink:href="file:///E:/Users/Jim/My%20Documents/OCC/@Reviews/Serious%20Statistics%20AA/Screenshots/Shadow%20of%20the%20Tomb%20Raider/The%20Hidden%20City%20-%20Abandoned%20Village/Difference/Crop/Wall%20-%20Difference%2003%20-%20SMAA%20T2x.png"
+         id="image895"
+         x="-881.00946"
+         y="-243.70126"
+         sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Screenshots\Shadow of the Tomb Raider\The Hidden City - Abandoned Village\Difference\Crop\Wall - Difference 03 - SMAA T2x.png" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.33333206px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-1601.585"
+       y="1081.5035"
+       id="text982-5"><tspan
+         sodipodi:role="line"
+         id="tspan980-9"
+         x="-1601.585"
+         y="1081.5035">SMAA T2x</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="TAA"
+     transform="translate(1619.7621,-561.4696)"
+     style="display:inline">
+    <g
+       id="g956"
+       transform="translate(-485.71429,-45.714286)">
+      <image
+         width="230"
+         height="453"
+         preserveAspectRatio="none"
+         style="stroke-width:0.26458332;image-rendering:optimizeSpeed"
+         xlink:href="file:///E:/Users/Jim/My%20Documents/OCC/@Reviews/Serious%20Statistics%20AA/Screenshots/Shadow%20of%20the%20Tomb%20Raider/The%20Hidden%20City%20-%20Abandoned%20Village/Difference/Crop/Vines%20-%20Difference%2002%20-%20TAA.png"
+         id="image834"
+         x="-82.047791"
+         y="627.1839"
+         sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Screenshots\Shadow of the Tomb Raider\The Hidden City - Abandoned Village\Difference\Crop\Vines - Difference 02 - TAA.png" />
+      <image
+         width="381"
+         height="423"
+         preserveAspectRatio="none"
+         style="stroke-width:0.26458332;image-rendering:optimizeSpeed"
+         xlink:href="file:///E:/Users/Jim/My%20Documents/OCC/@Reviews/Serious%20Statistics%20AA/Screenshots/Shadow%20of%20the%20Tomb%20Raider/The%20Hidden%20City%20-%20Abandoned%20Village/Difference/Crop/Wall%20-%20Difference%2002%20-%20TAA.png"
+         id="image884"
+         x="-473.04779"
+         y="657.1839"
+         sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Screenshots\Shadow of the Tomb Raider\The Hidden City - Abandoned Village\Difference\Crop\Wall - Difference 02 - TAA.png" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.33333206px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-959.29071"
+       y="608.23004"
+       id="text982-4"><tspan
+         sodipodi:role="line"
+         id="tspan980-2"
+         x="-959.29071"
+         y="608.23004">TAA</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="SMAA"
+     transform="translate(1619.7621,-561.4696)">
+    <g
+       id="g960"
+       transform="translate(-325.21618,130.25367)">
+      <image
+         width="230"
+         height="453"
+         preserveAspectRatio="none"
+         style="stroke-width:0.26458332;image-rendering:optimizeSpeed"
+         xlink:href="file:///E:/Users/Jim/My%20Documents/OCC/@Reviews/Serious%20Statistics%20AA/Screenshots/Shadow%20of%20the%20Tomb%20Raider/The%20Hidden%20City%20-%20Abandoned%20Village/Difference/Crop/Vines%20-%20Difference%2001%20-%20SMAA.png"
+         id="image823"
+         x="-883.5459"
+         y="451.21594"
+         sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Screenshots\Shadow of the Tomb Raider\The Hidden City - Abandoned Village\Difference\Crop\Vines - Difference 01 - SMAA.png" />
+      <image
+         width="381"
+         height="423"
+         preserveAspectRatio="none"
+         style="stroke-width:0.26458332;image-rendering:optimizeSpeed"
+         xlink:href="file:///E:/Users/Jim/My%20Documents/OCC/@Reviews/Serious%20Statistics%20AA/Screenshots/Shadow%20of%20the%20Tomb%20Raider/The%20Hidden%20City%20-%20Abandoned%20Village/Difference/Crop/Wall%20-%20Difference%2001%20-%20SMAA.png"
+         id="image873"
+         x="-1274.5459"
+         y="481.21594"
+         sodipodi:absref="E:\Users\Jim\My Documents\OCC\@Reviews\Serious Statistics AA\Screenshots\Shadow of the Tomb Raider\The Hidden City - Abandoned Village\Difference\Crop\Wall - Difference 01 - SMAA.png" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.33333206px;line-height:26.04166794px;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-1601.585"
+       y="608.50348"
+       id="text982"><tspan
+         sodipodi:role="line"
+         id="tspan980"
+         x="-1601.585"
+         y="608.50348">SMAA</tspan></text>
+  </g>
+</svg>
