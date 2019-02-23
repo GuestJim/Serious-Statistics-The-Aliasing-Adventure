@@ -1,0 +1,24 @@
+Order of screenshots
+00 - None
+01 - SSAA 2x
+02 - SSAA 4x
+03 - FXAA Low
+04 - FXAA Medium
+05 - FXAA High
+06 - FXAA Ultra
+07 - MSAA 2x
+08 - MSAA 4x
+09 - MSAA 8x
+
+10 - MLAA None
+11 - MLAA SSAA 2x
+12 - MLAA SSAA 4x
+13 - MLAA FXAA Low
+14 - MLAA FXAA Medium
+15 - MLAA FXAA High
+16 - MLAA FXAA Ultra
+17 - MLAA MSAA 2x
+18 - MLAA MSAA 4x
+19 - MLAA MSAA 8x
+
+Interestingly, the Steam Overlay does not capture the MLAA impact, so that must be applied after the overlay
