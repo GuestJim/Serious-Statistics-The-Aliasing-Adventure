@@ -11,7 +11,7 @@
 		\pause
 		\item	Rasterization samples a virtual space, creating \textbf{fragments} of the primitives where they are sampled. These fragments are then used for the \textbf{shading} of the final pixel.
 		\begin{itemize}
-			\item	\textbf{Forward} and \textbf{Deferred Shading} act differently with the rasterization step
+			\item	\textbf{Forward} and \textbf{Deferred Shading} act differently with the rasterization step\supercite{DeferredShadingUnity, ForwardDeferred}
 		\end{itemize}
 		\pause
 		\item	This sampling can lead to aliasing, depending on if it satisfies the \textbf{Nyquist limit} from Nyquist/Sampling theory
@@ -28,8 +28,8 @@
 	Forward and Deferred shading differ based on when the lighting is calculated
 	
 	\begin{itemize}
-		\item	Forward calculates the lighting on all fragments, including occluded
-		\item	Deferred shading calculates lighting only for non-occluded fragments
+		\item	Forward calculates the lighting on all fragments, including occluded\supercite{DeferredShadingUnity, ForwardDeferred}
+		\item	Deferred shading calculates lighting only for non-occluded fragments\supercite{DeferredShadingUnity, ForwardDeferred}
 	\end{itemize}
 	
 	Deferred shading can be much faster, by simplifying the lighting calculations but

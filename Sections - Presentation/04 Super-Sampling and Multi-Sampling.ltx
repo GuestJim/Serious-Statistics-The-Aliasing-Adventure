@@ -5,8 +5,8 @@
 \begin{itemize}
 	\item	\textbf{Super-sampling} is to use a higher sampling frequency than the output supports
 	\item	Both \textbf{Multi-sampling} and \textbf{Adaptive sampling} are efficiency-optimized methods borrowing from super-sampling
-	\item	Adaptive sampling increases sampling around edges as it finds them
-	\item	Multi-sampling uses a fixed sampling pattern but culls/discards based on stencil, Z, and coverage buffers
+	\item	Adaptive sampling increases sampling around edges as it finds them\supercite{StochasticSampling}
+	\item	Multi-sampling uses a fixed sampling pattern but culls/discards based on stencil, Z, and coverage buffers\supercite{DX10RasterizationStage, OpenGLMSAA}
 	\item	Critical concepts for these methods:
 	\begin{itemize}
 		\item	\textbf{Sampling pattern}
@@ -52,18 +52,18 @@
 \begin{frame}
 \frametitle{Sampling Patterns}
 	\begin{itemize}
-		\item	Starting with DirectX 10, Microsoft has required hardware acceleration for multi-sampling on GPUs
+		\item	Starting with DirectX 10, Microsoft has required hardware acceleration for multi-sampling on GPUs\supercite{DXReqs}
 		\begin{itemize}
-			\item	Shaders are run once per multi-sampled pixel
+			\item	Shaders are run once per multi-sampled pixel\supercite{DX10RasterizationStage, DX10RasterizationRules}
 			\item	GPUs have built-in sample patterns
 			\begin{itemize}
-				\item	With DirectX 10.1, \textbf{Standard Sample Patterns} must be included
-				\item	DirectX 12 supports programming custom sampling patterns (single pixel and quads)
+				\item	With DirectX 10.1, \textbf{Standard Sample Patterns} must be included\supercite{DX11StandardPatterns}
+				\item	DirectX 12 supports programming custom sampling patterns (single pixel and quads)\supercite{DX12CreatorsUpdate, DX12SamplePositions}
 				{\tiny
 
-					\hspace{1em}	\textbullet	AMD support since 2007 (2011 for quads)
+					\hspace{1em}	\textbullet	AMD support since 2007 (2011 for quads)\supercite{R600Registers, SouthernIslandsRegisters}
 
-					\vspace{-1ex}\hspace{1em}	\textbullet	NVIDIA support since 2014 (MFAA uses it)
+					\vspace{-1ex}\hspace{1em}	\textbullet	NVIDIA support since 2014 (MFAA uses it)\supercite{MFAA}
 				}
 			\end{itemize}
 		\end{itemize}
@@ -93,7 +93,7 @@
 	
 	\pause
 	\vspace{2ex}
-	\textbf{Stochastic Sampling} or Random Sampling
+	\textbf{Stochastic Sampling}\supercite{StochasticSampling} or Random Sampling
 	
 	\pause
 	\begin{itemize}
@@ -119,7 +119,7 @@
 	Once you have the sub-samples, how do you combine them for the final color?
 	\pause
 	\begin{multicols}{3}
-	[\noindent	Example Filters:	\vspace{-12pt}	]
+	[\noindent	Example Filters\supercite{blender}:	\vspace{-12pt}	]
 			\begin{itemize}
 			{	\fontsize{7}{8}\selectfont
 				\item	Point
@@ -165,7 +165,7 @@
 \framesubtitle{Examples - Mipmaps}
 	\only<1>	{
 		\begin{itemize}
-			\item	Mip from 'multum in parvo' -- Latin for 'many things in a small space'
+			\item	Mip from 'multum in parvo' -- Latin for 'many things in a small space'\supercite{Mipmaps}
 			\item	Textures can suffer from spatial aliasing at different scales
 			\item	\textbf{Mipmaps} contain pre-scaled versions of textures that can be prepared to avoid aliasing
 			\begin{itemize}
