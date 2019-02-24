@@ -6,25 +6,26 @@
 \noindent	Instead of addressing the Nyquist limit, some methods try to smooth aliasing artifacts from the image
 
 \only<1>	{
-\begin{itemize}
-	\item	Morphological Filtering (MLAA)\supercite{MLAAIntel} among the oldest
 	\begin{itemize}
-		\item	attempts to determine original geometry and blend appropriately
+		\item	Morphological Filtering (MLAA)\supercite{MLAAIntel} among the oldest
+		\begin{itemize}
+			\item	attempts to determine original geometry and blend appropriately
+		\end{itemize}
+		
+		\item	Temporal Filtering (TAA) utilizes \textbf{reprojection} and is also an older method
+		\begin{itemize}
+			\item	\textbf{reprojection}\supercite{Reprojection} involves reusing already calculated results, allowing for improved performance
+			\item	\textbf{Amortized Super-Sampling}\supercite{TAA} uses sub-pixel jittererd samples to potentially recreate 2x2 SSAA
+		\end{itemize}
+		
+		% \item	Fast Approximate (FXAA)\supercite{FXAA} trades accuracy for speed
+		\item	Fast Approximate (FXAA)\supercite{FXAA} focuses on speed over accuracy
+		\begin{itemize}
+			\item	finds edges, applies a perpendicular sub-pixel shift, and resamples
+			\item	does have an early exit to protect some edges and quality levels
+			\item	has low-pass filter to remove/reduce high frequency details
+		\end{itemize}	
 	\end{itemize}
-	
-	\item	Temporal Filtering (TAA) utilizes \textbf{reprojection} and is also an older method
-	\begin{itemize}
-		\item	\textbf{reprojection}\supercite{Reprojection} involves reusing already calculated results, allowing for improved performance
-		\item	\textbf{Amortized Super-Sampling}\supercite{TAA} uses sub-pixel jittererd samples to potentially recreate 2x2 SSAA
-	\end{itemize}
-	
-	\item	Fast Approximate (FXAA)\supercite{FXAA} focuses on speed over accuracy
-	\begin{itemize}
-		\item	finds edges, applies a perpendicular sub-pixel shift, and resamples
-		\item	does have an early exit to protect some edges and quality levels
-		\item	uses a low-pass filter to remove/reduce high frequency details
-	\end{itemize}	
-\end{itemize}
 }
 
 \only<2>{
@@ -35,6 +36,7 @@
 			\begin{itemize}
 				\item	pre-computed blending textures
 				\item	supports arbitrary sample positions
+				\item	diagonal pattern detection
 			\end{itemize}
 			
 			\item	Modular design
