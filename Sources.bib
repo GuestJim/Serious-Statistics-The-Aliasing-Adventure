@@ -1,66 +1,3 @@
-@article{JIMENEZ2012_CGF,
-    title			=	{SMAA: Enhanced Morphological Antialiasing},
-	url				=	{http://www.iryoku.com/smaa/},
-    author			=	{Jorge Jimenez and Jose I. Echevarria and Tiago Sousa and Diego Gutierrez},
-    journal			=	{Computer Graphics Forum (Proc. EUROGRAPHICS 2012)},
-    year			=	{2012},
-    volume			=	{31},
-    number			=	{2},
-}
-
-@inproceedings{JIMENEZ2011_SIGGRAPH11,
-    title			=	{Filtering Approaches for Real-Time Anti-Aliasing},
-	url				=	{iryoku.com/aacourse/},
-    author			=	{Jorge Jimenez and Diego Gutierrez and Jason Yang and Alexander Reshetov and Pete Demoreuille and Tobias Berghoff and Cedric Perthuis and Henry Yu and Morgan McGuire and Timothy Lottes and Hugh Malan and Emil Persson and Dmitry Andreev and Tiago Sousa},
-    booktitle		=	{ACM SIGGRAPH Courses},
-    year			=	{2011},
-}
-
-@manual{Blender,
-	title			=	{Blender Rendering - Anti-Aliasing},
-	url				=	{https://docs.blender.org/manual/en/latest/render/blender_render/settings/antialiasing.html#filtering},
-	copyright		=	{This page is licensed under a CC-BY-SA 4.0 Int. License.},
-}
-
-@manual{IMFilters,
-	title			=	{ImageMagick Command-Line Options -filter type},
-	url				=	{https://www.imagemagick.org/script/compose.php},
-	organization	=	{ImageMagick Studio LLC},
-}
-
-@manual{IMDifference,
-	title			=	{ImageMagick Compose Command Operators},
-	url				=	{http://www.imagemagick.org/script/command-line-options.php#filter},
-	organization	=	{ImageMagick Studio LLC},
-}
-
-@article{MLAAIntel,
-	title			=	{Morphological Antialiasing},
-	url				=	{http://www.cs.cmu.edu/afs/cs/academic/class/15869-f11/www/readings/reshetov09_mlaa.pdf},
-	author			=	{Alexander Reshetov},
-	organization	=	{Intel Labs},
-	year			=	{2009},
-}
-
-@article{FSAA,
-	title			=	{Super-sampling Anti-aliasing Analyzed},
-	url				=	{https://www.beyond3d.com/content/articles/37/1},
-	author			=	{Kristof Beets, Dave Barron},
-	year			=	{2000},
-	month			=	{apr},
-	organization	=	{3dfx},
-}
-
-@article{FXAA,
-	title			=	{FXAA Whitepaper},
-	url				=	{https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf},
-	author			=	{Timothy Lottes},
-	organization	=	{NVIDIA},
-	year			=	{2009},
-	month			=	{feb},
-	copyright		=	{2010 NVIDIA Corporation},
-}
-
 @manual{DX10RasterizationStage,
 	title			=	{Rasterizer Stage},
 	url				=	{https://docs.microsoft.com/en-us/windows/desktop/direct3d11/d3d10-graphics-programming-guide-rasterizer-stage},
@@ -186,6 +123,16 @@
 	organization	=	{NVIDIA Corporation},
 }
 
+@article{FXAA,
+	title			=	{FXAA Whitepaper},
+	url				=	{https://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf},
+	author			=	{Timothy Lottes},
+	organization	=	{NVIDIA},
+	year			=	{2009},
+	month			=	{feb},
+	copyright		=	{2010 NVIDIA Corporation},
+}
+
 @manual{TXAA,
 	title			=	{TXAA - Technology},
 	url				=	{https://www.geforce.com/hardware/technology/txaa/technology},
@@ -253,16 +200,40 @@
 	month			=	{jan},
 }
 
-@article{TAA,
-	title			=	{Amortized Supersampling},
-	author			=	{Yang, L & Sander, P.V. & Nehab, D & Hoppe, H & Sitthi-amorn, P & Lawrence, J},
-	organization	=	{Hong Kong UST, Microsoft Research, University of Virginia},
-	journal			=	{ACM Transactions on Graphics},
-	url				=	{http://hhoppe.com/supersample.pdf},
+@article{MLAAIntel,
+	title			=	{Morphological Antialiasing},
+	url				=	{http://www.cs.cmu.edu/afs/cs/academic/class/15869-f11/www/readings/reshetov09_mlaa.pdf},
+	author			=	{Alexander Reshetov},
+	organization	=	{Intel Labs},
 	year			=	{2009},
-	number			=	{28},
-	pages			=	{1-12},
-	doi				=	{10.1145/1618452.1618481}
+}
+
+@article{CMAA,
+	title			=	{Conservative Morphological Anti-Aliasing (CMAA)},
+	url				=	{https://software.intel.com/en-us/articles/conservative-morphological-anti-aliasing-cmaa-update},
+	author			=	{Filip Strugar, Leigh D.},
+	organization	=	{Intel}, 
+	year			=	{2018},
+	month			=	{nov},
+}
+
+@article{CMAA2,
+	title			=	{Conservative Morphological Anti-Aliasing 2.0},
+	url				=	{https://software.intel.com/en-us/articles/conservative-morphological-anti-aliasing-20},
+	author			=	{Filip Strugar, Adam Lake},
+	organization	=	{Intel},
+	year			=	{2018},
+	month			=	{sep},
+}
+
+
+@article{FSAA,
+	title			=	{Super-sampling Anti-aliasing Analyzed},
+	url				=	{https://www.beyond3d.com/content/articles/37/1},
+	author			=	{Kristof Beets, Dave Barron},
+	year			=	{2000},
+	month			=	{apr},
+	organization	=	{3dfx},
 }
 
 @article{Reprojection,
@@ -278,6 +249,35 @@
 	location		=	{San Diego, California},
 	pages			=	{25-35},
 	numpages		=	{11},
+}
+
+@article{TAA,
+	title			=	{Amortized Supersampling},
+	author			=	{Yang, L & Sander, P.V. & Nehab, D & Hoppe, H & Sitthi-amorn, P & Lawrence, J},
+	organization	=	{Hong Kong UST, Microsoft Research, University of Virginia},
+	journal			=	{ACM Transactions on Graphics},
+	url				=	{http://hhoppe.com/supersample.pdf},
+	year			=	{2009},
+	number			=	{28},
+	pages			=	{1-12},
+	doi				=	{10.1145/1618452.1618481}
+}
+
+@manual{TSSAAid,
+	title			=	{Tech Interview: Doom},
+	url				=	{https://www.eurogamer.net/articles/digitalfoundry-2016-doom-tech-interview},
+	organization	=	{Eurogamer/Digital Foundry},
+	author			=	{Richard Leadbetter, Robert A Duffy, Billy Khan, Tiago Sousa, Jean Geffroy, Axel Gneiting},
+	year			=	{2016},
+	month			=	{jul},
+}
+
+@manual{TSSAAWG,
+	title			=	{Update 9.9 Graphics Changes},
+	url				=	{https://worldoftanks.com/en/news/general-news/99-graphics/},
+	organization	=	{Wargaming.net},
+	year			=	{2015},
+	month			=	{jul},
 }
 
 @article{StochasticSampling,
@@ -300,23 +300,33 @@
 	address			=	{New York, NY, USA},
 } 
 
-@manual{TSSAAid,
-	title			=	{Tech Interview: Doom},
-	url				=	{https://www.eurogamer.net/articles/digitalfoundry-2016-doom-tech-interview},
-	organization	=	{Eurogamer/Digital Foundry},
-	author			=	{Richard Leadbetter, Robert A Duffy, Billy Khan, Tiago Sousa, Jean Geffroy, Axel Gneiting},
-	year			=	{2016},
-	month			=	{jul},
+@article{4AStochastic,
+	title			=	{Tech Interview: Metro Exodus, ray tracing and the 4A Engine's open world upgrades},
+	url				=	{https://www.eurogamer.net/articles/digitalfoundry-2019-metro-exodus-tech-interview},
+	author			=	{Alex Battaglia, Ben Archard, Oles Shishkovstov},
+	organization	=	{Eurogamer/Digital Foundry, 4A Games},
+	year			=	{2019},
+	month			=	{feb},
+	day				=	{17},
 }
 
-@manual{TSSAAWG,
-	title			=	{Update 9.9 Graphics Changes},
-	url				=	{https://worldoftanks.com/en/news/general-news/99-graphics/},
-	organization	=	{Wargaming.net},
-	year			=	{2015},
-	month			=	{jul},
+@article{JIMENEZ2012_CGF,
+    title			=	{SMAA: Enhanced Morphological Antialiasing},
+	url				=	{http://www.iryoku.com/smaa/},
+    author			=	{Jorge Jimenez and Jose I. Echevarria and Tiago Sousa and Diego Gutierrez},
+    journal			=	{Computer Graphics Forum (Proc. EUROGRAPHICS 2012)},
+    year			=	{2012},
+    volume			=	{31},
+    number			=	{2},
 }
 
+@inproceedings{JIMENEZ2011_SIGGRAPH11,
+    title			=	{Filtering Approaches for Real-Time Anti-Aliasing},
+	url				=	{iryoku.com/aacourse/},
+    author			=	{Jorge Jimenez and Diego Gutierrez and Jason Yang and Alexander Reshetov and Pete Demoreuille and Tobias Berghoff and Cedric Perthuis and Henry Yu and Morgan McGuire and Timothy Lottes and Hugh Malan and Emil Persson and Dmitry Andreev and Tiago Sousa},
+    booktitle		=	{ACM SIGGRAPH Courses},
+    year			=	{2011},
+}
 @article{Mipmaps,
 	title			=	{Pyramidal Parametrics},
 	author			=	{Williams, Lance},
@@ -367,30 +377,20 @@
 	organization	=	{Unity},
 }
 
-@article{CMAA,
-	title			=	{Conservative Morphological Anti-Aliasing (CMAA)},
-	url				=	{https://software.intel.com/en-us/articles/conservative-morphological-anti-aliasing-cmaa-update},
-	author			=	{Filip Strugar, Leigh D.},
-	organization	=	{Intel}, 
-	year			=	{2018},
-	month			=	{nov},
+@manual{Blender,
+	title			=	{Blender Rendering - Anti-Aliasing},
+	url				=	{https://docs.blender.org/manual/en/latest/render/blender_render/settings/antialiasing.html#filtering},
+	copyright		=	{This page is licensed under a CC-BY-SA 4.0 Int. License.},
 }
 
-@article{CMAA2,
-	title			=	{Conservative Morphological Anti-Aliasing 2.0},
-	url				=	{https://software.intel.com/en-us/articles/conservative-morphological-anti-aliasing-20},
-	author			=	{Filip Strugar, Adam Lake},
-	organization	=	{Intel},
-	year			=	{2018},
-	month			=	{sep},
+@manual{IMFilters,
+	title			=	{ImageMagick Command-Line Options -filter type},
+	url				=	{https://www.imagemagick.org/script/compose.php},
+	organization	=	{ImageMagick Studio LLC},
 }
 
-@article{4AStochastic,
-	title			=	{Tech Interview: Metro Exodus, ray tracing and the 4A Engine's open world upgrades},
-	url				=	{https://www.eurogamer.net/articles/digitalfoundry-2019-metro-exodus-tech-interview},
-	author			=	{Alex Battaglia, Ben Archard, Oles Shishkovstov},
-	organization	=	{Eurogamer/Digital Foundry, 4A Games},
-	year			=	{2019},
-	month			=	{feb},
-	day				=	{17},
+@manual{IMDifference,
+	title			=	{ImageMagick Compose Command Operators},
+	url				=	{http://www.imagemagick.org/script/command-line-options.php#filter},
+	organization	=	{ImageMagick Studio LLC},
 }
