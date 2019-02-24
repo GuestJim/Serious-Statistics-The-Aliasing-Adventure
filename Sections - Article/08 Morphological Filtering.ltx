@@ -1,11 +1,12 @@
 \section{Morphological Filtering, An Intelligent Early Attempt}
 
-To start covering post-process anti-aliasing methods, it makes sense to start with an early method and the oldest I have found reference to is morphological filtering.
+To start covering post-process anti-aliasing methods, it makes sense to start with an early method and the oldest I have found reference to is morphological filtering\supercite{MLAAIntel}.
 I cannot think of many games today that offer it as an in-game option, but for those of you with AMD GPUs you can find it as an option within the drivers.
-(You do need to have the anti-aliasing setting set to the Enhance or Override option for morphological filtering to be applied though.) It was actually originally developed with ray tracing in mind, but as it is independent of the rendering pipeline, it can be applied to rasterization as well.
+(You do need to have the anti-aliasing setting set to the Enhance or Override option for morphological filtering to be applied though.)
+It was actually originally developed with ray tracing in mind, but as it is independent of the rendering pipeline, it can be applied to rasterization as well.
 Like multi-sampling, there are multiple morphological filtering techniques, but in general they appear to function in a similar manner, with some having optimizations.
 
-What is morphological filtering, and why would I describe it as ‘intelligent’ in the section title?
+What is morphological filtering, and why would I describe it as 'intelligent' in the section title?
 Because it attempts to reconstruct what the original shape of the primitive was so it can blend along its edges appropriately.
 When we seeing an aliasing artifact, like the stair-step pattern of an aliased line, we assume it is supposed to be a line and not that pattern, and this is effectively what morphological filtering attempts to do as well.
 While we can consider the larger contextual clues of the scene, morphological filtering will look specifically to the colors of the pixels to identify edges.
@@ -17,5 +18,5 @@ Of course it has the disadvantage that it could be wrong and attempt to remove a
 This is going to be a disadvantage for all post-processing methods, but when your goal is to have a fast solution, or when you are running into hardware restrictions, these are viable options.
 
 Another disadvantage for this and other post-processing methods is a susceptibility to polygon popping, because they are only able to work with the final image.
-This means they do not intrinsically have any knowledge of sub-pixel features, so it is possible for objects or details to popping in and out of existence, potentially confusing the morphological filtering too.
+This means they do not intrinsically have any knowledge of sub-pixel features, so it is possible for objects or details to pop in and out of existence, potentially confusing the morphological filtering too.
 This also means it is not temporally stable, so temporal aliasing is a potential issue as well.

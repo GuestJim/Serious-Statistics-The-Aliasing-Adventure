@@ -5,23 +5,23 @@ Actually they have almost everything in common as the sampling pattern and filte
 While both super-sampling and multi-sampling will use more than one sample per-pixel, multi-sampling performs checks on some of the sampled information to determine if the individual fragments belong to the same primitive.
 This information is then fed to the shaders and influence the calculations done to determine the pixel's final color.
 
-Previously I mentioned that when rasterizing a ray is cast and when it intersects an object, it measures or samples it to create a fragment.
+Previously I mentioned that when rasterizing a ray is cast and when it intersects an object, it samples it to create a fragment.
 The data for this fragment are stored in the appropriate buffer, such as the normal buffer, stencil buffer, and Z buffer.
-The idea to these buffers is fairly simple with each keeping data that can influence the final color of the pixel.
+The idea to these buffers is fairly simple with each keeping data that can influence the final color of the pixel.\supercite{OpenGLRas, OpenGLFragment}
 The normal buffer would keep track of the orthogonal vector for the surface of the primitive, which is necessary for lighting information; the stencil buffer can also be called the edge buffer as it tracks of the edge of the primitive; and I already explained the Z or depth buffer.
 There would be other buffers too, such as one for storing the material of the primitive, for physically based rendering, another for keeping track of the texture and position on the texture, and undoubtedly many more.
-For multi-sampling though, it is the stencil and Z buffers that plays an important role.
+For multi-sampling though, it is the stencil and Z buffers that play an important role.
 
 With the sampling done and the fragments created, multi-sampling performs a check on each fragments' stencil and Z buffers, to determine if the fragments within the same pixel-space are within the same primitive or not.
-If all of them are within the same primitive, then the final color will be shared between these samples.
-This is why multi-sampling, at least traditionally, had difficulty with transparent textures as the primitive such textures are for would be the same and the color shared across the samples.
-Also if there is any aliasing within a texture, multi-sampling will not be able to address it because the check does not consider color; just the stencil and Z buffers.
+If all of them are within the same primitive, then the final color will be shared between these samples.\supercite{DX10RasterizationStage, OpenGLMSAA}
+This is why multi-sampling, at least traditionally, had difficulty with transparent textures as fragments within a primitive will pass the check and multi-sampling will not be used along the texture's internal edges.
+Similarly, any aliasing with a texture will not be addressed, because the check does not consider color; just the stencil and Z buffers.
 
 While within the primitive, where the check passes, the final color will be shared, at its edges the check will fail and the final color will not be shared by all samples.
 This check, therefore, is discovering the edges of the primitives and that knowledge is then used to influence the final color of the pixel.
 By this means, we achieve anti-aliasing, akin to super-sampling, at the edges of geometry while impacting performance less because not all fragments are fed to the shaders for calculating colors.
 
-While the predominant form of multi-sampling anti-aliasing is MSAA, there are actually multiple variants of it, such as CSAA (Coverage Sampled Anti-Aliasing from NVIDIA) and EQAA (Enhanced Quality Anti-Aliasing from AMD).
+While the predominant form of multi-sampling anti-aliasing is MSAA, there are actually multiple variants of it, such as CSAA (Coverage Sampled Anti-Aliasing from NVIDIA)\supercite{CSAA, CSAAOpenGL} and EQAA (Enhanced Quality Anti-Aliasing from AMD)\supercite{EQAA}.
 These differ from each other and MSAA by decoupling the number of samples for each buffer, so one might have more stencil samples or fewer color samples than another.
 The documentation for both refer to a 'coverage' sample type, but I am unsure exactly what this is.
 As I try to visualize it and research it, my best guess is it records if the sample position is covered by a primitive.
@@ -41,37 +41,38 @@ With 2f4x mode you get two fragments (two color samples and two stencil/Z sample
 Assuming all other things are equal, which they are potentially not, CSAA 8x would be equivalent to EQAA 4f8x; 8xQ is MSAA 8x; CSAA 16x is EQAA 4f16x; and CSAA 16xQ is EQAA 8f16x.
 There are still 2f4x and 2f8x modes for EQAA while CSAA apparently skips that number of fragments.
 
-Something important to note about multi-sampling is since at least DirectX 10-capable GPUs have existed there has been hardware acceleration for it.
+Something important to note about multi-sampling is since at least DirectX 10-capable GPUs have existed there has been hardware acceleration for it.\supercite{DXReqs}
 I cannot say I have a full understanding of how this acceleration works, but there are a couple things I am aware of.
 One is something that further helps distinguish multi-sampling from super-sampling and that is the shaders for calculating the color for each pixel, are run only once per pixel.
 With super-sampling, these shaders are run apparently once for each fragment and the results are then filtered to arrive at the final pixel color, so the shaders are doing at least double the work as normal.
 I do not know how this reduction in shader work is achieved, but I could very easily believe the filtering work necessary for each pixel is packed into the calculations for the shaders, so they need only be run once to get the same result.
-This would be faster the shader would not need to save its two outputs to some buffer, then call them again to filter them together.
+This would be faster as the shader would not need to save its two outputs to some buffer, then call them again to filter them together.
 ($1 + 1 = 2$, $2 + 2 = 4$, $2 + 4 = 6$ is more work than $1 + 1 + 2 + 2 = 6$ especially when the solutions need to be written to and called from memory.)
 
 The other thing I am aware of that would relate to hardware acceleration is that standard sampling patterns are stored on the GPUs, instead of software (game engine or API) needing to provide one.
 With a call by DirectX, the GPU can be told to use one of the built-in patterns, and there are multiple.
-Apparently it was possible for AMD and NVIDIA to design their own sampling patterns at the time of DX10, but with DirectX 10.1 Microsoft introduced standard sampling patterns that must be available on the GPU to be compliant with the graphics API.
+Apparently it was possible for AMD and NVIDIA to design their own sampling patterns at the time of DX10, but with DirectX 10.1 Microsoft introduced standard sampling patterns that must be available on the GPU to be compliant with the graphics API.\supercite{DX11StandardPatterns}
 It is still possible for additional patterns to be stored on the GPU, but at minimum these patterns for 2x, 4x, and 8x must be present and available.
 Support for 16x is optional under DirectX 10.1, but when 16x is supported by the GPU, the GPU must also have this standard pattern.
 
 %MS_STANDARD_PATTERNS
 \image{{MS Standard Patterns}}
 
-With DirectX 12 the API gained the ability to program sampling pattern, so a developer could create custom patterns if they wish.
+With DirectX 12 the API gained the ability to program sampling pattern, so a developer could create custom patterns if they wish.\supercite{DX12CreatorsUpdate, DX12PositionTiers, DX11StandardPatterns}
 There are two supporting tiers for this feature, with Tier 1 only allowing for the reprogramming of a single sampling pattern and Tier 2 allowing four sample patterns to be programmed to cover a 2x2 quad of pixels.
 It may be worth explicitly stating here that with a singular exception I will get to later, the sampling patterns for an arbitrary pixel or pixel quad are identical to all others for the frame.
+Also, interestingly, there is a limit of 16 combined samples, which means if you want a custom pattern for a quad, there can at most be 4 samples per pixel.\supercite{DX12SamplePositions}
 
 Something interesting I learned while looking into these DirectX features (and there is also support for this with OpenGL) is the timing of when these features were possible on GPUs.
-For NVIDIA it was added with its GTX 900 series (launched in 2014), which was second generation Maxwell, and it is this feature that enables Multi-Frame Sampled Anti-Aliasing, or MFAA.
+For NVIDIA it was added with its GTX 900 series (launched in 2014), which was second generation Maxwell, and it is this feature that enables Multi-Frame Sampled Anti-Aliasing, or MFAA\supercite{MFAA}.
 How this feature works is to alternate the sample pattern between frames, so a quick example would be with 2x where odd-numbered frames are sampled once in one location, and even-numbered frames sampled in a different location.
 By appropriately filtering these temporal samples together, it would be possible to approach the quality of MSAA 2x while the performance cost would remain near that of not using multi-sampling.
 The one time I tried this (which is a driver option and not an in-game option) it resulted in objects not rendering, so I never used it again.
 To be fair, this was some years ago (2015 specifically) but as I recall there was supposed to be support for this game.
 
-Also some years ago is when AMD introduced support for programming sampling patterns, according to the company’s documentation for its architectures.
-It was with Southern Islands, the original GCN GPUs (HD 7000 series) that AMD had support for programming samples for pixel quads, as shown in its November 2011 register reference guide.
-But it was with the R600 architecture (HD 2000 series) that first supported programmable sample patterns for single pixels, according to the register reference guide for the R600 and R700 architectures from January 2009, though R600 is from 2007.
+Also some years ago is when AMD introduced support for programming sampling patterns, according to the company’s documentation for its architectures.\supercite{AMDmanuals}
+It was with Southern Islands, the original GCN GPUs (HD 7000 series) that AMD had support for programming samples for pixel quads, as shown in its November 2011 register reference guide\supercite{SouthernIslandsRegisters}.
+But it was with the R600 architecture (HD 2000 series) that first supported programmable sample patterns for single pixels, according to the register reference guide for the R600 and R700 architectures from January 2009\supercite{R600Registers}, though R600 is from 2007.
 For some reason support for this feature was not added to DirectX at the time of these GPU architectures, but still we see hardware-level support for custom sampling patterns is more than a decade old.
 
 With multi-sampling really just being an optimization of super-sampling, it has the potential to provide comparable image quality but at a much lower cost to performance.

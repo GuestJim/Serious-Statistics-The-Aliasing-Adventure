@@ -6,11 +6,12 @@ This prioritization of quality can and does improve performance, as simpler obje
 Mipmaps provide already filtered versions of textures, or other objects if you generalize it to more than textures, for these lower-detail versions.
 My guess is most people associate mipmapping just with how the method can improve performance, but how it reduces aliasing is not too large a leap, especially if you already read the filtering portion of the Super-Sampling section.
 
-By the way, 'mip' is actually an acronym for 'multum in parvo,' Latin for 'many things in a small place,' which is a very apt description.
+By the way, 'mip' is actually an acronym for 'multum in parvo,' Latin for 'many things in a small place,' which is a very apt description.\supercite{Mipmaps, MipmapsSlides}
 
 Back to aliasing, if a high-resolution version of a texture, or other object, were used at a great distance away, we would run into issues with the Nyquist limit.
 Imagine a texture on a plane parallel to the frustum and that texture is 1024 x 1024 texels originally, but due to its distance it covers only 64 x 64 pixels in the final image.
-(Texels are texture elements, like pixels are picture elements, and I used it here when referencing the original texture specifically, while pixels relate to the final picture to be produced.) Clearly the texture needs to be resampled down to this smaller size, but depending on how the sampling process is done, in relation to the Nyquist limit, aliasing can occur such as Moire patterns.
+(Texels are texture elements, like pixels are picture elements, and I used it here when referencing the original texture specifically, while pixels relate to the final picture to be produced.)
+Clearly the texture needs to be resampled down to this smaller size, but depending on how the sampling process is done, in relation to the Nyquist limit, aliasing can occur such as Moire patterns.
 I have put together some examples of this, by leveraging Imagemagick similar to how I did earlier when covering the blend filters in the super-sampling section.
 Instead of over-sampling and then scaling down though, I used the same input resolution and then the different filters when scaling down.
 You may need to zoom in to see the differences, if you are not viewing the image at its native resolution.
@@ -33,7 +34,7 @@ I can make out aliasing in the Gaussian, Catmull-Rom, and Mitchell-Netravali, bu
 Something potentially worth noting is we may see some aliasing within these mipmaps, with the filters turning the concentric circles into solid discs at lower resolutions.
 While this is an example of losing high frequency detail, part of the purpose here is to simulate viewing these shapes at a distance, and this effect is something we can see in real-life.
 
-As another aside, it is with mipmaps that anisotropic filtering comes into play.
+As another aside, it is with mipmaps that anisotropic filtering comes into play\supercite{MipmapsSlides}.
 As I just mentioned, each level to a mipmap is half the dimension of the previous, so the question becomes what do you do if you need a resolution between two levels?
 You could use bilinear filtering, which will sample from the four texels surrounding the point of interest from the higher resolution mipmap level, but this will make the transition from one level to another sharp and an obvious artifact.
 Trilinear improves on this by sampling texel quads from both the nearest higher and lower resolution mipmap levels, but also weights them based on the distance the desired resolution is between these two resolutions.
@@ -44,7 +45,7 @@ Isotropic means measured distances will be the same in different directions, whi
 For something like the ground though, the geometry is different with measured distances being different depending on the axis you measure from.
 One pixel left or right in an image might represent a centimeter, but one pixel up or down could be ten centimeters.
 To address this non-isotropic geometry we need a non-isotropic or anisotropic filtering system.
-What anisotropic filtering does is sample more texels at the top and bottom of the texel quads that trilinear would normally sample.
+What anisotropic filtering does is sample more texels at the top and bottom of the texel quads than trilinear would normally sample, or on the left and right depending on the orientation of the surface.
 Basically it expands the height of the box used to sample the texture, to account for the greater distance the height of the final pixel actually covers.
 The different levels of anisotropic filter (2x, 4x, 8x, 16x) relate to the maximum length allowed for the height of this box, and therefore also impacts the number of texel samples used.
 However, it is not directly controlling the number of samples used; it is just providing an upper limit as the GPU can take fewer than this limit, if it wishes.

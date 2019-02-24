@@ -1,7 +1,7 @@
 \section{Aliasing, Defining the Problem}
 
 If you look up the definition of alias you will find something along the lines of 'also known as' or 'an assumed identity,' but what does this have to do with video game graphics?
-I could explain it directly but I think it would be better to approach it through the scientific field the term from; signal processing.
+I could explain it directly but I think it would be better to approach it through the scientific field the term is from; signal processing.
 
 I can give you a set of coordinate pairs to plot on a graph and if you do that, and connect the dots, you will get what is below:
 
@@ -9,7 +9,7 @@ I can give you a set of coordinate pairs to plot on a graph and if you do that, 
 \image{{Alias Example - Sin Samples}}
 
 For some you might need to think back a bit to remember math class, but this graph looks a lot like a sine wave with a period of 10, meaning every 10 units on the X-axis gets you to the same Y-value.
-Indeed I can put together a sine function that will fit the drawn lines perfectly: $y = sin(0.1 * x + 0.5)$.
+Indeed I can put together a sine function that will fit the drawn lines perfectly: $y = sin(0.1 * X + 0.5)$.
 
 %ALIAS_EXAMPLE-SIN_0.1
 \image{{Alias Example - Sin Waves - 0.1}}
@@ -21,11 +21,11 @@ Unfortunately, it is not the only perfect fit.
 \image{{Alias Example - Sin Waves - 0.9}}
 
 Here we have another graph that is still of a sine wave, but with a very different period, and yet it gives the same Y-values as before.
-To be specific, this function is $y = sin(0.9 * x + 0.5)$, and for sampling at the halves, it returns the same values as $y = sin(0.1 * x + 0.5)$.
+To be specific, this function is $y = sin(0.9 * X + 0.5)$, and for sampling at the halves, it returns the same values as $y = sin(0.1 * X + 0.5)$.
 This means that for that sampling pattern, these two very different functions are aliases, as one can be known as the other.
 
 You might not realize it, or at least not think about it much, but the rendering of computer graphics is a signal processing problem, with numerical measurements being made by sampling an 'analog' object.
-Okay, the object is not actual analog since our GPUs are working on digital constructions, but like an analog signal, the original objects have infinite definition.
+Okay, the object is not actually analog since our GPUs are working on digital constructions, but like an analog signal, the original objects have infinite definition.
 It might be infinite definition of a polyhedron instead of a sphere, but it is still the case that for every point on its edge or face, within its domain, it is defined.
 If you look back to the graphs above, the original connected-dots graph has its definition limited to just the measured points, and nothing else.
 For the two sine wave graphs though, for the domain of 0 $\leq$ X $\leq$ 10, the graph is defined, and this would be true even if it were just a straight line.
@@ -43,9 +43,7 @@ The finer the detail, the higher the frequency, so depending on the sampling rat
 The sharp edge of a primitive is actually going to be of infinite frequency, because the transition from one state to another (within the primitive to outside it) is infinitely short.
 The alias for something like a diagonal line then is the stair-step pattern commonly referred to as jaggies, which are a lower frequency signal with a wavelength corresponding to the pixel width of your display.
 
-
 Something funny to consider though is that when we see a jagged pattern and consider it aliasing, we are making an assumption.
 There may be contextual clues telling us it is in fact aliasing for a diagonal line, but it is still an assumption, which means it can be wrong and this will come into play with some post-processing anti-aliasing methods.
 
 In case any of you are familiar enough with this topic to know about the Nyquist limit, it is in fact relevant for computer anti-aliasing, which will get to when covering super-sampling and multi-sampling.
-

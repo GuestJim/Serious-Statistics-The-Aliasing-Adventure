@@ -238,7 +238,11 @@ However, it does not also sharpen the edges, or at least not as much, so it does
 
 \graphicspath{{Screenshots/SSF2017/Filters/Differences/}}
 Continuing the eternity that is working on this article, I thought to check if Imagemagick can be used to find the difference between images, and indeed it can.
-Naturally I put together some scripts for this and applied them to some of the screenshots you have already seen, but also worked on collecting new versions.
+Specifically, the \textbf{difference} method for the compose function\supercite{IMDifference} subtracts the darker color of the two pixels from the two images provided.
+The similar \textbf{subtract} method will subtract the color of the 'source' pixel from the 'destination' image.
+Comparing the results of the two, I believe difference is the better method for my goal.
+
+In addition to putting together some scripts for this, I also collected new versions of some of the screenshots.
 This is because I had noticed some of the driver-MLAA screenshots were not aligned with the others.
 Unfortunately something seemed determined to fight me on getting those new images, which require running the game in exclusive fullscreen (the drivers will not apply MLAA otherwise).
 My solution was to have OBS Studio capture the full display and encode it losslessly (x264 at CRF = 0 and with I444 chroma with BT.709 color space and the full YUV color range) then use VLC to watch the video and take PNG snapshots.

@@ -1,6 +1,6 @@
 \section{Enhanced Sub-Pixel Morphological Filtering, a Combination of Solutions}
 
-Enhanced sub-pixel morphological filtering (SMAA) is among newest of the methods I have been researching and also appears to be the most advanced, at least of the post-processing methods, but then, it is not always post-processing.
+Enhanced sub-pixel morphological filtering (SMAA)\supercite{JIMENEZ2012_CGF} is among newest of the methods I have been researching and also appears to be the most advanced, at least of the post-processing methods, but then, it is not always post-processing.
 Just as its name suggest, enhanced sub-pixel morphological filtering applies morphological filtering, which was already covered.
 Its name also indicates it features a number of enhancements over morphological filtering, and indeed it does, making this solution more efficient and accurate, while also preventing some artifacts that can occur with other methods.
 
@@ -29,9 +29,9 @@ This does mean then that even though this is a post-processing method, there are
 However, it, as well as the temporal super-sampling, gives this method awareness of sub-pixel features, which will improve its ability to preserve them.
 
 The base implementation of enhanced sub-pixel morphological filtering is SMAA 1x, and only applies the improved morphological filtering.
-With the addition of temporal super-sampling we get SMAA T2x, so-called because it uses two temporal samples (or at least it appears to only use two, from what I can gather from the paper).
+With the addition of temporal super-sampling we get SMAA T2x, so-called because it uses two temporal samples.
 Using spatial multi-sampling we have SMAA S2x, and if we use both temporal super-sampling and spatial multi-sampling we have SMAA 4x, which has a total of four samples feeding into the morphological algorithms.
-It is more of a performance drag than a pure post-processing method, but it should also be more effective than MSAA 2x at removing aliasing and I would think it would not be much more expensive to run with either.
+It is more of a performance drag than a pure post-processing method, but it should also be more effective than MSAA 2x at removing aliasing and I would think it would not be much more expensive to use either.
 
 Initially I transitioned to the next section here, but before 'finishing' this (finishing this is like a farewell tour, as I just keep coming back to it with more to add) I found I think an excellent example of what the temporal module for SMAA can achieve.
 It is in \href{http://www.overclockersclub.com/reviews/just_cause_4_review/}{\textit{Just Cause 4}}, which offers Temporal SMAA as an option, along with FXAA and None for the Anti-Aliasing setting.
@@ -48,8 +48,8 @@ This, along with the reprojection I would guess, allows the method to continue t
 
 It is also possible the morphological module is correctly guessing the railings extend the full length, and so is restoring the detail that is otherwise lost.
 
-Before moving on I want to quickly mention another variation of morphological filtering that I have encountered since I started working on this article: CMAA or Conservative Morphological Anti-Aliasing.
-It was developed by Intel, as was its updated version CMAA2, with its original performance and quality target being between FXAA and SMAA.
+Before moving on I want to quickly mention another variation of morphological filtering that I have encountered since I started working on this article: CMAA or Conservative Morphological Anti-Aliasing\supercite{CMAA}.
+It was developed by Intel, as was its updated version CMAA2\supercite{CMAA2}, with its original performance and quality target being between FXAA and SMAA.
 With CMAA2, it now supports integration with MSAA, like SMAA.
-I will leave it to you to investigate, and I have included both the CMAA and CMAA2 articles in the reference so you can find them easily, but also want to let you know that the CMAA article has a utility you can download and play with that can apply CMAA, FXAA, and SMAA to arbitrary PNG images you provide it.
+I will leave it to you to investigate, and I have included both the CMAA and CMAA2 articles in the references so you can find them easily, but also want to let you know that the CMAA article\supercite{CMAA} has a utility you can download that can apply CMAA, FXAA, and SMAA to arbitrary PNG images you provide it.
 If you want to do your own comparisons, it might be worth checking out.

@@ -1,8 +1,8 @@
 \section{Fast Approximate Filtering, a Fast But Simple Approach}
 
-Fast approximate anti-aliasing, or FXAA, is a rather common post-processing anti-aliasing method in use today, and if you are using an NVIDIA GPU, you can force it on through the drivers.
+Fast approximate anti-aliasing, or FXAA\supercite{FXAA}, is a rather common post-processing anti-aliasing method in use today, and if you are using an NVIDIA GPU, you can force it on through the drivers.
 As its name suggests, it is fast, but from what I have read it appears to lack some intelligence, at least for how it attempts to remove aliasing.
-By the way, I am going to try to refer to all of the post-processing methods as filtering rather than anti-aliasing, because they are in fact filters and I feel it is a fair distinction for only the rasterization-based methods to be labeled anti-aliasing.
+By the way, I am going to try to refer to all of the post-processing methods as filtering rather than anti-aliasing, because they are in fact filters and I feel it is a fair distinction for only the sampling-based methods to be labeled anti-aliasing.
 
 The way this fast approximate filtering works is it takes the output image and searches for edges by looking for changes in colors, like morphological filtering does.
 It then determines if the edges it finds are horizontal or vertical and finds the ends of the edge.

@@ -1,7 +1,7 @@
 \section{Stochastic Sampling, a Tolerable Solution}
 
 Initially I went from multi-sampling directly to post-processing filters, but as happened multiple times while working on this article, I came across 'new' literature to read and felt it appropriate to add.
-For this topic it is very necessary I put the 'new' in quotes because the research paper is actually from 1986, but it was new to me.
+For this topic it is very necessary I put the 'new' in quotes because the research paper is actually from 1986\supercite{StochasticSampling}, but it was new to me.
 
 Over three decades ago a solution to reducing aliasing was put forward, and while initially I was unaware of any example of the concept being used, I discovered one from within my research for this and then another by coincidence.
 The one discovered within my research has actually been shared already, which makes me wonder if you spotted them, but I should probably cover what this solution is first.
@@ -46,8 +46,8 @@ The other answer, however, comes from a different direction, and from that sourc
 
 I started working on this article quite a while ago, and since then a number of games have released.
 At the point in time I am writing this paragraph, \href{https://www.overclockersclub.com/reviews/metro_exodus_review/}{\textit{Metro Exodus}} with its highly anticipated gameplay, graphics, and ray tracing implementation.
-To serve its community of readers, Eurogamer/Digital Foundry interviewed a couple employees at the game's developer, 4A Games and they talk about not just using stochastic algorithms, but even reference the same 1986 paper I mentioned at the start of this section.
-Based on what is written in the interview, stochastic sampling as described in the research paper is not being used, but the concept for it is.
+To serve its community of readers, Eurogamer/Digital Foundry interviewed a couple employees at the game's developer, 4A Games,\supercite{4AStochastic} and they talk about not just using stochastic algorithms, but even reference the same 1986 paper I mentioned at the start of this section: Stochastic Sampling in Computer Graphics\supercite{Stochastic Sampling}.
+Based on what is written in the interview, stochastic sampling as described in the research paper is not being used, but the concept behind it is.
 The sampling positions for the pixels are not necessarily changing, but the sampling positions for different effects are following stochastic algorithms.
 The reason is to significantly reduce the amount of data needed to generate these effects.
 
