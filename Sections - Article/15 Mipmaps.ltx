@@ -47,5 +47,5 @@ One pixel left or right in an image might represent a centimeter, but one pixel 
 To address this non-isotropic geometry we need a non-isotropic or anisotropic filtering system.
 What anisotropic filtering does is sample more texels at the top and bottom of the texel quads than trilinear would normally sample, or on the left and right depending on the orientation of the surface.
 Basically it expands the height of the box used to sample the texture, to account for the greater distance the height of the final pixel actually covers.
-The different levels of anisotropic filter (2x, 4x, 8x, 16x) relate to the maximum length allowed for the height of this box, and therefore also impacts the number of texel samples used.
+The different levels of anisotropic filter (2x, 4x, 8x, 16x) relate to the maximum length allowed for this box, and therefore also impacts the number of texel samples used.
 However, it is not directly controlling the number of samples used; it is just providing an upper limit as the GPU can take fewer than this limit, if it wishes.
