@@ -1,6 +1,6 @@
 \section{Anti-Aliasing, the Results pt. 2 (Shadow of the Tomb Raider)}
 
-Unlike \textit{Serious Sam Fusion 2017}, the anti-aliasing options for \textit{Shadow of the Tomb Raider} are almost completely limited to post-processing solutions.
+Unlike \textit{Serious Sam Fusion 2017}, the anti-aliasing options for \href{https://www.overclockersclub.com/reviews/tomb_raider_shadow}{\textit{Shadow of the Tomb Raider}} are almost completely limited to post-processing solutions.
 The lone exception is SMAA 4x, as it leverages MSAA 2x as one of its components, but otherwise SMAA, TAA, and SMAA T2x are all filtering solutions.
 For the testing I went in the order None, SMAA, TAA, SMAA T2x, and SMAA 4x and I used DirectX 12 for the graphics API.
 I took the screenshots by finding a location I liked for it and then taking advantage of the fact this game allows you to change almost every graphics setting without any restarts or reloads to cycle through the options.
@@ -52,7 +52,7 @@ It should be noted though that SMAA 4x comes with a significant hit to performan
 %KUWAQ_YAKU
 \image{{Kuwaq Yaku}}
 
-The first in-game location I visited to search for aliasing is the village of Kuwaq Yaku, and this specific location is, as I recall, not too far from the bar and nearby campfire.
+The first in-game location I visited to search for aliasing is the village of Kuwaq Yaku, and this specific location is not too far from the bar and nearby campfire.
 As is actually rather often the case, there is aliasing on Lara's bow and hair, but it is that in the background of the bridge that specifically grabbed my attention.
 First though I want to look at the aliasing on Lara:
 
@@ -75,7 +75,7 @@ Going from None to SMAA, we can clearly see the aliasing has been reduced but is
 TAA is doing a better job with the wood railings, but you can still spot aliasing in the area.
 To the right of the bird the edge of a wood plank is still aliased with TAA, but it was not with SMAA.
 Also on the left side of the section TAA does not do as good a job with the aliasing on the planks there either.
-Fortunately, SMAA T2x does a decent job addressing the aliasing missed by both SMAA and TAA, which is actually what this mode is supposed to do.
+Fortunately, SMAA T2x does a decent job addressing the aliasing missed by both SMAA and TAA, which is exactly what this mode is supposed to do.
 Going to SMAA 4x, I am not really seeing an visual benefits, and that aliasing on the right side seems to have returned.
 Not sure why that would happen.
 
@@ -112,7 +112,7 @@ Without zooming in past native resolution though, the aliasing along the edges o
 Turning to Lara's hair, we can see a lot of speckling to it, perhaps a result of how the light of the nearby campfire interacts with the tessellated hair.
 Unfortunately SMAA does not do that great a job of cleaning it up, though it is still better.
 With TAA her hair looks still better, while the improvements from SMAA T2x and SMAA 4x seem more marginal.
-The bow however I feel does benefit some from SMAA T2x, but it is only in a marginal way.
+The bow, however, I feel does benefit some from SMAA T2x, but it is only in a marginal way.
 
 For the bow, SMAA definitely helps with the aliasing and then TAA takes it the rest of the way, but when I zoom in I just like the blending of SMAA T2x better.
 To me it seems the blend is sharper between the bow and the background with SMAA T2x than TAA.
@@ -130,8 +130,8 @@ I am unsure if SMAA or this implementation of TAA has an 'early exit' function l
 %VINES
 \image{{AA - 04 - Vines}}
 
-Looking to the highlighted vines, we can see there is a lot of alias artifacting to them, but as I just said, I think this is intentional for the effect.
-When going to SMAA, a lot of the artifacts remain, which I think is appropriate, but sadly TAA does just blur the artifacting away.
+Looking to the highlighted vines, we can see there is a lot of alias artifacting to them making it look like noise, but as I just said, I think this is intentional for the effect.
+When going to SMAA, a lot of the artifacts remain, which I think is appropriate, but sadly TAA does just blur the noise away.
 SMAA T2x does return a lot of it, but we can still see a softening of edges.
 I think SMAA 4x is doing alright at keeping the aliasing, but I can also see some softening compared to None.
 
@@ -180,7 +180,7 @@ Remember, TAA, SMAA T2x, and SMAA 4x all have temporal components to them, while
 
 Turning to performance data, as I already explained, this comes from the game's built-in benchmark, which is far more convenient to use than manual runs.
 It might not be perfectly representative of the gameplay experience to expect, but then the focus here is to compare the anti-aliasing options and not to specifically consider gameplay experience.
-Yeah, I might just be justifying laziness, but the data this data is still valid for the purpose of this article.
+Yeah, I might just be justifying laziness, but this data is still valid for the purpose of this article.
 
 With the anti-aliasing turned off, the Ultra preset enabled, Exclusive Fullscreen and DX12 selected the benchmark reported and average frame rate of 93 FPS.
 With SMAA enabled we got 87 FPS and TAA gave us 88 FPS, which is really no difference.
@@ -190,6 +190,15 @@ Of course going to SMAA 4x pulls the performance down noticeably, to an average 
 It is true I reviewed the game with this as the anti-aliasing option, so it is playable but that is partly because \textit{Shadow of the Tomb Raider} is a game that is not hurt by a sub-60 FPS frame rate.
 For just enjoying the game, I doubt I would use SMAA 4x.
 
+\begin{center}
+	\noindent	\setlength{\tabcolsep}{2pt} {
+	\begin{tabular}{l | c | c | c | c | c }
+		Option		&	None	&	SMAA	&	TAA	&	SMAA T2x	&	SMAA 4x	\\	\hline
+		FPS Average	&	93		&	87		&	88	&	84			&	54	\\	\hline
+	\end{tabular}
+	}
+\end{center}
+
 The VRAM usage is not really that interesting, as it basically follows what we have already seen and can predict.
 For every location the VRAM consumption for options None, SMAA, TAA, and SMAA T2x were the same.
 It was only with SMAA 4x that this value changed.
@@ -197,6 +206,18 @@ For the Menu the VRAM usage was 3.9 GB for the non-SMAA 4x options and 4.2 GB fo
 Kuwaq Yaku's usages were 6.9 GB and 7.1 GB.
 For the Peruvian Jungle setting they were 6.8 GB and 7.1 GB.
 Lastly the Abandoned Village saw 6.8 GB used and 7.2 GB used with SMAA 4x.
+
+\begin{center}
+	\noindent	\setlength{\tabcolsep}{2pt} {
+	\begin{tabular}{l | c | c | c | c | c }
+		VRAM Consumed (GB)	&	None	&	SMAA	&	TAA	&	SMAA T2x	&	SMAA 4x	\\	\hline
+		Main Menu			&	3.9		&	3.9		&	3.9	&	3.9			&	4.2		\\	\hline
+		Kawaq Yaku			&	6.9		&	6.9		&	6.9	&	6.9			&	7.1		\\	\hline
+		Peruvian Jungle		&	6.8		&	6.8		&	6.8	&	6.8			&	7.1		\\	\hline
+		Abandoned Village	&	6.8		&	6.8		&	6.8	&	6.8			&	7.2		\\	\hline
+	\end{tabular}
+	}
+\end{center}
 
 The memory impact for using SMAA 4x was not that much, but the performance impact definitely was.
 The other options did not move the VRAM usage at all, which does seem a little odd, as one would expect a little change like the 0.1 GB with FXAA in \textit{Serious Sam Fusion 2017}, but perhaps enough was reserved with None to cover these, or the increase is invisible due to rounding error.
