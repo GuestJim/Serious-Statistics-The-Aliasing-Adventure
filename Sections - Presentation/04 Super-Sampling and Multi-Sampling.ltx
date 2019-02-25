@@ -6,7 +6,7 @@
 	\item	\textbf{Super-sampling} is to use a higher sampling frequency than the output supports
 	\item	Both \textbf{Multi-sampling} and \textbf{Adaptive sampling} are efficiency-optimized methods borrowing from super-sampling
 	\item	Adaptive sampling increases sampling around edges as it finds them\supercite{StochasticSampling}
-	\item	Multi-sampling uses a fixed sampling pattern but culls/discards based on stencil, Z, and coverage buffers\supercite{DX10RasterizationStage, OpenGLMSAA}
+	\item	Multi-sampling uses a fixed sampling pattern but culls/discards based on stencil, Z, and coverage buffers\supercite{DX10RasterizationStart, OpenGLMSAA}
 	\item	Critical concepts for these methods:
 	\begin{itemize}
 		\item	\textbf{Sampling pattern}
@@ -54,7 +54,7 @@
 	\begin{itemize}
 		\item	Starting with DirectX 10, Microsoft has required hardware acceleration for multi-sampling on GPUs\supercite{DXReqs}
 		\begin{itemize}
-			\item	Shaders are run once per multi-sampled pixel\supercite{DX10RasterizationStage, DX10RasterizationRules}
+			\item	Shaders are run once per multi-sampled pixel\supercite{DX10RasterizationStart, DX10RasterizationRules}
 			\item	GPUs have built-in sample patterns
 			\begin{itemize}
 				\item	With DirectX 10.1, \textbf{Standard Sample Patterns} must be included\supercite{DX11StandardPatterns}
@@ -119,7 +119,7 @@
 	Once you have the sub-samples, how do you combine them for the final color?
 	\pause
 	\begin{multicols}{3}
-	[\noindent	Example Filters\supercite{blender}:	\vspace{-12pt}	]
+	[\noindent	Example Filters\supercite{Blender, IMFilters}:	\vspace{-12pt}	]
 			\begin{itemize}
 			{	\fontsize{7}{8}\selectfont
 				\item	Point
