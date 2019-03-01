@@ -1,5 +1,9 @@
 \section{Mipmaps, Perhaps Non-Obvious Anti-Aliasing Solution}
 
+One anti-aliasing method I did not cover is mipmaps, which some of you may or may not be familiar with.
+I did not cover these in the main body of this article because it does not really fit in with rasterization-based methods or filter-based methods meant for addressing aliasing along edges.
+Also, I would not be surprised if even those of you are familiar with mipmaps do not realize their role in reducing aliasing.
+
 Just about every 3D game applies the concept of level-of-detail distances.
 The idea is that when something is closer to the camera, the highest quality version of the object is used, but for something farther away, a lower quality version is used instead.
 This prioritization of quality can and does improve performance, as simpler objects are easier to work with, and more resources can go to the higher quality, nearby objects.
