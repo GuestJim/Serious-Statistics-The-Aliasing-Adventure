@@ -388,7 +388,8 @@ ggplot(data=OCAT, aes(x=MsBetweenPresents, y=rbind(c(diff(MsBetweenPresents), 0)
 #	annotate("rect", ymin=quantile(diff(MsBetweenPresents), c(.001, .010)), ymax=quantile(diff(MsBetweenPresents), c(.999, .990)), xmin=quantile(MsBetweenPresents, c(.001, .010)), xmax=quantile(MsBetweenPresents, c(.999, .990)), alpha=c(0.1, 0.075), fill=c("red", "blue")) +
 #		does not work, would need to put quantile data in other object, don't care
 	geom_point(alpha = 0.1) +
-	stat_density_2d(geom = "polygon", aes(fill = stat(nlevel), alpha = stat(nlevel)), show.legend = FALSE) + 	scale_fill_viridis_c() +
+	# stat_density_2d(geom = "polygon", aes(fill = stat(nlevel), alpha = stat(nlevel)), show.legend = FALSE) + 	scale_fill_viridis_c() +
+	stat_density_2d(geom = "polygon", aes(fill = stat(nlevel)), show.legend = FALSE) + 	scale_fill_viridis_c() +
 	geom_point(data=results, aes(x=FTIME, y=FDIFF, group = RUN), color = "magenta", shape ="x", stat = "identity") +
 	facet_wrap(RUN ~., as.table = TRUE, drop = FALSE, labeller = labeller(RUN = NAMconv)) +
 	scale_x_continuous(name="Frame Time (ms)", breaks=seq(from=0, to=ceiling(1000/30), by=1000/120), labels=round(seq(from=0, to=ceiling(1000/30), by=1000/120), 2), limits=c(0, 1000/40), expand=c(0.02, 0), sec.axis = dup_axis()) +
@@ -406,7 +407,8 @@ ggplot(data=OCAT, aes(x=MsBetweenDisplayChange, y=rbind(c(diff(MsBetweenDisplayC
 #	annotate("rect", ymin=quantile(diff(MsBetweenPresents), c(.001, .010)), ymax=quantile(diff(MsBetweenPresents), c(.999, .990)), xmin=quantile(MsBetweenPresents, c(.001, .010)), xmax=quantile(MsBetweenPresents, c(.999, .990)), alpha=c(0.1, 0.075), fill=c("red", "blue")) +
 #		does not work, would need to put quantile data in other object, don't care
 	geom_point(alpha = 0.1) +
-	stat_density_2d(geom = "polygon", aes(fill = stat(nlevel), alpha = stat(nlevel)), show.legend = FALSE) + 	scale_fill_viridis_c() +
+	# stat_density_2d(geom = "polygon", aes(fill = stat(nlevel), alpha = stat(nlevel)), show.legend = FALSE) + 	scale_fill_viridis_c() +
+	stat_density_2d(geom = "polygon", aes(fill = stat(nlevel)), show.legend = FALSE) + 	scale_fill_viridis_c() +
 #	geom_point(data=results, aes(x=FTIME, y=FDIFF, group = RUN), color = "magenta", shape ="x", stat = "identity") +
 	facet_wrap(RUN ~., as.table = TRUE, drop = FALSE, labeller = labeller(RUN = NAMconv)) +
 	scale_x_continuous(name="Refresh Cycles Later (1 / 60 Hz)", breaks=seq(from=0, to=ceiling(1000/30), by=1000/120), labels=round(seq(from=0, to=2, by=0.5), 2), limits=c(0, 1000/40), expand=c(0.02, 0), sec.axis = dup_axis()) +
