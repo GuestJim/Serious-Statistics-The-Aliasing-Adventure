@@ -17,7 +17,7 @@ This ray will not bounce, which would be the defining characteristic of ray trac
 If it does, it measures or samples the primitive, with the values for these samples derived from interpolating the values at the primitives vertices to every sample position.\supercite{DX10RasterizationStage, DX10RasterizationStart, DX10RasterizationRules}
 
 Trying to translate that, information is not known within the primitive but at its vertices, so when a sample position is within the primitive, this vertex information is used to construct what the information should be within the primitive.
-If one vertex is defined as being black and another as white, the interpolated color for a sample between them will be a gray, with the specific shade of gray depending on the position between the vertices.
+If one vertex is defined as being black and another as white, the interpolated color for a sample between them will be a grey, with the specific shade of grey depending on the position between the vertices.
 
 %FRUSTUM
 \image{{Frustum}}
@@ -32,7 +32,6 @@ Information like color, material, normal, stencil, and Z are all measured and st
 This is the work that shaders do on a GPU and additional effects can be applied by them, which influence the final color of the pixel.
 
 It is in the shading process, or specifically a portion of it, that the differences between forward and deferred rendering, or shading exist.
-This shading step, or a portion of it, is where forward and deferred rendering, or shading, differ.
 With forward shading, all fragments are used for the lighting calculations while deferred shading waits to do the lighting until a pass identifies the non-occluded fragments.\supercite{ForwardDeferred, DeferredShadingUnity}
 This means only as many lighting calculations are done as there are pixels in the final image with deferred, improving performance, but the process also hits memory bandwidth harder and risks mistakes due to a lack of information.
 You see, by only using non-occluded fragments, if a blocked fragment should influence the lighting of another, like with a transparent texture, the information is not there for deferred shading.
@@ -73,51 +72,47 @@ Because the polygons popping in and out are stacked, the result is the colors po
 
 It is also possible to demonstrate this with the sine waves from earlier, by applying an offset to the sampling positions of just 0.25, both positive and negative.
 
-%SIN_POPPING-GRAD
-\image{{Alias Example - Sin Popping - Grad}}
+%ALIAS_EXAMPLE_TEMPORAL
+\image{{Alias Example - Temporal}}
 
 Despite the offset being a quarter the distance between samples, the gradients appear to shift by double the sampling distance.
 I think this does a pretty good job of demonstrating popping but also a kind of temporal aliasing.
 A shift of just 0.25, which you know by my statement but also by the color-matching rug plot at the bottom of the graph, results in the gradients shifting by 2.
 If instead of the sampling position shifting by 0.25 it was the signal itself moving by 0.25 per unit time, the resulting gradient would appear to be moving eight times faster ($2 / 0.25$)!
 
-For this next graph I combined the three of the datasets so they can be drawn and connected in the proper order.
-As you can see the result is much better at representing the original function:
+Returning to spatial aliasing, which allows $sin(0.1x + 0.5)$ and $sin(0.9x + 0.5)$ to be confused, a way to avoid this aliasing is to increase the sampling frequency or resolution.
+There is a frequency at which aliasing can be prevented, and thanks to Nyquist-Shannon sampling theorem we know this to be double the original signal’s frequency.
+There are some exceptions to this, with radio broadcasts being one, and the theorem refers to the ability to reconstruct the original signal, not just if it can be visually identified, which are both points I think are worth keeping in mind.
 
-%SIN_SUPER
-\image{{Alias Example - Sin Super}}
+The frequency of the original function, $sin(0.9x + 0.5)$, is 0.9, so doubling the frequency gets us to 1.8.
+Changing this to a length, we get 0.5556 ($1 / 1.8$) as the distance between samples, and as you can see in this graph, it definitely does a better job capturing details of the original function, compared to the sample distance of 1 used earlier.
 
-While the 0.25 distance between samples is better, there are skipped samples at the integers, which means aliasing is still possible.
-We know it is still possible because of the Nyquist limit not being met.
-The Nyquist limit is the lower limit for the sampling frequency of a signal, such that aliasing will not occur, and is double the signalâ€™s frequency.
-The original sine function has a frequency of 0.9, so the Nyquist limit is 0.45 and one must sample at that or a higher frequency to avoid aliasing.
-While a sampling frequency of 0.25 is better than 0.45, at the integer gaps the sampling frequency is 0.5 and does not satisfy the limit.
+%NYQUIST_RATE
+\image{{Alias Example - Nyquist - Rate}}
 
-Below is a graph with a sampling frequency of 0.45:
+The fact the amplitude of the samples does not match the original signal is not too great an issue.
+It is just caused by starting at 0.5 as opposed to another position, like 0.25.
+It would make the contrast between the sections of the gradients easier to see, but it is still the case we can see the alternating nature of the original signal.
 
-%SIN_NYQUIST_45
-\image{{Alias Example - Sin Nyquist 45}}
+Of course increasing the sampling rate even more will produce a still clearer image of the original signal, so I did this by doubling the Nyquist rate to 0.2778 ($1 / 3.6$), producing this graph.
 
-Does it perfectly represent the original?
-Not quite, but there is still enough information to reconstruct the original, which is the goal.
-Looking at it with the gradients in place, it is a bit easier to see that it does align nicely with the original signal.
-I should point out the 'pixel' width for the gradient is now matching the distance between the samples, with the samples placed at the center.
+%NYQUIST_RATE_x2
+\image{{Alias Example - Nyquist - Rate x2}}
 
-%SIN_NYQUIST_45_GRAD
-\image{{Alias Example - Sin Nyquist 45 - Grad}}
+For an easier comparison between these sampling options, I have built another graph just of the gradients, but also added another that may be interesting to consider.
+It is much wider than the graphs shown already, to help show off any long patterns within them.
 
-If we were to instead sample with a distance of 0.5 between the samples though, we get this:
+%RATE_COMPARISON
+\image{{Alias Example - Rate Comparison}}
 
-%SIN_NYQUIST_50
-\image{{Alias Example - Sin Nyquist 50}}
+At the top we see a gradient in red for the low-frequency signal that can be an alias for the high frequency signal, and below it the gradient where the distance between samples is 1.
+We can see how well it matches the alias signal, even though it is made from the original signal shown at the bottom in blue.
 
-This data actually looks like it describes a signal defined by two sine functions, one with a low frequency causing the overall amplitude to cycle, and the other a higher frequency that has the signal crossing 0 rapidly.
-Looking at it with the gradients also shows it does not match up with the original function very well at x = 0, 5, and 10.
+The next gradient is the interesting one I decided to include, as it corresponds to a sampling width of 0.5, which is better than the Nyquist rate, yet it does not necessarily look better.
+We can see the high-frequency pattern of alternating white and black sections, but there is also a low-frequency pattern where the sections are shades of grey.
+This is not desirable in graphics because that low-frequency pattern could be noticed.
 
-%SIN_NYQUIST_50_GRAD
-\image{{Alias Example - Sin Nyquist 50 - Grad}}
+The next two gradients come from the Nyquist rate and then double this rate, before ending on the original signal.
 
-Moving off of the Nyquist limit by just 0.05 is still enough to allow aliasing to occur.
-
-Even with this one failure though, we can still see that increasing the sampling frequency (or reducing the distance between them) can get you closer to an accurate result of the original signal.
-While these additional samples are called sub-samples, as they are from within the larger sample space (the pixel for a rendered image), this concept itself is called super-sampling.
+While the 0.5-width gradient does complicate things with its low-frequency pattern, we do still see the general trend that increasing the sampling rate, decreasing the distance between samples helps to avoid aliasing.
+This leads us to the first anti-aliasing method I want to discuss, which is super-sampling.

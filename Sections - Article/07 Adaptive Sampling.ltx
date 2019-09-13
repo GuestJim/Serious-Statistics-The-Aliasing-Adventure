@@ -1,7 +1,7 @@
 \section{Adaptive Sample, Selectively Applying Super-Sampling}
 
 Before getting to the post-processing filters, I want to cover another optimization to super-sampling that I have come across in some literature, but I cannot say has ever been common in games; Adaptive sampling.
-Though mentioned in some of what I have read, there always seemed to be little or no explanation for it, but then I found that 1986 article on stochastic sampling\supercite{StochasticSampling} I just talked about.
+Though mentioned in some of what I have read, there always seemed to be little or no explanation for it, but then I found that 1986 article on Stochastic sampling\supercite{StochasticSampling} I just talked about.
 In this paper it describes it as applying additional rays near edges, and these new rays are placed half way between the previous ones.
 Technically it is speaking about ray tracing instead of rasterization here, but the concept is likely similar and applicable to rasterization, but that is an assumption on my part.
 

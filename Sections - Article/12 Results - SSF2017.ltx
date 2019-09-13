@@ -1,4 +1,5 @@
-\section{Anti-Aliasing, the Results pt. 1 (Serious Sam Fusion 2017)}
+\section{Anti-Aliasing, the Results pt.
+1 (Serious Sam Fusion 2017)}
 
 At this point I want to start getting into the results of my testing with the various anti-aliasing and related options in two games.
 While it is the case that at the time I originally collected this data I was experiencing an odd issue with my RX Vega 64, I have recollected the affected data with the new Radeon Software Adrenalin 2019 Edition drivers.
@@ -17,7 +18,7 @@ The order of \textit{Serious Sam Fusion 2017} was None, SSAA 2x, SSAA 4x, FXAA L
 All other options matched the Ultra preset.
 It may be worth noting that changing the MSAA setting requires the game to restart its engine, but this is done automatically and without disrupting your position in the game.
 Additionally I used DirectX 11 as the graphics API and played in exclusive fullscreen as it was only this way that I could also use the morphological filtering option in the AMD graphics drivers.
-(Vulkan is my preferred API for this title, but the drivers cannot/will not apply MLAA to it.)
+(Vulkan is my preferred API for this title, but the drivers cannot or will not apply MLAA to it.)
 To collect screenshots with this morphological filtering enabled I repeated my process, using saves at each location to recreate the framing (though I apparently moved the camera by accident for the first set), and then used Radeon ReLive to capture the screenshots.
 Interestingly it appears the morphological filtering is applied after the Steam Overlay hooks in, so screenshots taken by Steam do not show the results of the filtering.
 
@@ -263,7 +264,7 @@ If you look closely you will see there are differences almost everywhere, which 
 
 We have already seen that using the Point Sampling option makes the image appear worse than not using anti-aliasing, and this confirms it.
 We can clearly see there were far more differences between point and Lanczos than there were between Lanczos and no anti-aliasing at all.
-Unless you are experimenting with things like I am now, I cannot imagine a time one would choose to use point sampling.
+Unless you are experimenting with things like I am now, I cannot imagine a time one would choose to use point filtering.
 
 %DIFFERENCE_FILTER_BILINEAR
 \image{{Difference 02 - SSAA 4x - Bilinear}}
@@ -365,7 +366,7 @@ The same is true of the textures, where we see differences in many of the detail
 
 Moving on to the super-sampling options with and without MLAA being applied, and we see even more details are being impacted by MLAA, which makes sense as there are more details in these images.
 This is somewhat disappointing, but hardly unexpected.
-It is worth remembering though that as this MLAA implementation is being applied by the driver, it is completely naïve about the content.
+It is worth remembering though, that as this MLAA implementation is being applied by the driver, it is completely naïve about the content.
 If it were implemented within the game engine, the UI would certainly be unaffected as it could be applied after the morphological filtering.
 Whether there could be a means of protecting the textures though, I am unsure.
 
@@ -422,19 +423,21 @@ Quickly, here are my specifications:
 \end{itemize}
 
 %VRAM_GRAPH
-\image{Serious Sam Fusion 2017 (DX11 - Fresh) - VRAM}
+\image{Serious Statistics- The Aliasing Adventure - Means + VRAM}
 
 The columns represent the VRAM used for each option, and the specific values are also placed at their base to be clear.
-The box plots are for the recorded frame rate and the scale for them is on the right side.
+The box plots are for the recorded frame time and the scale for them is on the right side.
+These are not standard box plots, as the ends of the whiskers and boxes correspond to the 0.1\%, 1\%, 99\%, and 99.9\% values.
+The lines in the middle of the boxes are still the median value though, and the crossed-circle symbol marks the arithmetic mean.
 It should be noted there is definitely some VRAM being consumed by other processes.
 
 The order of these columns is the order I made the runs in.
 This, by the way, is the third time I collected this same data.
 The first time was when I was still suffering the issue I described in the introduction.
 The second time the data was 'good' but I decided to recollect it anyway, with a different procedure.
-For both of these earlier attempts I remained in the game and cycled through the options, then reloaded the auto-save at the beginning of the map and kept going.
+For both of these earlier attempts I remained in the game and cycled through the options, then reloading the auto-save at the beginning of the map and starting the run over.
 Because I want data on the VRAM used, this method is not ideal, as it is possible for the game's engine to load something into the memory, or just reserve portions of it and then keep it even as the options change.
-For this third run I exited the game and restarted it for each run, hence it being labeled 'Fresh,' so it should have been clearing itself out of the VRAM.
+For this third collection I exited the game and restarted it for each run, so it should have been clearing itself out of the VRAM.
 The patterns in this third collection mirror those of the second run, so that data was not invalid, but the specific values here should be better.
 
 Before going further, I want to quickly cover a few related points.
@@ -485,26 +488,42 @@ It actually looks like all of the FXAA options are within that for None, so you 
 While MSAA is a more significant hit, I think most people would be plenty happy with the performance even at MSAA 8x.
 It is just the SSAA options that drag down performance, which is not too surprising.
 
-That being said though, as I look at the data for GPU clock speed, ASIC power, temperature, and fan speed I think it might also be the case that there was a bottleneck when using super-sampling.
-While there was clock speed fluctuation for all of the runs, only the SSAA runs dropped to around 1200 MHz.
-The others did come down to around 1400 MHz, and both FXAA High and Ultra dropped below 1400 MHz, but those are not as severe of drops.
-Across all of the runs though, the ASIC power usage was approximately the same (around 200 W), as was the fan speed (3000 RPM).
-This is why I think there is a bottleneck somewhere because the thermal profile across the runs should be very similar, so thermal throttling should hit them all more-or-less the same.
-If the same amount of power is being sent in to the GPU, then it cannot be hotter than any other time.
-If there is a bottleneck though, then it might be causing a stall with the GPU, triggering it to lower the clock speed.
-A lower clock speed will also lower power usage and heat, so this too makes me think there may be a bottleneck as some other component may by working much harder, taking more power and producing more heat, to do the super-sampling work.
-It is entirely possible I am wrong here and it could be thermal throttling, the data is just not so clear on that.
+That being said though, as I look at the data for GPU clock speed, ASIC power, temperature, and fan speed I think it might also be the case that there was something negatively impacting the performance for SSAA.
+Some fluctuation of clock speed is not necessarily unusual, but it is only for SSAA that it fell to as low as approximately 1200 MHz.
+The other options would drop to around 1400 MHz, with both FXAA High and Ultra at times falling below that even.
+Still, that is a far less significant a drop than what was seen with the SSAA options.
+
+This difference in clock speed leads me to question why.
+Looking at the other data, like ASIC power usage and Fan speed, it does not appear to be a thermal problem.
+All of the runs used around 200 W and the fan speed also was usually around 3000 RPM.
+This means the same amount of energy was going in and the same amount of energy was being removed from the GPU too, so with similar thermal characteristics, why the difference?
+My original hypothesis was an internal bottleneck of some kind, that components within the GPU were stalling waiting on other parts, and this triggered the clock speed to be lowered.
+As I have thought about it more, I have developed a different hypothesis that is somewhat related, in that certain aspects of the foundation are the same, but theory itself is different.
+
+My original thinking was that it could not be a thermal throttling issue, because when energy in and energy out are the same, the thermals must also be the same, so throttling should be the same.
+What I have thought of since is to consider the possibility that within the GPU, the thermal performance may be different.
+Also it is somewhat naïve to apply the data I have for the overall performance of the GPU to the internal components with the same assumptions.
+Consider this scenario; a circuit inside the GPU that can normally get its work done in say 1 ms, while the total time to draw the frame is 10 ms.
+(These numbers do not really pertain to the data and are just meant as examples.That means that for 1 ms it is drawing power and producing heat, but with 9 ms of inactivity to cool, its temperature remains low enough that no thermal throttling is needed.
+It sprints and rests in cycles.
+If the workload changes, however, such as with SSAA so that its work takes 5 ms to complete, but it does not take more power to complete; it just takes more time.
+(As power is energy per unit time, more energy may also be involved.This means then that the circuit is producing heat for 5 ms and only getting 5 ms to cool.
+With less time to cool, this could make the circuit warmer than it was before, triggering thermal throttling.
+Even though the power in is the same, and the work done to remove the heat produced is the same, the change from a cycle of sprint and rest, to something with a longer period of activity and shorter rests could cause the GPU to pace itself, lowering the clock speed.
+
+As I am not a GPU engineer by any stretch, both of my theories are completely speculative and lacking any experiential or professional weight to them.
+I do think the newer one is not completely unreasonable though.
 
 %COURSE_FACET
-\image{Serious Sam Fusion 2017 (DX11 - Fresh) - Course Facet - Frames}
+\image{Serious Statistics- The Aliasing Adventure - @Course - Frame Time}
 
 \begin{minipage}{\textwidth}
 \begin{multicols}{2}
 	%POWER_FACET
-	\image{Serious Sam Fusion 2017 (DX11 - Fresh) - Course Facet - Power}
+	\image{Serious Statistics- The Aliasing Adventure - Course Power}
 \columnbreak
 	%CLOCK_FACET
-	\image{Serious Sam Fusion 2017 (DX11 - Fresh) - Course Facet - GPU}
+	\image{Serious Statistics- The Aliasing Adventure - Course GPU Clock}
 \end{multicols}
 \end{minipage}
 
@@ -513,12 +532,14 @@ Not sure why that happened, but it did and we can see it on this graph and anoth
 Before that though, in case anyone is curious to see the VRAM consumption across these runs, here is that graph:
 
 %VRAM_FACET
-\image{Serious Sam Fusion 2017 (DX11 - Fresh) - Course Facet - VRAM}
+\image{Serious Statistics- The Aliasing Adventure - Course VRAM}
 
-Also, here is a graph with the distribution of frame rates for all of the runs plotted:
+Also, here is a graph with the distribution of frame times for all of the runs plotted.
+The arithmetic mean and the median are both also drawn, with the mean as the solid green line and the median as the dotted cyan line.
+(The red line is just to mark where 60 FPS is.)
 
-%FPS_GROUPED
-\image{Serious Sam Fusion 2017 (DX11 - Fresh) - FPS Grouped}
+%@FREQ_FRAME
+\image{Serious Statistics- The Aliasing Adventure - @Freq - Frame Time}
 
 One advantage to how I put together these and other articles or reviews is that I can always update the R scripts I use for processing the data and generating graphs.
 Since I started this article I constructed a new graph type that I hope can reveal performance stability, as it plots frame time against consecutive frame time difference.
@@ -528,10 +549,29 @@ A sudden, significant change can be noticed as a stutter instead of a smooth tra
 Anyway, I had to fight with the code some, but I was ultimately able to make a faceted graph for all of these runs, allowing you to see the frame-time stability of them.
 
 %TIME_DIFF
-\image{Serious Sam Fusion 2017 (DX11 - Fresh) - Time vs Diff Facet}
+\image{Serious Statistics- The Aliasing Adventure - @Diff - Frame Time}
 
 Every option but SSAA 2x, SSAA 4x, and FXAA Medium show actually pretty good stability with the great bulk of the data around Y = 0.
 The X-values do shift some, as we should expect from the earlier graphs and from what we know of these methods.
-Still do not know what is up with the FXAA Medium data, but still the bulk of the data is together in one clump, indicating it was still very stable.
+Still do not know what is up with the FXAA Medium data, but the bulk of the data is together in one clump, indicating it was still very stable.
 (Though I am not showing it here, the Display Change data actually looks much tighter.
 My belief is that MsBetweenDisplayChange is going to be more representative of the user-experience, but MsBetweenPresents may be better for monitoring performance, and that is what we are more interested in here.)
+
+Now that I am back at this article months later, I have decided to do some rebuilding of the R scripts for processing the data, bringing them in-line with the current state of the scripts, and providing some tweaks to the graphs.
+One of the graph types that I have changed significantly since writing this article originally is a quantile plot.
+Quantiles are like percentiles and can tell you how much data is above or below a certain point, and I have the scale configured to show as percentiles.
+Normally a QQ plot has both axes as quantiles, for comparing data against other distributions, but instead I have the Y-axis show the data value.
+This way we can see how the values are distributed, according to their place in the data, as opposed to the plot earlier that showed the frequency of values in the data.
+
+Something I have added to my QQ plots (I still refer to them as that, even though both axes are not quantiles) is a QQ line, which connects the 1% and 99% values.
+The most desirable pattern for a plot like this is for the shape of it to be mostly flat and its slope to be near zero, as that indicates very consistent performance.
+This line helps to show how linear the plot is, and I also added a label for what the slope of the line is.
+There are also colored boxes that trace the marked percentile values to the data value on the other axis.
+
+%@QQ_FRAME
+\image{Serious Statistics- The Aliasing Adventure - @QQ - Frame Time}
+
+At this point I do not know at what point a difference in slope is significant, but I do think it is reasonable to consider the None, MSAA, and FXAA slopes, ranging from 0.42 to 0.50, to be similar.
+It is only the SSAA slopes that significantly differ, with the SSAA 2x slope being nearly double that of None (0.98 compared to 0.5).
+The difference is even greater for SSAA 4x, with its slope being three and a half times larger (1.79 compared to 0.5).
+This indicates that the performance for both SSAA options was far less consistent over the length of the runs than the other configurations.

@@ -48,7 +48,7 @@ You may notice a couple odd patterns in those graphics too, which have cyan dots
 These are Quincunx patterns, which I have seen reference to NVIDIA offering, and they offer an interesting efficiency advantage to others.\supercite{OpenGLNVMS}
 First I want to explain the red dots are samples while the cyan dots are 'taps.'
 The difference between samples and taps are, from my understanding, the pixel they are associated with.
-While all samples are taps, being a sample implies it is a tap associated with pixel concerned, while a generic tap is associated with a different pixel.
+While all samples are taps, being a sample implies it is a tap associated with the pixel concerned, while a generic tap is associated with a different pixel.
 When using the 2x Quincunx pattern, the samples for every pixel are at the center of the pixel and the upper-left corner.
 (I believe it is not arbitrary for the upper left corner to be used here as a top-left rule is used, at least for DirectX, to determine if a pixel center is within a triangle.\supercite{DX10RasterizationRules})
 The efficiency advantage for this pattern comes from the fact that the corners are shared between pixels, so one 'upper-left' corner for one pixel is the upper-right corner of another, and lower-left and lower-right of another two.
@@ -61,12 +61,12 @@ While Quincunx patterns are definitely clever, as they increase the amount of in
 Remember, with this type of pattern there is only one sample unique to each pixel, and all of the others are shared.
 This sharing can lead to that blurring, depending on how the samples are blended together, which is actually the next topic after sampling pattern I will cover, but there are some more points here I want to cover.
 
-The first one I want to cover what I consider to be over-sampling and distinct from super-sampling; super resolutions.
+The first one I want to cover is what I consider to be over-sampling and distinct from super-sampling; super resolutions.
 Both NVIDIA and AMD have driver features to enable super resolutions, with the NVIDIA implementation being Dynamic Super Resolution (DSR)\supercite{NVIDIADSR} and AMD's being Virtual Super Resolution (VSR)\supercite{AMDVSR}.
 My crude understanding for how these work, in part at least, is to augment the list of hardware-supported resolutions supplied to a game.
 A very common if not universal setting in PC games is the resolution, and often the default option is the native resolution of your display, but there are other resolutions below it.
  I think the way this works is the game has a list of supported resolutions and is then fed the native resolution of the monitor so it will only show that and lower resolutions to the player.
-What both DSR and VSR will do is pass the game a higher supported resolution, or if the entire list is provided by the drivers, a longer list with these higher above-native resolution, which can appropriately be called super resolutions.
+What both DSR and VSR will do is pass the game a higher supported resolution, or if the entire list is provided by the drivers, a longer list with these higher, above-native resolution, which can appropriately be called super resolutions.
 When one of these super resolutions is selected, the game will internally be rendered at that resolution, and the drivers then scale the result down to your monitor's native resolution.
 
 Because the game is being rendered at a higher resolution, as though your monitor were a higher resolution, the sampling pattern should be an ordered grid, since the game thinks the samples are the centers of pixels.
@@ -89,7 +89,7 @@ Outside of that filter though, the most simple and crude that would be used for 
 The way this filter works is to just average the information of samples across the pixel area equally.
 It does not matter how near or far a sample is from the center of the pixel, it will have the same weight on the shading of the pixel.
 
-The next filter is still pretty simple and crude, but can still be an improvement, and it is called the Tent or Triangle filter.
+The next filter is still pretty simple and crude, but can be an improvement, and it is called the Tent or Triangle filter.
 With this the distance from the center of the pixel is used to weight the samples.
 Those samples closer to the center have greater weight than those farther away.
 Something possible with the Tent/Triangle filter is it can be set to actually reach outside of the area of a pixel, so these taps can influence the final color.
@@ -99,7 +99,7 @@ Next we have the Quadratic and Cubic filters, which are defined by quadratic and
 The next three are more complicated distributions, but like the quadratic and cubic are all smooth, unlike Tent/Triangle.
 These next three are Gaussian, which resembles the Gaussian or Normal curve, Catmull-Rom, and Mitchell-Netravali.
 From what I discovered, Catmull-Rom appears to be a special version of the Mitchell-Netravali distribution, as different inputs for the Mitchell-Netravali function can produce it.
-There are undoubtedly more filters than these, but they are the ones Blender offers when it is rendering a scene and identify in its documentation.\supercite{Blender}
+There are undoubtedly more filters than these, and we will see some additional later, but these are the ones Blender offers when it is rendering a scene and identify in its documentation.\supercite{Blender}
 I have put together a graphic of the shapes of these filter functions that I think will help you understand how they work:
 
 %BLEND_FILTERS
@@ -107,7 +107,7 @@ I have put together a graphic of the shapes of these filter functions that I thi
 
 The height of these functions would be the weighting of a sample, based on the X-value as this would be the distance from the center of the pixel.
 
-I want to point out something about the last two functions, which is the negative lobes they have.
+Something worth pointing out about the last two functions are their negative lobes.
 In the Blender documentation I mentioned, Catmull-Rom is described as the most sharpening, which makes sense as its lobes are the more negative, compared to Mitchell-Netravali.
 It make sense that these negative lobes would sharpen the image, as it means the taps from adjacent pixels are actually being subtracted from the pixel being shaded, which should then increase the contrast between them.
 Returning to the Blender documentation, Gaussian was described as the most blurring between these three, which makes sense as it lacks the negative lobes, does cover the taps of adjacent pixels, and is also rather tall, so the weighting is great.

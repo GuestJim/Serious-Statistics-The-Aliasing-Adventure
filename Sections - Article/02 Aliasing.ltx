@@ -5,39 +5,39 @@ I could explain it directly but I think it would be better to approach it throug
 
 I can give you a set of coordinate pairs to plot on a graph and if you do that, and connect the dots, you will get what is below:
 
-%ALIAS_EXAMPLE-SIN_SAMPLES
-\image{{Alias Example - Sin Samples}}
+%ALIAS_EXAMPLE-SINEE_SAMPLES
+\image{{Alias Example - Sine Samples}}
 
 For some you might need to think back a bit to remember math class, but this graph looks a lot like a sine wave with a period of 10, meaning every 10 units on the X-axis gets you to the same Y-value.
-Indeed I can put together a sine function that will fit the drawn lines perfectly: $y = sin(0.1 * X + 0.5)$.
+Indeed I can put together a sine function that will fit the drawn lines perfectly: $y = sin(0.1 * X * 2\pi + 0.5)$.
 
 %ALIAS_EXAMPLE-SIN_0.1
-\image{{Alias Example - Sin Waves - 0.1}}
+\image{{Alias Example - Sine Samples - 0.1}}
 
 If you were trying to analyze a signal with the coordinate pairs from before, this would seem like a perfect fit.
 Unfortunately, it is not the only perfect fit.
 
 %ALIAS_EXAMPLE-SIN_0.9
-\image{{Alias Example - Sin Waves - 0.9}}
+\image{{Alias Example - Sine Samples - 0.9}}
 
 Here we have another graph that is still of a sine wave, but with a very different period, and yet it gives the same Y-values as before.
-To be specific, this function is $y = sin(0.9 * X + 0.5)$, and for sampling at the halves, it returns the same values as $y = sin(0.1 * X + 0.5)$.
+To be specific, this function is $y = sin(0.9 * X * 2\pi + 0.5)$, and for sampling at the halves, it returns the same values as $y = sin(0.1 * X * 2\pi + 0.5)$.
 This means that for that sampling pattern, these two very different functions are aliases, as one can be known as the other.
 
 You might not realize it, or at least not think about it much, but the rendering of computer graphics is a signal processing problem, with numerical measurements being made by sampling an 'analog' object.
 Okay, the object is not actually analog since our GPUs are working on digital constructions, but like an analog signal, the original objects have infinite definition.
 It might be infinite definition of a polyhedron instead of a sphere, but it is still the case that for every point on its edge or face, within its domain, it is defined.
 If you look back to the graphs above, the original connected-dots graph has its definition limited to just the measured points, and nothing else.
-For the two sine wave graphs though, for the domain of 0 $\leq$ X $\leq$ 10, the graph is defined, and this would be true even if it were just a straight line.
+For the two sine wave graphs though, I have theme plotted and therefore defined from 0 $\leq$ X $\leq$ 10 or wider, and this would be true even if it were just a straight line.
 In graphics another name for the original objects is primitives.
 
-I have another example here with the sine waves, but at the bottom of the graph I have also placed 'gradients' that reflect the information of the waves above.
+I have another example of the sine waves, but at the bottom of the graph I have also placed 'gradients' that reflect the information of the waves above.
 (Technically they are not gradients but rectangles simulating gradients.) I think these gradients can help illustrate the difference between discrete samples and the 'continuous' (remember, I am using rectangles, not an actual gradient) signals or primitives.
 
 %ALIAS_EXAMPLE-SIN_WAVES-GRAD
-\image{{Alias Example - Sin Waves - Grad}}
+\image{{Alias Example - Sine Waves - Grad}}
 
-Delving a little more deeply into Sampling theory or Nyquist theory, aliasing is a kind of artifact when a high frequency signal could be confused for a low frequency signal, exactly like we see above with these two sine waves.
+Delving a little more deeply into Sampling theory or Nyquist-Shannon theory, aliasing is a kind of artifact when a high frequency signal could be confused for a low frequency signal, exactly like we see above with these two sine waves.
 For video games, and computer graphics in general, a 'high frequency signal' might seem an abstract concept, but perhaps thinking of it as 'short wavelength' would be more helpful.
 The finer the detail, the higher the frequency, so depending on the sampling rate, you may get aliasing of one kind or another (and there are multiple kinds).
 The sharp edge of a primitive is actually going to be of infinite frequency, because the transition from one state to another (within the primitive to outside it) is infinitely short.

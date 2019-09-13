@@ -30,7 +30,8 @@ This is important because the whole idea is to improve image quality using tempo
 
 What I want to explain about the tent filter is that it is used in more than one step, but in both cases to do the same thing.
 For getting the final color we see for a pixel, it is used like normal to reduce the weighting of pixels farther from the center of the pixel.
-It is also applied for each buffer though, as the sample for each buffer also gets the temporal treatment with the most recent sample being combined with the information from that in the other buffers, using the tent function to appropriately weight them.
+It is also applied for each buffer though, as the sample for each buffer also gets the temporal treatment.
+The most recent sample being combined with the information from that in the other buffers, using the tent function to appropriately weight them.
 As these samples are only to cover a quadrant of the pixel, the tent filter is only large enough to cover the quadrant, effectively ensuring only the nearest samples are used and fed into the function.
 To determine the final pixel color the tent is larger, covering the entire pixel.
 

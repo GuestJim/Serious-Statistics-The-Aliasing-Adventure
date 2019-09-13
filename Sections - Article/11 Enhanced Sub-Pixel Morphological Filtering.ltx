@@ -1,6 +1,6 @@
 \section{Enhanced Sub-Pixel Morphological Filtering, a Combination of Solutions}
 
-Enhanced sub-pixel morphological filtering (SMAA)\supercite{JIMENEZ2012_CGF} is among newest of the methods I have been researching and also appears to be the most advanced, at least of the post-processing methods, but then, it is not always post-processing.
+Enhanced sub-pixel morphological filtering (SMAA)\supercite{JIMENEZ2012_CGF} is among the newest of the methods I have been researching and also appears to be the most advanced, at least of the post-processing methods, but then, it is not always post-processing.
 Just as its name suggest, enhanced sub-pixel morphological filtering applies morphological filtering, which was already covered.
 Its name also indicates it features a number of enhancements over morphological filtering, and indeed it does, making this solution more efficient and accurate, while also preventing some artifacts that can occur with other methods.
 
@@ -18,9 +18,9 @@ This improvement makes the morphological filtering modular and allows it to acce
 
 Temporal super-sampling has already been covered, but it is possible this technology uses a different approach than that described earlier.
 However, we still see it using reprojection to apply previously determined shading information onto the current frame.
-Like what is done with the multi-sampling above though, the offset of these temporal super-samples are used to better inform the morphological filtering.
+Like what is done with the multi-sampling above, the offset of these temporal super-samples are used to better inform the morphological filtering.
 Additionally, tweaks have been made to the temporal super-sampling method to avoid ghosting and other artifacts.
-This includes considering velocity when weighting the temporal sample and also applying the morphological filter to the velocity information as well.
+This includes considering velocity when weighting the temporal sample and applying the morphological filter to the velocity information as well.
 As morphological filtering will blend pixels on both sides of the edge the velocity information is for, there can be artifacting, but this application of the filtering on the velocity information addresses this.
 (Interestingly, this is done in such a way to be free, be placing the information in the alpha or transparency channel of the color buffer, which the filtering will already be run on.)
 
@@ -38,15 +38,14 @@ It is in \href{http://www.overclockersclub.com/reviews/just_cause_4_review/}{\te
 What I discovered were some locations where you could have a view of a railing in the distance and with both None and FXAA as the option, the railing looked broken.
 This is because the diagonal lines of the railing were small enough to be sub-pixel, resulting in polygon popping aliasing, so sections were missing.
 With Temporal SMAA selected though, the railing is connected again.
-While I cannot disable the temporal module here to confirm, my guess is the temporal super-samples are being fed into the morphological module, informing it the diagonal lines of the railing do stretch the entire length.
-This, along with the reprojection I would guess, allows the method to continue the yellow lines across the length, addressing the popping that was otherwise present.
+As I was not moving the camera when I took the screenshots, it is possible this reconstruction of the railings was the result of the morphological engine alone, and the temporal information was not contributing.
+It could also be the case there is a jitter applied, like with amortized super-sampling, catching the sub-pixel detail of the railing.
+Either way, it is able to restore the railing to being connected, as you can see.
 
 %JC4_POPPING
 {\graphicspath{{Screenshots/JC4/}}
 \image{{Just Cause 4 - Popping}}
 }
-
-It is also possible the morphological module is correctly guessing the railings extend the full length, and so is restoring the detail that is otherwise lost.
 
 Before moving on I want to quickly mention another variation of morphological filtering that I have encountered since I started working on this article: CMAA or Conservative Morphological Anti-Aliasing\supercite{CMAA}.
 It was developed by Intel, as was its updated version CMAA2\supercite{CMAA2}, with its original performance and quality target being between FXAA and SMAA.

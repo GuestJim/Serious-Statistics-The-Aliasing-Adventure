@@ -1,345 +1,304 @@
 library(ggplot2)
 #	based on the Python code from https://en.wikipedia.org/wiki/File:AliasingSines.svg
 
-sam1000 = seq(-1, 10, length.out = 1000) + 0.5
-fun1000 = sam1000 * 2 * pi
-sam0010 = -1:10 + 0.5
-fun0010 = sam0010 * 2 * pi
+sin.1	=	function(x)	sin(x * 2 * pi * 0.1)
+sin.9	=	function(x)	sin(x * 2 * pi * 0.9)
 
-FUN9 = function(x) sin((x) * 2 * pi * 0.9)
-FUN9g = function(x) sin((x) * 2 * pi * 0.9) + 1
-FUN1 = function(x) sin((x) * 2 * pi * 0.1)
-FUN1g = function(x) sin((x) * 2 * pi * 0.1) + 1
+samps	=	function(LEN = NULL, BY = NULL, stoc = FALSE, STOC = FALSE, END = 10)	{
+	if	(is.null(LEN)	&	is.null(BY)		&	!stoc)	{
+		out	=	seq(-1, END) + 0.5
+	}
+	if	(!is.null(LEN)	&	is.null(BY)		&	!stoc)	{
+		out	=	seq(-1, END, length.out = LEN) + 0.5
+	}
+	if	(is.null(LEN)	&	!is.null(BY)	&	!stoc)	{
+		# out	=	seq(-1, END, by = BY) + 0.5
+		out	=	c(seq(0, -1, by = -BY), seq(0, END, by = BY)) + 0.5
+		#	I want it to always have the point 0.5
+	}
+	if	(stoc	&	!STOC)	{
+		out	=	stocs
+	}
+	if	(STOC)	{
+		out	=	STOCS(END)
+	}
+	return(unique(sort(out)))
+}
 
-stp0010 = (max(sam0010) - min(sam0010)) / (length(sam0010) - 1)
-stp1000 = (max(sam1000) - min(sam1000)) / (length(sam1000) - 1)
 
-#	makes 1000 samples between 0 and 10
-#		the + 0.5 is needed for ideal alignment
+# sin.9FL	=	function(END = 10, BY = 1, func = mean)	{
+	# mean = box,	TRIAG = triangle,	GAUSS = gaussian
+	# out	=	matrix(seq(-1, END-1/BY, by = 1/BY)+1/(2*BY), ncol = BY, byrow = TRUE)
+	# out	=	apply(sin.9(out), 1, func)
+	# return(out)
+# }
+
+# TRIAG	=	function(DATA)	{
+	# len = length(DATA)
+	# weighted.mean(DATA, 0:(len - 1)/len + 1/(2*len))
+# }
+
+# GAUSS	=	function(DATA)	{
+	# len = length(DATA)
+	# weighted.mean(DATA, pnorm(0:(len - 1)/len + 1/(2*len)))
+# }
+#	nice to have and I think it will work, but I do not want to try incorporating it
+
+if	(interactive())	{
+	setwd("E:/Users/Jim/My Documents/OCC/@Reviews/Serious Statistics AA/@1.1 Stuff")
+}	else	{
+	pdf(NULL)
+}
 
 theme_set(theme_grey(base_size = 22))
-pdf(NULL) #prevents rplots.pdf from being generated
+
+gWIDTH	=	16
+gHEIGH	=	9
+DPI		=	120
+
+customSave	=	function(type="", device=ggdevice, plot = last_plot(), width=gWIDTH, height=gHEIGH, dpi=DPI)	{
+	if	(device	==	"png"	|	device == "both")	{
+		ggsave(filename=paste0("Alias Example - ", type, ".png"), plot = plot, device="png", width=width, height=height, dpi=dpi)
+	}
+	if	(device	==	"pdf"	|	device == "both")	{
+		ggsave(filename=paste0("Alias Example - ", type, ".pdf"), plot = plot, device="pdf", width=width, height=height)
+	}
+}
+
+
+POINTS		=	function(LEN = NULL, BY = NULL, stoc = FALSE, OFF = 0, CLR = "magenta", END = 10)	{
+	geom_point(	data = data.frame(x = samps(LEN = LEN, BY = BY, stoc = stoc, END = END) + OFF), aes(x, y = sin.9(x)), color = CLR, size = 2)
+}
+LINES		=	function(LEN = NULL, BY = NULL, stoc = FALSE, OFF = 0, lineCLR = "black", lineSIZE = 0, END = 10)		{
+	geom_path(	data = data.frame(x = samps(LEN = LEN, BY = BY, stoc = stoc, END = END) + OFF), aes(x, y = sin.9(x)), color = lineCLR, size = lineSIZE)
+}
+RUG			=	function(LEN = NULL, BY = NULL, stoc = FALSE, OFF = 0, CLR = "magenta", END = 10)	{
+	geom_rug(data = data.frame(x = samps(LEN = LEN, BY = BY, stoc = stoc, END = END) + OFF), aes(x), color = CLR, size = 1)
+}
+
+COMBINED	=	function(LEN = NULL, BY = NULL, stoc = FALSE, OFF = 0, CLR = "magenta", lineCLR = "black", lineSIZE = 0, END = 10)	{
+	list(
+		LINES(	LEN = LEN, BY = BY, stoc = stoc, OFF = OFF, lineCLR = lineCLR, lineSIZE = lineSIZE, END = END),
+		POINTS(	LEN = LEN, BY = BY, stoc = stoc, OFF = OFF, CLR = CLR, END = END),
+		RUG(	LEN = LEN, BY = BY, stoc = stoc, OFF = OFF, CLR = CLR, END = END)
+	)
+	#	separate layers can be added as a list like this
+}
+
+FUN	=	function(func, samples = 5000, CLR)	{
+	stat_function(aes(x = samps()), fun = func, n = samples, color = CLR) 
+}
+
+GRAD	=	function(func = sin.9, LEN = NULL, BY = NULL, stoc = FALSE, STOC = FALSE, OFF = 0, hOFF = 0, vOFF = 0, WID = 1, CLR = "black", END = 10)	{
+	list(
+		geom_rect(aes(
+				xmin	=	min(samps(LEN = LEN, BY = BY, END = END)) - hOFF - WID / 2,
+				xmax	=	max(samps(LEN = LEN, BY = BY, END = END)) + hOFF + WID / 2,
+				ymin	=	-1 - vOFF,
+				ymax	=	-1 - 0.25 - vOFF	),
+			fill = "white",
+			color = "black"
+			),
+		geom_rect(aes(
+				xmin	=	samps(LEN = LEN, BY = BY, END = END) - hOFF - WID / 2,
+				xmax	=	samps(LEN = LEN, BY = BY, END = END) + hOFF + WID / 2,
+				ymin	=	-1 - 0 - vOFF,
+				ymax	=	-1 - 0.25 - vOFF	),
+			alpha	=	(func(samps(LEN = LEN, BY = BY, stoc = stoc, STOC = STOC, END = END) + OFF) / 2 + 0.5),
+			fill	=	CLR
+			)
+	)
+}
+
+scales	=	list(
+	scale_x_continuous(breaks = 0:10, name = "X"),
+	scale_y_continuous(breaks = -2:2/2, name = "Y"),
+	coord_cartesian(xlim = c(-1, 11))
+	)
+
+THEME	=	theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
+
+
+COMBINED	=	function(LEN = NULL, BY = NULL, stoc = FALSE, OFF = 0, CLR = "magenta", lineCLR = "black")	{
+	list(
+		LINES(		stoc = stoc),
+		POINTS(		stoc = stoc),
+		RUG(		stoc = stoc)
+	)
+	#	separate layers can be added as a list like this
+}
+
+
+#Samples
+ggplot() + 
+COMBINED(	) + 
+scales + THEME
+
+customSave("Sine Samples", "both")
 
 ggplot() + 
-geom_rug(aes(x =sam0010), color = "magenta", size = 1) + 
-geom_path(aes(x=sam0010, y = sin(fun0010 * 0.9))) +
-geom_point(aes(x=sam0010, y = sin(fun0010 * 0.9)), color = "magenta", size = 3) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + scale_y_continuous(name="Y") +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
+GRAD(		) + 
+COMBINED(	) + 
+scales + THEME
 
-ggsave(filename="Alias Example - Sin Samples.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Samples.png", device="png", width=16, height=9)
+customSave("Sine Samples - Grad", "both")
+
+#Samples + Sin 0.1
+ggplot() + 
+FUN(sin.1, 10000, "red") +
+COMBINED(	END = 20) + 
+scales + THEME
+
+customSave("Sine Samples - 0.1", "both")
 
 ggplot() + 
-geom_rug(aes(x = sam0010), color = "magenta", size = 1) + 
-geom_path(aes(x=sam0010, y = sin(fun0010 * 0.9) + 1)) +
-geom_rect(aes(xmin = min(sam0010) - 0.5, xmax = max(sam0010) + 0.5, ymin = -0.25, ymax = 0), fill = "white") + 
-geom_col(aes(x = sam0010, y = -0.25), width = stp0010, fill = "black", alpha = (sin(fun0010 * 0.9) / 2 + 0.5)) +
-geom_point(aes(x=sam0010, y = sin(fun0010 * 0.9) + 1), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) +
-scale_y_continuous(name="Y", breaks = c(0, 0.5, 1, 1.5, 2), labels = c("-1.0", "-0.5", "0.0", "0.5", "1.0")) +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
+GRAD(		vOFF = 0.25) + 
+GRAD(		func = sin.1, LEN = 10000, WID = 11/10000, CLR = "red") + 
+FUN(sin.1, 10000, "red") +
+COMBINED(	) + 
+scales + THEME
 
-ggsave(filename="Alias Example - Sin Samples 0.1 - Grad.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Samples 0.1 - Grad.png", device="png", width=16, height=9)
+customSave("Sine Samples - 0.1 - Grad", "both")
+
+#Samples + Sin 0.9
+ggplot() + 
+FUN(sin.9, 10000, "blue") +
+COMBINED(	) + 
+scales + THEME
+
+customSave("Sine Samples - 0.9", "both")
 
 ggplot() + 
-#geom_rug(aes(x = sam1000), color = "magenta", size = 0.25) + 
-geom_path(aes(x=sam1000, y = sin(fun1000 * 0.9) + 1), color = "blue") +
-geom_rect(aes(xmin = min(sam1000) - stp1000/2, xmax = max(sam1000) + stp1000/2, ymin = -0.25, ymax = 0), fill = "white") + 
-geom_col(aes(x = sam1000, y = -0.25), width = stp1000, fill = "black", alpha = (sin(fun1000 * 0.9) / 2 + 0.5)) +
-#geom_point(aes(x=sam1000, y = sin(fun1000 * 0.9) + 1), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) +
-scale_y_continuous(name="Y", breaks = c(-1, -0.5, 0, 0.5, 1) + 1, labels = c("-1.0", "-0.5", "0.0", "0.5", "1.0")) +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
+GRAD(		vOFF = 0.25) + 
+GRAD(		func = sin.9, LEN = 10000, WID = 11/10000, CLR = "blue") + 
+FUN(sin.9, 10000, "blue") +
+COMBINED(	) + 
+scales + THEME
 
-ggsave(filename="Alias Example - Sin Samples 0.9 - Grad.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Samples 0.9 - Grad.png", device="png", width=16, height=9)
+customSave("Sine Samples - 0.9 - Grad", "both")
 
-ggplot() + 
-#geom_vline(xintercept = (0:10 + 0.5), alpha=0.25) + 
-geom_rug(aes(x = -1:10 + 0.5), color = "magenta", size = 1) + 
-geom_path(aes(x=sam0010, y = sin(fun0010 * 0.1))) +
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN1, n = 10000, color = "red") + 
-#geom_path(aes(x=sam1000, y = sin(fun1000 * 0.1)), color = "red") + 
-#geom_path(aes(x=sam1000, y = sin(fun1000 * 0.9)), color = "blue") +
-geom_point(aes(x=sam0010, y = sin(fun0010 * 0.1)), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + scale_y_continuous(name="Y") +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
 
-ggsave(filename="Alias Example - Sin Waves - 0.1.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Samples 0.1.png", device="png", width=16, height=9)
+#Sine Waves
+ggplot() +
+FUN(sin.1, 10000, "red") +
+FUN(sin.9, 10000, "blue") +
+COMBINED() + 
+scales + THEME
 
-ggplot() + 
-#geom_vline(xintercept = (0:10 + 0.5), alpha=0.25) + 
-geom_rug(aes(x = -1:10 + 0.5), color = "magenta", size = 1) + 
-geom_path(aes(x=sam0010, y = sin(fun0010 * 0.1))) +
-#stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN1, n = 10000, color = "red") +
-#geom_path(aes(x=sam1000, y = sin(fun1000 * 0.1)), color = "red") + 
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN9, n = 10000, color = "blue") + 
-#geom_path(aes(x=sam1000, y = sin(fun1000 * 0.9)), color = "blue") +
-geom_point(aes(x=sam0010, y = sin(fun0010 * 0.1)), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + scale_y_continuous(name="Y") +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
+customSave("Sine Waves", "both")
 
-ggsave(filename="Alias Example - Sin Waves - 0.9.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Samples 0.9.png", device="png", width=16, height=9)
 
-ggplot() + 
-#geom_vline(xintercept = (0:10 + 0.5), alpha=0.25) + 
-geom_rug(aes(x = -1:10 + 0.5), color = "magenta", size = 1) + 
-geom_path(aes(x=sam0010, y = sin(fun0010 * 0.1))) +
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN1, n = 10000, color = "red") + 
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN9, n = 10000, color = "blue") +
-geom_point(aes(x=sam0010, y = sin(fun0010 * 0.1)), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + scale_y_continuous(name="Y") +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
+ggplot() +
+GRAD(	func = sin.1,	LEN = 10000,	WID = 11/10000,				CLR = "red") + 
+GRAD(													vOFF = 0.25) + 
+GRAD(	func = sin.9,	LEN = 10000,	WID = 11/10000,	vOFF = 0.5,	CLR = "blue") + 
+FUN(sin.1, 10000, "red") +
+FUN(sin.9, 10000, "blue") +
+COMBINED() + 
+scales + THEME
 
-ggsave(filename="Alias Example - Sin Waves.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Waves.png", device="png", width=16, height=9)
+customSave("Sine Waves - Grad", "both")
+
+#	Offsets with legend
+ggplot() +
+GRAD(		OFF = -0.25, 				CLR = "red") + 
+GRAD(					vOFF = 0.25,	CLR = "magenta") + 
+GRAD(		OFF = 0.25,	vOFF = 0.5,	CLR = "cyan") + 
+COMBINED(	OFF = -0.25,	CLR = "red",	lineCLR = "darkgrey") +
+COMBINED(	) + 
+COMBINED(	OFF = 0.25,		CLR = "cyan",	lineCLR = "darkgrey") + 
+scales + THEME + 
+scale_color_manual(guide = "legend", name = "Offset", values = c("0" = "magenta", "+0.25" = "cyan", "-0.25" = "red"), labels = c("+0.25", "0", "-0.25")) + 
+#	for this to work I am adding generic points with the aesthetics including a color so the scale will work
+geom_point(aes(x = -Inf, y = -Inf, color = "-0.25")) +
+geom_point(aes(x = -Inf, y = -Inf, color = "0")) +
+geom_point(aes(x = -Inf, y = -Inf, color = "+0.25")) +
+geom_point(aes(x = -Inf, y = -Inf), color = "#dfdfdf")
+#	this last one covers the points
+
+customSave("Temporal", "both")
+
+LEN	=	4096
+END	=	48
 
 ggplot() + 
-geom_rug(aes(x = -1:10 + 0.5), color = "magenta", size = 1) + 
-geom_rect(aes(xmin = min(sam1000) - stp1000/2, xmax = max(sam1000) + stp1000/2, ymin = -0.75, ymax = -0.5), fill = "white") + 
-geom_col(aes(x = sam1000, y = -0.75), width = stp1000, fill = "blue", alpha = (sin(fun1000 * 0.9) / 2 + 0.5)) +
+GRAD(		func = sin.1,	LEN = LEN,		WID = (END + 1)/LEN,	vOFF = 0.00,	CLR = "red",	END = END) + 
+GRAD(		BY = 1.0,						WID = 1.0,				vOFF = 0.25,					END = END) +
+GRAD(		BY = 0.5,						WID = 0.5,				vOFF = 0.50,					END = END) +
+GRAD(		BY = (1/0.9)/2,					WID = (1/0.9)/2,		vOFF = 0.75,					END = END) +
+GRAD(		BY = (1/0.9)/4,					WID = (1/0.9)/4,		vOFF = 1.00,					END = END) +
+GRAD(		func = sin.9,	LEN = LEN,		WID = (END + 1)/LEN,	vOFF = 1.25,	CLR = "blue",	END = END) + 
+scale_x_continuous(name = NULL, breaks = NULL) + 
+scale_y_continuous(name = NULL, breaks = -(0:5/4)-1.125, labels = c(
+	"sin(0.1x + .5)",
+	"Width: 1.0",
+	"Width: 0.5",
+	"Width: 0.5556",
+	"Width: 0.2778",
+	"sin(0.9x + .5)"
+)) + coord_cartesian(expand = FALSE) + 
+THEME + theme(axis.text.y=element_text(hjust = 0))
 
-geom_rect(aes(xmin = min(sam0010) - 0.49, xmax = max(sam0010) + 0.49, ymin = -0.5, ymax = -0.25), fill = "white") + 
-geom_rect(aes(xmin = sam0010 - stp0010/2, xmax = sam0010 + stp0010/2, ymin = -0.5, ymax = -0.25), fill = "black", alpha = (sin(fun0010 * 0.9) / 2 + 0.5)) + 
-#geom_col(aes(x = sam0010, y = -0.5), width = stp0010, fill = "black", alpha = (sin(fun0010 * 0.9) / 2 + 0.5)) +
+customSave("Rate Comparison", "both")
 
-geom_rect(aes(xmin = min(sam1000) - stp1000/2, xmax = max(sam1000) + stp1000/2, ymin = -0.25, ymax = 0), fill = "white") + 
-geom_col(aes(x = sam1000, y = -0.25), width = stp1000, fill = "red", alpha = (sin(fun1000 * 0.1) / 2 + 0.5)) +
+#	Nyquist stuff, just use BY
+NS = (1/0.9)/2
+NS = (1/0.9)/1.25
+NS = 1
 
-geom_path(aes(x=sam0010, y = sin(fun0010 * 0.1) + 1)) +
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN1g, n = 10000, color = "red") + 
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN9g, n = 10000, color = "blue") +
-geom_point(aes(x=sam0010, y = sin(fun0010 * 0.1) + 1), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + 
-scale_y_continuous(name="Y", breaks = c(0, 0.5, 1, 1.5, 2), labels = c("-1.0", "-0.5", "0.0", "0.5", "1.0")) +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
+NyquistGraph	=	function(NS)	{
+	ggplot() + 
+	GRAD(		BY = NS,						WID = NS, END = 10) +
+	GRAD(		func = sin.9,	LEN = 10000,	WID = 11/10000,	vOFF = 0.25,	CLR = "blue", END = 10) + 
+	FUN(sin.9, 10000, "blue") +
+	COMBINED(	BY = NS, lineSIZE = 1.5) +
+	scales + THEME
+}
+NyquistGraph(0.75)
 
-ggsave(filename="Alias Example - Sin Waves - Grad.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Waves - Grad.png", device="png", width=16, height=9)
-#	manually edit the graphic here, so the height of the sample gradient is correct
+customSave("Nyquist - Rate", "both",	NyquistGraph(1/(0.9*2)))
+customSave("Nyquist - Rate x2", "both",	NyquistGraph(1/(0.9*4)))
 
-sin((0:10 + 0.5) * 2*pi * 0.1)
-sin((0:10 + 0.5) * 2*pi * 0.9)
+#	Stochastic
+STOCS	=	function(END = 10)	{
+	-1:END + 0.5 + runif(2 + END, -0.5, 0.5)
+}
 
-round(sin((0:10 + 0.5) * 2*pi * 0.1) - sin((0:10 + 0.5) * 2*pi * 0.9), 14)
-#	going to more than 14 decimal places does show the differences
+END	=	1694/2
+LEN	=	1694*3
+END	=	360		#	original value used
 
-samPP25 = seq(-1, 10) + 0.5 + 0.25
-funPP25 = samPP25 * 2 * pi
-
-samPN25 = seq(-1, 10) + 0.5 - 0.25
-funPN25 = samPN25 * 2 * pi
-
-ggplot() + 
-scale_color_manual(guide = "legend", values = c("-0.25" = "red", "0" = "magenta",  "+0.25" = "cyan" ), breaks = c("-0.25", "0", "+0.25"), labels = c("-0.25", "0", "+0.25")) + 
-geom_rug(aes(x = samPP25), color = "cyan", size = 2) + 
-geom_rug(aes(x = sam0010), color = "magenta", size = 2) + 
-geom_rug(aes(x = samPN25), color = "red", size = 2) + 
-geom_path(aes(x=samPP25, y = sin(funPP25 * 0.9)), color = "gray") +
-geom_point(aes(x=samPP25, y = sin(funPP25 * 0.9), color = "+0.25"), size = 2) + 
-geom_path(aes(x=samPN25, y = sin(funPN25 * 0.9)), color = "gray") +
-geom_point(aes(x=samPN25, y = sin(funPN25 * 0.9), color = "-0.25"), size = 2) + 
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN1, n = 10000, color = "black") + 
-geom_point(aes(x=sam0010, y = sin(fun0010 * 0.9), color = "0"), size = 2) +
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + scale_y_continuous(name="Y") + labs(color = "Offset") + 
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
-
-ggsave(filename="Alias Example - Sin Popping.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Popping.png", device="png", width=16, height=9)
-
-ggplot() + 
-scale_color_manual(guide = "legend", values = c("-0.25" = "red", "0" = "magenta",  "+0.25" = "cyan" ), breaks = c("-0.25", "0", "+0.25"), labels = c("-0.25", "0", "+0.25")) + 
-geom_rug(aes(x = samPP25), color = "cyan", size = 2) + 
-geom_rug(aes(x = sam0010), color = "magenta", size = 2) + 
-geom_rug(aes(x = samPN25), color = "red", size = 2) + 
-
-geom_rect(aes(xmin = min(sam0010) - 0.5, xmax = max(sam0010) + 0.5, ymin = -0.75, ymax = -0.5), fill = "white") + 
-geom_col(aes(x = samPP25 - 0.25, y = -0.75), width = stp0010, fill = "cyan", alpha = (sin(funPP25 * 0.9) / 2 + 0.5)) +
-
-geom_rect(aes(xmin = min(sam0010) - 0.5, xmax = max(sam0010) + 0.5, ymin = -0.5, ymax = -0.25), fill = "white") + 
-geom_col(aes(x = sam0010, y = -0.5), width = stp0010, fill = "magenta", alpha = (sin(fun0010 * 0.9) / 2 + 0.5)) +
-
-geom_rect(aes(xmin = min(sam0010) - 0.5, xmax = max(sam0010) + 0.5, ymin = -0.25, ymax = 0), fill = "white") + 
-geom_col(aes(x = samPN25 + 0.25, y = -0.25), width = stp0010, fill = "red", alpha = (sin(funPN25 * 0.9) / 2 + 0.5)) +
-#	above are the gradients
-geom_point(aes(x=samPP25, y = sin(funPP25 * 0.9) + 1, color = "+0.25"), size = 2) + 
-geom_point(aes(x=sam0010, y = sin(fun0010 * 0.9) + 1, color = "0"), size = 2) +
-geom_point(aes(x=samPN25, y = sin(funPN25 * 0.9) + 1, color = "-0.25"), size = 2) + 
-geom_path(aes(x=samPP25, y = sin(funPP25 * 0.9) + 1), color = "gray") +
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN1g, n = 10000, color = "black") + 
-geom_path(aes(x=samPN25, y = sin(funPN25 * 0.9) + 1), color = "gray") +
-#	above are the plots
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + labs(color = "Offset") + 
-scale_y_continuous(name="Y", breaks = c(-1, -0.5, 0, 0.5, 1) + 1, labels = c("-1.0", "-0.5", "0.0", "0.5", "1.0")) +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
-
-ggsave(filename="Alias Example - Sin Popping - Grad.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Popping - Grad.png", device="png", width=16, height=9)
-
-
-SUPsam = data.frame(c(samPN25, sam0010, samPP25), sin(c(funPN25, fun0010, funPP25) * 0.9))
-colnames(SUPsam) = c("x", "y")
-SUPsam = SUPsam[order(SUPsam$x),]
-
-ggplot() + 
-scale_color_manual(guide = "legend", values = c("0" = "magenta", "+0.25" = "cyan", "-0.25" = "red"), labels = c("-0.25", "+0.25", "0")) + 
-geom_rug(aes(x = -1:10 + 0.5 + 0.25), color = "cyan", size = 2) + 
-geom_rug(aes(x = -1:10 + 0.5), color = "magenta", size = 2) + 
-geom_rug(aes(x = -1:10 + 0.5 - 0.25), color = "red", size = 2) + 
-geom_path(aes(x=SUPsam$x, y = SUPsam$y), color = "black", size = 1) + 
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN9, n = 10000, color = "blue") + 
-geom_point(aes(x=samPP25, y = sin(funPP25 * 0.9), color = "+0.25"), size = 2) + 
-geom_point(aes(x=samPN25, y = sin(funPN25 * 0.9), color = "-0.25"), size = 2) + 
-geom_point(aes(x=sam0010, y = sin(fun0010 * 0.9), color = "0"), size = 2) +
-#geom_point(aes(x=sam0010, y = sin(fun0010 * 0.9), color = "0"), size = 2) +
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + scale_y_continuous(name="Y") + labs(color = "Offset") + 
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
-
-ggsave(filename="Alias Example - Sin Super.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Super.png", device="png", width=16, height=9)
-
-#	The below shows the Nyquist Limit, with NY50 being below the limit, and NY45 being the limit
-samNY50 = seq(-1, 10, 0.5) + 0.5
-funNY50 = samNY50 * 2 * pi
-
-ggplot() + 
-#geom_vline(xintercept = (0:10 + 0.5), alpha=0.25) + 
-geom_rug(aes(x = samNY50), color = "magenta", size = 1) + 
-#geom_path(aes(x=sam1000, y = sin(fun1000 * 0.9)), color = "blue", size = 1.5) +
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN9, n = 10000, color = "blue", size = 1.5) + 
-#geom_path(aes(x=sam1000, y = sin(fun1000 * 0.1)), color = "red", size = 1) +
-#geom_path(aes(x=sam1000, y = -sin(fun1000 * 0.1)), color = "red", size = 1) +
-geom_path(aes(x=samNY50, y = sin(funNY50 * 0.9)), size = 2) +
-geom_point(aes(x=samNY50, y = sin(funNY50 * 0.9)), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + scale_y_continuous(name="Y") +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
-
-ggsave(filename="Alias Example - Sin Nyquist 50.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Nyquist 50.png", device="png", width=16, height=9)
-
-
-ggplot() + 
-#geom_vline(xintercept = (0:10 + 0.5), alpha=0.25) + 
-geom_rug(aes(x = samNY50), color = "magenta", size = 1) + 
-
-geom_rect(aes(xmin = min(sam1000) - stp1000/2, xmax = max(sam1000) + stp1000/2, ymin = -0.5, ymax = -0.25), fill = "white") + 
-geom_col(aes(x = sam1000, y = -.5), width = stp1000, fill = "blue", alpha = (sin(fun1000 * 0.9) / 2 + 0.5)) +
-
-geom_rect(aes(xmin = min(samNY50) - 0.25, xmax = max(samNY50) + 0.25, ymin = -0.25, ymax = 0), fill = "white") + 
-geom_col(aes(x = samNY50, y = -0.25), width = 0.5, fill = "black", alpha = (sin(funNY50 * 0.9) / 2 + 0.5)) +
-
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN9g, n = 10000, color = "blue", size = 1.5) + 
-geom_path(aes(x=samNY50, y = sin(funNY50 * 0.9) + 1), size = 2) +
-geom_point(aes(x=samNY50, y = sin(funNY50 * 0.9) + 1), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + 
-scale_y_continuous(name="Y", breaks = c(-1, -0.5, 0, 0.5, 1) + 1, labels = c("-1.0", "-0.5", "0.0", "0.5", "1.0")) +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
-
-ggsave(filename="Alias Example - Sin Nyquist 50 - Grad.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Nyquist 50 - Grad.png", device="png", width=16, height=9)
-
-
-samNY45 = seq(-1, 10, 0.45) + 0.5
-funNY45 = samNY45 * 2 * pi
-
-ggplot() + 
-#geom_vline(xintercept = (0:10 + 0.5), alpha=0.25) + 
-geom_rug(aes(x = samNY45), color = "magenta", size = 1) + 
-#geom_path(aes(x=sam1000, y = sin(fun1000 * 0.9)), color = "blue", size = 2) +
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN9, n = 10000, color = "blue", size = 2) + 
-geom_path(aes(x=samNY45, y = sin(funNY45 * 0.9)), size = 2) +
-geom_point(aes(x=samNY45, y = sin(funNY45 * 0.9)), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + scale_y_continuous(name="Y") +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
-
-ggsave(filename="Alias Example - Sin Nyquist 45.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Nyquist 45.png", device="png", width=16, height=9)
+store = STOCS(END)
+stocs = store[1:362]	#	for use with END = 360	
+stocs = store
 
 
 ggplot() + 
-geom_rug(aes(x = samNY45), color = "magenta", size = 1) + 
+GRAD(		func = sin.1,	LEN = LEN,		WID = (END + 1)/LEN,	vOFF = 0.00,	CLR = "red",	END = END) + 
+GRAD(		BY = 1.0,						WID = 1.0,				vOFF = 0.25,					END = END) +
+GRAD(		stoc = TRUE,											vOFF = 0.50,					END = END) +
+GRAD(		func = sin.9,	LEN = LEN,		WID = (END + 1)/LEN,	vOFF = 0.75,	CLR = "blue",	END = END) + 
+scale_x_continuous(name = NULL, breaks = NULL) + 
+scale_y_continuous(name = NULL, breaks = -(0:3/4)-1-0.125, labels = c(
+	"sin(0.1x + .5)",
+	"Width: 1", 
+	"Stochastic",
+	"sin(0.9x + .5)"
+)) + coord_cartesian(expand = FALSE) + 
+THEME + theme(axis.text.y=element_text(hjust = 0))
 
-geom_rect(aes(xmin = min(sam1000) - stp1000/2, xmax = max(sam1000) + stp1000/2, ymin = -0.5, ymax = -0.25), fill = "white") + 
-geom_col(aes(x = sam1000, y = -.5), width = stp1000, fill = "blue", alpha = (sin(fun1000 * 0.9) / 2 + 0.5)) +
+customSave("Stochastic Comparison", "both")							#	with END = 360
+customSave("Stochastic Comparison - Pixel", "both", height = 1.5)	#	with END = 1694/2
 
-geom_rect(aes(xmin = min(samNY45) - 0.225, xmax = max(samNY45) + 0.225, ymin = -0.25, ymax = 0), fill = "white") + 
-geom_col(aes(x = samNY45, y = -0.25), width = 0.45, fill = "black", alpha = (sin(funNY45 * 0.9) / 2 + 0.5)) +
-
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN9g, n = 10000, color = "blue", size = 2) + 
-geom_path(aes(x=samNY45, y = sin(funNY45 * 0.9) + 1), size = 2) +
-geom_point(aes(x=samNY45, y = sin(funNY45 * 0.9) + 1), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) + 
-scale_y_continuous(name="Y", breaks = c(-1, -0.5, 0, 0.5, 1) + 1, labels = c("-1.0", "-0.5", "0.0", "0.5", "1.0")) +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
-
-ggsave(filename="Alias Example - Sin Nyquist 45 - Grad.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Nyquist 45 - Grad.png", device="png", width=16, height=9)
-
-
-#	Stochastic sampling		add random offsets
-runif(10, -0.5, 0.5)
-#	generates 10 random numbers from -0.5 to 0.5
-
-samRand = -1:10 + 0.5 + runif(12, -0.5, 0.5)
-funRand = samRand * 2 * pi
-
+#	to make a comparison of multiple stochastic placements, save the plots to variables, and then combine them
+#		saving the plots this way protects them from changes
+stocs = store[1:12]
 ggplot() + 
-geom_rug(aes(x = samRand), color = "magenta", size = 1) + 
-geom_rug(aes(x = sam0010), color = "cyan", size = 1) + 
+GRAD(		BY = 1.0,						WID = 1.0,				vOFF = 0.00,					END = END) +
+GRAD(		stoc = TRUE,											vOFF = 0.25) +
+GRAD(		func = sin.9,	LEN = LEN,		WID = (END + 1)/LEN,	vOFF = 0.50,	CLR = "blue",	END = END) + 
+COMBINED(	stoc = TRUE) +
+FUN(sin.9, 10000, "blue") +
+scales + THEME
 
-geom_rect(aes(xmin = min(sam1000) - stp1000/2, xmax = max(sam1000) + stp1000/2, ymin = -0.75, ymax = -0.5), fill = "white") + 
-geom_col(aes(x = sam1000, y = -0.75), width = stp1000, fill = "blue", alpha = (sin(fun1000 * 0.9) / 2 + 0.5)) +
-
-geom_rect(aes(xmin = min(sam0010) - 0.5, xmax = max(sam0010) + 0.5, ymin = -0.5, ymax = -0.25), fill = "white") + 
-geom_col(aes(x = sam0010, y = -0.5), width = stp0010, fill = "black", alpha = (sin(funRand * 0.9) / 2 + 0.5)) +
-
-geom_rect(aes(xmin = min(sam0010) - 0.5, xmax = max(sam0010) + 0.5, ymin = -0.25, ymax = 0), fill = "white") + 
-geom_col(aes(x = sam0010, y = -0.25), width = stp0010, fill = "red", alpha = (sin(fun0010 * 0.9) / 2 + 0.5)) +
-
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN1g, n = 10000, color = "red", size = 2) + 
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN9g, n = 10000, color = "blue", size = 2) +
-geom_point(aes(x=sam0010, y = sin(fun0010 * 0.9) + 1), color = "cyan", size = 2) + 
-geom_path(aes(x=samRand, y = sin(funRand * 0.9) + 1), size = 2) +
-geom_point(aes(x=samRand, y = sin(funRand * 0.9) + 1), color = "magenta", size = 2) + 
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) +
-scale_y_continuous(name="Y", breaks = c(-1, -0.5, 0, 0.5, 1) + 1, labels = c("-1.0", "-0.5", "0.0", "0.5", "1.0")) +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
-
-ggsave(filename="Alias Example - Sin Rand 100.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Rand 100.png", device="png", width=16, height=9)
-
-#comparing NYquist 50 to Stochastic
-Samstep = 0.5
-samRand = seq(-1, 10, Samstep) + 0.5
-samRand = samRand + runif(length(samRand), -Samstep/2, Samstep/2)
-funRand = samRand * 2 * pi
-
-ggplot() + 
-geom_rug(aes(x = samRand), color = "magenta", size = 1) + 
-geom_rug(aes(x = samNY50), color = "cyan", size = 1) + 
-
-geom_rect(aes(xmin = min(sam1000) - stp1000/2, xmax = max(sam1000) + stp1000/2, ymin = -0.75, ymax = -0.5), fill = "white") + 
-geom_col(aes(x = sam1000, y = -0.75), width = stp1000, fill = "blue", alpha = (sin(fun1000 * 0.9) / 2 + 0.5)) +
-
-geom_rect(aes(xmin = min(samNY50) - 0.25, xmax = max(samNY50) + 0.25, ymin = -0.5, ymax = -0.25), fill = "white") + 
-geom_col(aes(x = samNY50, y = -0.5), width = Samstep, fill = "black", alpha = (sin(funRand * 0.9) / 2 + 0.5)) +
-
-geom_rect(aes(xmin = min(samNY50) - 0.25, xmax = max(samNY50) + 0.25, ymin = -0.25, ymax = 0), fill = "white") + 
-geom_col(aes(x = samNY50, y = -0.25), width = Samstep, fill = "red", alpha = (sin(funNY50 * 0.9) / 2 + 0.5)) +
-
-geom_path(aes(x=samNY50, y = sin(funNY50 * 0.9) + 1), size = 1, color = "red") +
-stat_function(data = data.frame(x = 0), mapping = aes(x = x), fun = FUN9g, n = 10000, color = "blue", size = 1) +
-geom_point(aes(x=samNY50, y = sin(funNY50 * 0.9) + 1), size = 2, color = "cyan") + 
-geom_path(aes(x=samRand, y = sin(funRand * 0.9) + 1), size = 2) +
-geom_point(aes(x=samRand, y = sin(funRand * 0.9) + 1), color = "magenta", size = 2) + 
-
-scale_x_continuous(breaks = (0:10), name="X", limits = c(-1, 11)) +
-scale_y_continuous(name="Y", breaks = c(-1, -0.5, 0, 0.5, 1) + 1, labels = c("-1.0", "-0.5", "0.0", "0.5", "1.0")) +
-theme(panel.background = element_blank(), plot.background = element_rect(fill = "#dfdfdf"))
-
-ggsave(filename="Alias Example - Sin Rand 50 - Grad.pdf", device="pdf", width=16, height=9)
-ggsave(filename="Alias Example PNGs\\Alias Example - Sin Rand 50 - Grad.png", device="png", width=16, height=9)
+customSave("Stochastic", "both")

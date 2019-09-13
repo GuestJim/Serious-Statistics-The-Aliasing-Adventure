@@ -11,7 +11,7 @@ At this point, the image is re-sampled, so the offset pixels are, to some degree
 Basically the edges are smudged to remove the aliasing, but this is not all as a low-pass filter is also applied, if sub-pixel aliasing, like polygon popping, is present enough.
 A low-pass allows lower-frequency signals to get through, so applying it to an image means any sharply discontinuous feature will be removed, as these are high-frequency objects.
 If you remember back to the sine waves I shared earlier, a low-pass filter might remove the $y = sin(0.9 * x + 0.5)$ function but it would keep the $y = sin(0.1 * x + 0.5)$ function.
-In this specific case, the filter will use a low-pass value derived from a box filter of the 3x3 pixel neighborhood.
+In the case of fast approximate filtering, it filter will use a low-pass value derived from a box filter of the 3x3 pixel neighborhood.
 A box filter has no weighting based on distance, so all of the samples are just averaged together.
 
 While this method works and is fast, because it only works with as many samples as there are pixels, it only seeks out edges to blur and then sharp and small features (high frequency features) to remove.

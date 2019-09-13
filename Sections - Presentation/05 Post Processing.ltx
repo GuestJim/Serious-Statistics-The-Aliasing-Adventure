@@ -22,7 +22,7 @@
 		\item	Fast Approximate (FXAA)\supercite{FXAA} focuses on speed over accuracy
 		\begin{itemize}
 			\item	finds edges, applies a perpendicular sub-pixel shift, and resamples
-			\item	does have an early exit to protect some edges, and quality levels
+			\item	features multiple quality levels and early exit to protect some edges
 			\item	has low-pass filter to remove/reduce high frequency details
 		\end{itemize}	
 	\end{itemize}
@@ -41,10 +41,10 @@
 			
 			\item	Modular design
 			\begin{itemize}
-				\item	SMAA ~1x - morphological engine only
+				\item	SMAA \ 1x - morphological engine only
 				\item	SMAA T2x - SMAA 1x with two temporal super-samples
 				\item	SMAA S2x - SMAA 1x with two spatial multi-samples
-				\item	SMAA ~4x - SMAA 1x + SMAA T2x + SMAA S2x
+				\item	SMAA \ 4x - SMAA 1x + SMAA T2x + SMAA S2x
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}

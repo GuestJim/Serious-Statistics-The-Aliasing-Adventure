@@ -1,0 +1,74 @@
+Serious Statistics: The Aliasing Adventure
+Render Time
+
+Mean
+          AA       Mean Median
+        None FPS 304.82 313.09
+     SSAA 2x FPS 114.02 122.01
+     SSAA 4x FPS  65.99  71.46
+    FXAA Low FPS 286.76 288.68
+ FXAA Medium FPS 288.33 291.29
+   FXAA High FPS 276.85 280.03
+  FXAA Ultra FPS 273.96 275.41
+     MSAA 2x FPS 222.82 226.96
+     MSAA 4x FPS 218.14 224.01
+     MSAA 8x FPS 211.90 219.35
+        None  ms   3.28   3.19
+     SSAA 2x  ms   8.77   8.20
+     SSAA 4x  ms  15.15  13.99
+    FXAA Low  ms   3.49   3.46
+ FXAA Medium  ms   3.47   3.43
+   FXAA High  ms   3.61   3.57
+  FXAA Ultra  ms   3.65   3.63
+     MSAA 2x  ms   4.49   4.41
+     MSAA 4x  ms   4.58   4.46
+     MSAA 8x  ms   4.72   4.56
+
+Percentiles
+          AA       0.1%     1%    99%  99.9%
+        None FPS 442.34 419.82 193.31 182.28
+     SSAA 2x FPS 172.06 167.17  71.40  64.22
+     SSAA 4x FPS 104.52 101.69  40.03  36.53
+    FXAA Low FPS 433.58 414.59 189.72 178.06
+ FXAA Medium FPS 417.50 408.66 190.33 182.73
+   FXAA High FPS 431.41 406.67 180.38 170.00
+  FXAA Ultra FPS 399.10 385.65 182.75 175.84
+     MSAA 2x FPS 326.26 310.92 160.10 148.98
+     MSAA 4x FPS 313.27 288.14 156.61 145.17
+     MSAA 8x FPS 306.23 277.47 151.93 144.58
+        None  ms   2.26   2.38   5.17   5.49
+     SSAA 2x  ms   5.81   5.98  14.01  15.57
+     SSAA 4x  ms   9.57   9.83  24.98  27.38
+    FXAA Low  ms   2.31   2.41   5.27   5.62
+ FXAA Medium  ms   2.40   2.45   5.25   5.47
+   FXAA High  ms   2.32   2.46   5.54   5.88
+  FXAA Ultra  ms   2.51   2.59   5.47   5.69
+     MSAA 2x  ms   3.06   3.22   6.25   6.71
+     MSAA 4x  ms   3.19   3.47   6.39   6.89
+     MSAA 8x  ms   3.27   3.60   6.58   6.92
+
+Percentile of FPS
+          AA 60 FPS 50 FPS 30 FPS 20 FPS 15 FPS
+        None   0.00   0.00      0      0      0
+     SSAA 2x   0.01   0.00      0      0      0
+     SSAA 4x  22.47  13.26      0      0      0
+    FXAA Low   0.00   0.00      0      0      0
+ FXAA Medium   0.00   0.00      0      0      0
+   FXAA High   0.00   0.00      0      0      0
+  FXAA Ultra   0.00   0.00      0      0      0
+     MSAA 2x   0.00   0.00      0      0      0
+     MSAA 4x   0.00   0.00      0      0      0
+     MSAA 8x   0.00   0.00      0      0      0
+
+Distribution Stats
+          AA Mean (ms) StDev (ms) CoV (%) Skew Kurtosis
+        None      3.28       0.64   19.38 1.09     4.09
+     SSAA 2x      8.77       1.87   21.27 1.19     3.85
+     SSAA 4x     15.15       3.60   23.74 1.35     4.04
+    FXAA Low      3.49       0.65   18.62 0.66     3.39
+ FXAA Medium      3.47       0.63   18.20 0.69     3.34
+   FXAA High      3.61       0.70   19.46 0.63     3.23
+  FXAA Ultra      3.65       0.63   17.33 0.64     3.43
+     MSAA 2x      4.49       0.70   15.57 0.59     3.30
+     MSAA 4x      4.58       0.66   14.47 0.92     3.67
+     MSAA 8x      4.72       0.69   14.61 0.90     3.82

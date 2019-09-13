@@ -7,7 +7,7 @@ It was actually originally developed with ray tracing in mind, but as it is inde
 Like multi-sampling, there are multiple morphological filtering techniques, but in general they appear to function in a similar manner, with some having optimizations.
 
 What is morphological filtering, and why would I describe it as 'intelligent' in the section title?
-Because it attempts to reconstruct what the original shape of the primitive was so it can blend along its edges appropriately.
+Because it attempts to reconstruct what the original shape of a primitive was so it can blend along its edges appropriately.
 When we seeing an aliasing artifact, like the stair-step pattern of an aliased line, we assume it is supposed to be a line and not that pattern, and this is effectively what morphological filtering attempts to do as well.
 While we can consider the larger contextual clues of the scene, morphological filtering will look specifically to the colors of the pixels to identify edges.
 Once the edges are found, it looks for a pattern within them to determine the original geometry.

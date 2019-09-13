@@ -3,8 +3,7 @@
 \begin{frame}
 \frametitle{Rasterization}
 	\begin{itemize}
-		\item	The dominant means of sampling \textbf{primitives} for generating computer graphics is \textbf{Rasterization}		
-		%\item	The dominant means of generating images from computer graphics \textbf{primitives} is \textbf{Rasterization}
+		\item	The dominant means of sampling \textbf{primitives} for generating computer graphics is \textbf{Rasterization}
 		\begin{itemize}
 			\item	\textbf{Ray Tracing} is another method that can also suffer from aliasing, and other artifacts
 		\end{itemize}
@@ -14,7 +13,7 @@
 			\item	\textbf{Forward} and \textbf{Deferred Shading} act differently with the rasterization step\supercite{DeferredShadingUnity, ForwardDeferred}
 		\end{itemize}
 		\pause
-		\item	This sampling can lead to aliasing, depending on if it satisfies the \textbf{Nyquist limit} from Nyquist/Sampling theory
+		\item	This sampling can lead to aliasing, depending on if it satisfies the \textbf{Nyquist limit} from Nyquist-Shannon sampling theory
 	\end{itemize}
 \end{frame}
 
@@ -23,7 +22,7 @@
 	\image{{Fragments}}
 	
 	\scriptsize
-	The \textbf{frustum} is two similar rectangles; the front and back of the camera view
+	The \textbf{frustum} is two similar rectangles; the front and back of the camera view.
 		
 	Forward and Deferred shading differ based on when the lighting is calculated
 	

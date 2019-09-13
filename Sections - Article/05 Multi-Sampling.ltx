@@ -26,8 +26,8 @@ These differ from each other and MSAA by decoupling the number of samples for ea
 The documentation for both refer to a 'coverage' sample type, but I am unsure exactly what this is.
 As I try to visualize it and research it, my best guess is it records if the sample position is covered by a primitive.
 If it is this simple than my lack of certainty comes from assuming this information would be inherent to other samples within a fragment, at least for when the coverage sample position aligns with the fragment position.
-By having fragments with additional coverage samples, I can see how the blend weighting will be more accurate without significantly increasing the performance penalty.
-Checking the value in a buffer, in this case coverage, would be faster than trying to compute the color at each of these additional locations.
+Shading is a more performance demanding step in the process than the collecting of the samples, and likely any checks are also faster than shading, so this increase in non-shading samples, if you will, should not degrade performance too much.
+These samples can still be used to better determine the blending weight of the samples that will be used for shading.
 
 The result of this decoupling of fragments and coverage samples can be either improved quality at the same performance, or the same quality at better performance.
 Interestingly the documentation for both CSAA and EQAA shows very different options and naming schemes between them.
@@ -46,7 +46,7 @@ I cannot say I have a full understanding of how this acceleration works, but the
 One is something that further helps distinguish multi-sampling from super-sampling and that is the shaders for calculating the color for each pixel, are run only once per pixel.
 With super-sampling, these shaders are run apparently once for each fragment and the results are then filtered to arrive at the final pixel color, so the shaders are doing at least double the work as normal.
 I do not know how this reduction in shader work is achieved, but I could very easily believe the filtering work necessary for each pixel is packed into the calculations for the shaders, so they need only be run once to get the same result.
-This would be faster as the shader would not need to save its two outputs to some buffer, then call them again to filter them together.
+This would be faster as the shader would not need to save its two or more outputs to some buffer, then call them again to filter them together.
 ($1 + 1 = 2$, $2 + 2 = 4$, $2 + 4 = 6$ is more work than $1 + 1 + 2 + 2 = 6$ especially when the solutions need to be written to and called from memory.)
 
 The other thing I am aware of that would relate to hardware acceleration is that standard sampling patterns are stored on the GPUs, instead of software (game engine or API) needing to provide one.
@@ -59,7 +59,7 @@ Support for 16x is optional under DirectX 10.1, but when 16x is supported by the
 \image{{MS Standard Patterns}}
 
 With DirectX 12 the API gained the ability to program sampling pattern, so a developer could create custom patterns if they wish.\supercite{DX12CreatorsUpdate, DX12PositionTiers, DX11StandardPatterns}
-There are two supporting tiers for this feature, with Tier 1 only allowing for the reprogramming of a single sampling pattern and Tier 2 allowing four sample patterns to be programmed to cover a 2x2 quad of pixels.
+There are two supporting tiers for this feature, with Tier 1 only allowing for the reprogramming of a single sampling pattern and Tier 2 allowing for sample patterns to be programmed to cover a 2x2 quad of pixels.
 It may be worth explicitly stating here that with a singular exception I will get to later, the sampling patterns for an arbitrary pixel or pixel quad are identical to all others for the frame.
 Also, interestingly, there is a limit of 16 combined samples, which means if you want a custom pattern for a quad, there can at most be 4 samples per pixel.\supercite{DX12SamplePositions}
 

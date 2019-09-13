@@ -36,6 +36,30 @@ We can see the 16x pattern does a better job packing the samples and taps togeth
 Interestingly it appears the samples are paired together in both patterns, though the packing of 16x hides this better.
 Still, this indicates Microsoft at least has chosen to apply a form of Stochastic sampling, but it also appears to be limited to the highest two sampling patterns the company requires.
 
+These might not be the best demonstrations, being only along one dimension, but I have put together some graphs to show Stochastic sampling being applied to the sine function used earlier in the article.
+All three graphs use the same list of random values (applied as offsets to regular sampling positions), but the shorter ones use the first section of that list.
+For example, this graph uses just the first twelve points, and the later graphs more, but if you look closely in them you will see the pattern to the gradient is the same at the beginning.
+
+%STOCHASTIC_GRAPH
+\image{{Alias Example - Stochastic}}
+
+The top gradient is what you get when sampling at the halves, like has been shown before, and is there just for comparison.
+Clearly the middle gradient, from Stochastic sampling, does not show the same pattern, and indeed no pattern.
+If we pull back to see what happens when we sample at more positions, we get these gradients.
+
+%STOCHASTIC_COMPARISON
+\image{{Alias Example - Stochastic Comparison}}
+
+Again there is clearly no pattern to the Stochastic gradient, and while it might not be able to perfectly recreate the actual signal, it also does not display an alias of it.
+If this were, say, the surface of a circle, it would look very uneven, but the regular sampling gradient would make the circle appear more like a polygon, with vertices evenly distributed along the circumference.
+My guess is we would still interpret the Stochastic circle as a circle, but a rough one, while the other would look like a polygon, and if we contextually expect a circle, that is going to be the less desirable option.
+
+%STOCHASTIC_COMPARISON_PIXEL
+\image{{Alias Example - Stochastic Comparison - Pixel}}
+
+For this graph I decided to make it so the width of the sections is two pixels and to make them less tall, so the height does not impact how we interpret them.
+Still kind of looks like a barcode, but the noisiness to it does appear more accurate to the original signal in blue, especially compared to the lower-frequency alias in red and the gradient from regular sampling.
+
 So why, if Stochastic sampling can reduce the visual presence of aliasing is it not more common than just MSAA 8x and 16x?
 I am not certain, but I have an idea for why that I have arrived at from two directions, and one I am less confident in.
 My lower confidence one is that to use stochastic sampling positions at low sampling counts, like 1x for normal rendering, will require keeping track of the random offsets for each sample in each pixel.
@@ -45,7 +69,7 @@ Perhaps its processing would increase the time to render a frame, but if it also
 The other answer, however, comes from a different direction, and from that source I coincidentally encountered.
 
 I started working on this article quite a while ago, and since then a number of games have released.
-At the point in time I am writing this paragraph, \href{https://www.overclockersclub.com/reviews/metro_exodus_review/}{\textit{Metro Exodus}} with its highly anticipated gameplay, graphics, and ray tracing implementation.
+At the point in time I am writing this paragraph, \href{https://www.overclockersclub.com/reviews/metro_exodus_review/}{\textit{Metro Exodus}} with its highly anticipated gameplay, graphics, and ray tracing implementation has already launched.
 To serve its community of readers, Eurogamer/Digital Foundry interviewed a couple employees at the game's developer, 4A Games,\supercite{4AStochastic} and they talk about not just using stochastic algorithms, but even reference the same 1986 paper I mentioned at the start of this section: Stochastic Sampling in Computer Graphics\supercite{Stochastic Sampling}.
 Based on what is written in the interview, stochastic sampling as described in the research paper is not being used, but the concept behind it is.
 The sampling positions for the pixels are not necessarily changing, but the sampling positions for different effects are following stochastic algorithms.
