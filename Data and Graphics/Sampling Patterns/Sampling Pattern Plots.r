@@ -337,8 +337,8 @@ MSPD[,3]	=	factor(MSPD[,3], levels = ORDERMS, ordered = TRUE)
 ggplot(data = MSPD, aes(x = x, y = y)) + 
 ggtitle("DirectX Standard Sample Patterns (Poisson Disk)") + 
 BORD +
-geom_point(data = MSPD[MSPD$Pattern == "8x",],	color = "black",	size = 24,		shape = 1) + 
-geom_point(data = MSPD[MSPD$Pattern == "16x",],	color = "black",	size = 20,	shape = 1) + 
+geom_point(data = MSPD[MSPD$Pattern == "8x",],	color = "black",	size = 28,		shape = 1) + 
+geom_point(data = MSPD[MSPD$Pattern == "16x",],	color = "black",	size = 23,	shape = 1) + 
 geom_point(aes(color = Type),	size = 7) + 
 facet_grid(cols = vars(Pattern)) + AXESpd + theme(legend.position = "none")
 
