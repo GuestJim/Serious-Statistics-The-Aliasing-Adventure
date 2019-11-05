@@ -3,32 +3,36 @@
 \begin{frame}
 \frametitle{Sampling}
 \framesubtitle{Spatial Aliases}
-	\only<1>	{
-		\image{Alias Example - Sine Samples}
-		
-		\footnotesize	\setlength{\tabcolsep}{2pt}	\color{MAGENTA}{
-		\begin{tabular}{lcccccccccccc}
-			X = &	\{-0.5~	&	0.5~	&	1.5~	&	 2.5~	&	 3.5~	&	 4.5~	&	5.5~	&	6.5~	&	7.5~	&	8.5~	&	9.5~	&	10.5~\}	\\
-			Y = &	\{-0.31	&	0.31	&	0.81	&	1.00	&	0.81	&	0.31	&	-0.31	&	-0.81	&	-1.00	&	-0.81	&	-0.31	&	0.31\}
-		\end{tabular}
-		}
-	}
+	\image{Alias Example - Sine Samples}
+	
+	\footnotesize	\setlength{\tabcolsep}{2pt}	\color{MAGENTA}{
+	\begin{tabular}{lcccccccccccc}
+		X = &	\{-0.5~	&	0.5~	&	1.5~	&	 2.5~	&	 3.5~	&	 4.5~	&	5.5~	&	6.5~	&	7.5~	&	8.5~	&	9.5~	&	10.5~\}	\\
+		Y = &	\{-0.31	&	0.31	&	0.81	&	1.00	&	0.81	&	0.31	&	-0.31	&	-0.81	&	-1.00	&	-0.81	&	-0.31	&	0.31\}
+	\end{tabular}	}
+\end{frame}
 
-	\only<2>	{
-		\image{Alias Example - Sine Samples - 0.1}
-		
-		\vspace{2.0ex}
-		\centering	\color{RED}{$Y = sin(0.1 * X * 2\pi + 0.5)$}
-	}
+\begin{frame}
+\frametitle{Sampling}
+\framesubtitle{Spatial Aliases}
+	\image{Alias Example - Sine Samples - 0.1}
+	
+	\vspace{2.0ex}
+	\centering	\color{RED}{$Y = sin(0.1 * X * 2\pi + 0.5)$}
+\end{frame}
 
-	\only<3>	{
-		\image{Alias Example - Sine Samples - 0.9}
-		
-		\vspace{2.0ex}
-		\centering	\color{BLUE}{$Y = sin(0.9 * X * 2\pi + 0.5)$}
-	}
+\begin{frame}
+\frametitle{Sampling}
+\framesubtitle{Spatial Aliases}
+	\image{Alias Example - Sine Samples - 0.9}
+	
+	\vspace{2.0ex}
+	\centering	\color{BLUE}{$Y = sin(0.9 * X * 2\pi + 0.5)$}
+\end{frame}
 
-	\only<4>	{
+\begin{frame}
+\frametitle{Sampling}
+\framesubtitle{Spatial Aliases}
 		\centering
 		\includegraphics[keepaspectratio,width=0.95\textwidth, height=\paperheight]{{Alias Example - Sine Waves - Grad}}
 		\vspace{2.0ex}
@@ -42,7 +46,6 @@
 		
 		\normalsize
 		{\color{BLUE}{$Y = sin(0.9 * X * 2\pi + 0.5)$}}
-	}
 \end{frame}
 
 \begin{frame}

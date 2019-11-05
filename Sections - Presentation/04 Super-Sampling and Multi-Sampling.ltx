@@ -16,38 +16,41 @@
 \end{frame}
 
 \subsection{Sampling Patterns}
-{%\setbeamercolor{normal text}{bg=GRAY}
+%\setbeamercolor{normal text}{bg=GRAY}
 \begin{frame}[squeeze]
 \frametitle{Sampling Patterns}
 
-	{\noindent	\color{RED}{\textbullet	Samples}}	\hspace{2em}	{\color{CYAN}{\textbullet	Taps}}
+{\noindent	\color{RED}{\textbullet	Samples}}	\hspace{2em}	{\color{CYAN}{\textbullet	Taps}}
 		
-	\only<1-2>	{\image{{Sample Patterns - 2x}}	}
+\image{{Sample Patterns - 2x}}
 	
-	\only<2>	{
-	\footnotesize{
-		\begin{itemize}
-			\item	Using \textbf{n-Rook} solutions is desirable as it increases sampling in two dimensions
-			\item	Quincunx patterns share taps between pixel spaces
-		\end{itemize}
-		\centering	Sampling patterns can be defined for 1 pixel or 2x2 quads of pixels, then repeated for the screen
-	}
-	}
+\pause
+\footnotesize{
+	\begin{itemize}
+		\item	Using \textbf{n-Rook} solutions is desirable as it increases sampling in two dimensions
+		\item	Quincunx patterns share taps between pixel spaces
+	\end{itemize}
+	\centering	Sampling patterns can be defined for 1 pixel or 2x2 quads of pixels, then repeated for the screen
+}
+\end{frame}
+
+\begin{frame}[squeeze]
+\frametitle{Sampling Patterns}
+
+{\noindent	\color{RED}{\textbullet	Samples}}	\hspace{2em}	{\color{CYAN}{\textbullet	Taps}}
+
+\image{{Sample Patterns - 4x}}
 	
-	\only<3-4>	{\image{{Sample Patterns - 4x}}}
-	
-	\only<4>	{
-	\footnotesize{
-		\begin{itemize}
-			\item	Ordered Grid does not solve n-Rook and is susceptible to patterns
-			\item	Rotated Grid might not solve n-Rook but is less susceptible to patterns
-			\item	n-Rook solutions are efficient by maximizing sampling in X and Y
-			\item	n-Queen solutions are more efficienct by maximizing sampling in X, Y, and diagonals
-		\end{itemize}
-		}
+\pause
+\footnotesize{
+	\begin{itemize}
+		\item	Ordered Grid does not solve n-Rook and is susceptible to patterns
+		\item	Rotated Grid might not solve n-Rook but is less susceptible to patterns
+		\item	n-Rook solutions are efficient by maximizing sampling in X and Y
+		\item	n-Queen solutions are more efficienct by maximizing sampling in X, Y, and diagonals
+	\end{itemize}
 	}
 \end{frame}
-}
 
 \begin{frame}
 \frametitle{Sampling Patterns}
@@ -140,55 +143,66 @@
 \begin{frame}
 \frametitle{Sample Filtering}
 \framesubtitle{Examples - Oversampling}
-	\only<1>	{
 	\graphicspath{{Media 1.1/Filters/}}
 		\image[height=0.27\textheight]{Composite - Circles - 01 Point}
 		\image[height=0.27\textheight]{Composite - Circles - 02 Box}
 		\image[height=0.27\textheight]{Composite - Circles - 03 Triangle}
-	}
-	\only<2>	{
+\end{frame}
+	
+\begin{frame}<handout:0>
+\frametitle{Sample Filtering}
+\framesubtitle{Examples - Oversampling}
 	\graphicspath{{Media 1.1/Filters/}}
 		\image[height=0.27\textheight]{Composite - Circles - 04 Quadratic}
 		\image[height=0.27\textheight]{Composite - Circles - 05 Cubic}
 		\image[height=0.27\textheight]{Composite - Circles - 06 Gaussian}
-	}
-	\only<3>	{
+\end{frame}
+	
+\begin{frame}<handout:0>
+\frametitle{Sample Filtering}
+\framesubtitle{Examples - Oversampling}
 	\graphicspath{{Media 1.1/Filters/}}
 		\image[height=0.27\textheight]{Composite - Circles - 07 Catrom}
 		\image[height=0.27\textheight]{Composite - Circles - 08 Mitchell}
-	}
 \end{frame}
 
 \subsubsection{Mipmaps}
+\graphicspath{{Media 1.1/Mipmaps/}}
 \begin{frame}
 \frametitle{Sample Filtering}
 \framesubtitle{Examples - Mipmaps}
-	\only<1>	{
-		\begin{itemize}
-			\item	Mip from 'multum in parvo' -- Latin for 'many things in a small space'\supercite{Mipmaps}
-			\item	Textures can suffer from spatial aliasing at different scales
-			\item	\textbf{Mipmaps} contain pre-scaled versions of textures that can be prepared to avoid aliasing
-			\begin{itemize}
-				\item	Similar '\textbf{pyramidal parametrics}' schemes are used for other assets too
-				\item	\textbf{Anisotropic filtering} extends the range of texture elements used when interpolation between mipmap levels is necessary
-			\end{itemize}
-			\item	By having the scaling already done, this can also improve performance
-		\end{itemize}
-	}
 
-	\graphicspath{{Media 1.1/Mipmaps/}}
-	\only<2>	{
-		\image[height=0.27\textheight]{Mipmaps - 01 Point}
-		\image[height=0.27\textheight]{Mipmaps - 02 Box}
-		\image[height=0.27\textheight]{Mipmaps - 03 Triangle}
-	}
-	\only<3>	{
-		\image[height=0.27\textheight]{Mipmaps - 04 Quadratic}
-		\image[height=0.27\textheight]{Mipmaps - 05 Cubic}
-		\image[height=0.27\textheight]{Mipmaps - 06 Gaussian}
-	}
-	\only<4>	{
-		\image[height=0.27\textheight]{Mipmaps - 07 Catmull-Rom}
-		\image[height=0.27\textheight]{Mipmaps - 08 Mitchell-Netravali}
-	}
+	\begin{itemize}
+		\item	Mip from 'multum in parvo' -- Latin for 'many things in a small space'\supercite{Mipmaps}
+		\item	Textures can suffer from spatial aliasing at different scales
+		\item	\textbf{Mipmaps} contain pre-scaled versions of textures that can be prepared to avoid aliasing
+		\begin{itemize}
+			\item	Similar '\textbf{pyramidal parametrics}' schemes are used for other assets too
+			\item	\textbf{Anisotropic filtering} extends the range of texture elements used when interpolation between mipmap levels is necessary
+		\end{itemize}
+		\item	By having the scaling already done, this can also improve performance
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sample Filtering}
+\framesubtitle{Examples - Mipmaps}
+	\image[height=0.27\textheight]{Mipmaps - 01 Point}
+	\image[height=0.27\textheight]{Mipmaps - 02 Box}
+	\image[height=0.27\textheight]{Mipmaps - 03 Triangle}
+\end{frame}
+
+\begin{frame}<handout:0>
+\frametitle{Sample Filtering}
+\framesubtitle{Examples - Mipmaps}
+	\image[height=0.27\textheight]{Mipmaps - 04 Quadratic}
+	\image[height=0.27\textheight]{Mipmaps - 05 Cubic}
+	\image[height=0.27\textheight]{Mipmaps - 06 Gaussian}
+\end{frame}
+
+\begin{frame}<handout:0>
+\frametitle{Sample Filtering}
+\framesubtitle{Examples - Mipmaps}
+	\image[height=0.27\textheight]{Mipmaps - 07 Catmull-Rom}
+	\image[height=0.27\textheight]{Mipmaps - 08 Mitchell-Netravali}
 \end{frame}

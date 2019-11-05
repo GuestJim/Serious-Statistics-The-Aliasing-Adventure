@@ -5,7 +5,6 @@
 
 \noindent	Instead of addressing the Nyquist limit, some methods try to smooth aliasing artifacts from the image
 
-\only<1>	{
 	\begin{itemize}
 		\item	Morphological Filtering (MLAA)\supercite{MLAAIntel} among the oldest
 		\begin{itemize}
@@ -26,9 +25,12 @@
 			\item	has low-pass filter to remove/reduce high frequency details
 		\end{itemize}	
 	\end{itemize}
-}
+\end{frame}
 
-\only<2>{
+\begin{frame}[squeeze]
+\frametitle{Post Processing/Filtering}
+
+\noindent	Instead of addressing the Nyquist limit, some methods try to smooth aliasing artifacts from the image
 	\begin{itemize}
 		\item	Enhanced Sub-Pixel Morphological Filtering (SMAA)\supercite{JIMENEZ2012_CGF} improves upon MLAA
 		\begin{itemize}
@@ -48,7 +50,6 @@
 			\end{itemize}
 		\end{itemize}
 	\end{itemize}
-}
 \end{frame}
 
 \subsection{Example}
