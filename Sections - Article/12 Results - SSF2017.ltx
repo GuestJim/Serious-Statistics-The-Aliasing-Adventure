@@ -32,7 +32,7 @@ I choose this location because the enclosure shows some aliasing on it as do the
 There is also a doorway in the frame that also shows some aliasing.
 
 %AA_LAMP_NONE
-\image{{AA - Lamp}}
+\image{AA - Lamp}
 
 While the aliasing of the doorway is plainly visible here, it was the enclosure and shadows that made me choose this location.
 Without any anti-aliasing we can see typical geometric aliasing at both locations, but there also appears to be aliasing from the lighting on the enclosure too.
@@ -41,7 +41,7 @@ We can also see some artifacting within the shadows being cast as some edges loo
 I want to first look to the doorway though.
 
 %DOOR_GAME
-\image{{AA - 01 - Door - Game}}
+\image{AA - 01 - Door - Game}
 
 I want to go over the placement of the sections in this image.
 The None section is toward the middle of the upper row, with MSAA and SSAA increasing in sample count as you move away from it.
@@ -60,7 +60,7 @@ Looking to the FXAA row, I think FXAA Medium and better are doing a good job of 
 I feel it is worth mentioning the Ultra preset for this game has both MSAA and FXAA turned up to their maximums, so normally these would be working together.
 
 %DOOR_MLAA
-\image{{AA - 01 - Door - MLAA}}
+\image{AA - 01 - Door - MLAA}
 
 Now we have AMD's driver-side morphological filtering enabled and as you can see I accidentally messed up the orientation of the camera for these screenshots (and therefore also those of the fire enclosure).
 Looking to the horizontal line first, all of them look pretty good, including the section with no in-game anti-aliasing option.
@@ -73,7 +73,7 @@ Coming to the FXAA row, it is still true the morphological filtering is taking c
 The vertical line I feel is best dealt with at FXAA High and Ultra, as I can still see a stair-step pattern with FXAA Medium.
 
 %LAMP_GAME
-\image{{AA - 01 - Lamp - Game}}
+\image{AA - 01 - Lamp - Game}
 
 Coming to the fire enclosure, it is not that easy to see much aliasing on the enclosure itself, but there is some there.
 You can see it on the curved bar over the top, but also within the figure that decorates the sides, with the light passing through it.
@@ -90,17 +90,17 @@ There are many moving pieces involved and every game engine and even the individ
 It also may be fixed by now.
 
 %LAMP_MLAA
-\image{{AA - 01 - Lamp - MLAA}}
+\image{AA - 01 - Lamp - MLAA}
 
 Naturally this shadow distortion with MSAA still happens when morphological filtering is added, but in all cases it also seems to help with the aliasing on the enclosure.
 
 %AA_TORCH_NONE
-\image{{AA - Torch}}
+\image{AA - Torch}
 
 This torch is actually immediately outside of the secret room we were just in and we can clearly see aliasing on every edge of the torch, but we will be looking at something else also captured by these screenshots.
 
 %TORCH_GAME
-\image{{AA - 03 - Torch - Game}}
+\image{AA - 03 - Torch - Game}
 
 Unlike with the doorway, both SSAA and MSAA look to be doing a good job on the torch, matching very nicely on their sample counts.
 This is actually exactly what you want to see with MSAA; matching SSAA on quality, while it should also perform much better than super-sampling.
@@ -112,20 +112,20 @@ Even at FXAA High I can make out some hardness between pixels where there was al
 Still, all of these options are doing a good job here.
 
 %TORCH_MLAA
-\image{{AA - 03 - Torch - MLAA}}
+\image{AA - 03 - Torch - MLAA}
 
 With morphological filtering the aliasing of the legs appears to be gone, even at the None option, but we can still see a little at the bowl of the torch.
 Every option, MSAA, SSAA, and FXAA address this aliasing though.
 While I can see some differences as the sample count increases for MSAA and SSAA, they all still look good, and every FXAA option looks effectively the same to me here.
 
 %AA_TIMELOCK_NONE
-\image{{AA - Time-Lock}}
+\image{AA - Time-Lock}
 
 Now for the last set of screenshots I have for \textit{Serious Sam Fusion 2017}, which are focused on the Time-Lock, the spawn point for this level.
 There is something very interesting going on with it, but first I want to focus on the temple behind it, as it has a nice, long near-horizontal line on it, and a lot of texture detail.
 
 %TEMPLE_GAME
-\image{{AA - 02 - Temple - Game}}
+\image{AA - 02 - Temple - Game}
 
 While the highlight I have is on the left side of the section, you can see the aliasing continues on the right side, and might even be a little easier to see there, because of the angle to the camera.
 Something else you can spot is one of the incidental benefits of super-sampling, and potentially over-sampling too, though I lack the screenshots to prove it there; increased fine detail to textures.
@@ -144,7 +144,7 @@ Something else I want to point out with these sections is FXAA is definitely sof
 Even FXAA Ultra looks softer than None, and this is generally a concern with FXAA and all post-processing methods.
 
 %TEMPLE_MLAA
-\image{{AA - 02 - Temple - MLAA}}
+\image{AA - 02 - Temple - MLAA}
 
 Looking at the same location with morphological filtering in place we can see it too is removing the fine detail.
 Even with SSAA 4x, this filtering is removing enough detail to look worse than no anti-aliasing at all.
@@ -153,7 +153,7 @@ On the bright side though, it does appear to have removed the aliasing on the te
 Now for the really fun one; the Time-Lock!
 
 %TIMELOCK_GAME
-\image{{AA - 02 - Time-Lock - Game}}
+\image{AA - 02 - Time-Lock - Game}
 
 What the heck is happening with that light?
 At least that is the question I hope you are asking yourself, so I am not unique in that.
@@ -177,7 +177,7 @@ Looking beyond the reflection, we can see they all do a good job of removing the
 If you look closely you can also notice some loss of detail with every FXAA option, but when actually playing the game, I doubt anyone will really notice it, at least for the areas we can see in these sections.
 
 %TIMELOCK_MLAA
-\image{{AA - 02 - Time-Lock - MLAA}}
+\image{AA - 02 - Time-Lock - MLAA}
 
 Looking at what the morphological filtering does here, we can see it does soften the reflected light, but there is little that can be done about it outside of SSAA.
 It has removed the aliasing that was present otherwise though.
@@ -194,12 +194,12 @@ As the Time-Lock scene contains a lot of detail and effects, this is where I ret
 For reference I have an image without any anti-aliasing, and so the Rescaling Filter setting will have no effect, and to see how its options have an impact I activated SSAA 4x, as it likely presents the most sub-samples to filter.
 
 %00_None
-\image{{00 - None}}
+\image{00 - None}
 
 The amount of aliasing we see here is fairly obvious, so why not just move on to how SSAA 4x looks with Point Sampling.
 
 %01_SSAA4x_Point
-\image{{01 - SSAA 4x - Point}}
+\image{01 - SSAA 4x - Point}
 
 Yes, in case you were unsure, yes, there is aliasing present in this image that was not present without any anti-aliasing.
 It is visible on the base of the Time-Lock and along the top façade of the temple too.
@@ -207,7 +207,7 @@ We can also see more detail to the textures, as observed before with super-sampl
 Still, I think it is safe to say one would not want to use this filtering option.
 
 %02_SSAA4x_Bilinear
-\image{{02 - SSAA 4x - Bilinear}}
+\image{02 - SSAA 4x - Bilinear}
 
 In general I would not consider Bilinear to be that good of a filtering option, but here it does a very good job as now we are actually seeing the anti-aliasing benefits of super-sampling.
 You can see the aliased edges with Point Sampling are much softer along the façade now and while the textures technically are softer as well, Point Sampling was very possibly introducing artifacts this method does not.
@@ -216,20 +216,20 @@ In every image but Point Sampling we can see a bright line extending the entire 
 This is not the case with Point Sampling, which may just be a coincidence for which of the four sub-samples per-pixel were selected.
 
 %03_SSAA4x_Bicubic
-\image{{03 - SSAA 4x - Bicubic}}
+\image{03 - SSAA 4x - Bicubic}
 
 In theory Bicubic should be a better filter than Bilinear, as the filtering function should smoothly transition while Bilinear will have hard changes, but honestly I cannot spot a difference between the two here.
 This is not the case with Sharpen Bicubic though.
 
 %04_SSAA4x_Sharpen_Bicubic
-\image{{04 - SSAA 4x - Sharpen Bicubic}}
+\image{04 - SSAA 4x - Sharpen Bicubic}
 
 I do not know what is done to make this filter sharpen the details; if it is an additional sharpening filter or a change to the Bicubic filter to also sharpen, but regardless, the impact is apparent.
 Within textures and along edges, we can see the details are sharpened, which may or may not be desirable.
 While it does bring out more details in textures, some edges also stand out more, making any imperfections or aliasing artifacts more apparent.
 
 %05_SSAA4x_Lanczos
-\image{{05 - SSAA 4x - Lanczos}}
+\image{05 - SSAA 4x - Lanczos}
 
 Last we have the Lanczos filter, and it should be the best of these.
 If you look closely enough you may be able to spot that it does have more detail within textures than Bicubic did, though not as much as Sharpen Bicubic.
@@ -254,31 +254,31 @@ I am not cropping any of these difference images, so you can see the entire scen
 Black means the images are the same at that pixel location.
 
 %DIFFERENCE_FILTER_NONE
-\image{{Difference 00 - None}}
+\image{Difference 00 - None}
 
 This first image shows the difference between no anti-aliasing enabled at all and using SSAA 4x with the Lanczos filter, so we will see it again when I get to the method differences.
 If you look closely you will see there are differences almost everywhere, which makes sense as we are comparing against super-sampling, which affects the appearance of everything.
 
 %DIFFERENCE_FILTER_POINT
-\image{{Difference 01 - SSAA 4x - Point}}
+\image{Difference 01 - SSAA 4x - Point}
 
 We have already seen that using the Point Sampling option makes the image appear worse than not using anti-aliasing, and this confirms it.
 We can clearly see there were far more differences between point and Lanczos than there were between Lanczos and no anti-aliasing at all.
 Unless you are experimenting with things like I am now, I cannot imagine a time one would choose to use point filtering.
 
 %DIFFERENCE_FILTER_BILINEAR
-\image{{Difference 02 - SSAA 4x - Bilinear}}
+\image{Difference 02 - SSAA 4x - Bilinear}
 
 Coming to Bilinear, the differences are very hard to make out, which is why this image is almost completely black, but if you look closely, you can still find some detail.
 It does show Bilinear is doing a pretty good job here though.
 
 %DIFFERENCE_FILTER_BICUBIC
-\image{{Difference 03 - SSAA 4x - Bicubic}}
+\image{Difference 03 - SSAA 4x - Bicubic}
 
 Bicubic, however, is doing an even better job than Bilinear was, requiring you to look even more closely to spot any differences.
 
 %DIFFERENCE_FILTER_SHARPEN_BICUBIC
-\image{{Difference 04 - SSAA 4x - Sharpen Bicubic}}
+\image{Difference 04 - SSAA 4x - Sharpen Bicubic}
 
 Sharpen Bicubic shows more differences from Lanczos than regular Bicubic did, which is not very surprising really, but it is still really close.
 It does however appear that regular Bicubic is the closet to Lanczos of the other options, based on this specific scene.
@@ -288,13 +288,13 @@ Now for the real fun and long part, as we go through the different anti-aliasing
 I have a bunch of images to go through and for this first batch the reference image is the version that lacks anti-aliasing.
 
 %DIFFERENCE_SSAA2x
-\image{{Difference 01 - SSAA 2x}}
+\image{Difference 01 - SSAA 2x}
 
 Similar, though not the same as before, we see plenty of differences between None and SSAA 2x for edges and textures both.
 I am going to move directly to SSAA 4x, so I can talk about both super-sampling options together, though we have already seen this image above.
 
 %DIFFERENCE_SSAA4x
-\image{{Difference 02 - SSAA 4x}}
+\image{Difference 02 - SSAA 4x}
 
 We can see even stronger differences with SSAA 4x than with SSAA 2x, and checking the originals, it does not appear the lighting changed appreciably to cause these differences.
 All of the additional detail is the result of the two additional samples per pixel, and the sampling pattern used.
@@ -307,16 +307,16 @@ I am bringing this up because it is clearly defined in these images and is not a
 Next up are the FXAA options and I want to show you all of the difference images before discussing them.
 
 %DIFFERENCE_FXAA_LOW
-\image{{Difference 03 - FXAA Low}}
+\image{Difference 03 - FXAA Low}
 
 %DIFFERENCE_FXAA_MEDIUM
-\image{{Difference 04 - FXAA Medium}}
+\image{Difference 04 - FXAA Medium}
 
 %DIFFERENCE_FXAA_HIGH
-\image{{Difference 05 - FXAA High}}
+\image{Difference 05 - FXAA High}
 
 %DIFFERENCE_FXAA_ULTRA
-\image{{Difference 06 - FXAA Ultra}}
+\image{Difference 06 - FXAA Ultra}
 
 These difference images are exposing everything fast approximate filtering identifies as an edge, which is not limited to geometric edges but also those within textures, and those details that do not get through the low-pass filter.
 In fact it looks a lot like every texture is impacted by this filtering method, which is not exactly desirable.
@@ -326,13 +326,13 @@ Of course this difference operation of Imagemagick is only telling us there is a
 I want you to keep in mind that ground texture for these MSAA options too:
 
 %DIFFERENCE_MSAA2x
-\image{{Difference 07 - MSAA 2x}}
+\image{Difference 07 - MSAA 2x}
 
 %DIFFERENCE_MSAA4x
-\image{{Difference 08 - MSAA 4x}}
+\image{Difference 08 - MSAA 4x}
 
 %DIFFERENCE_MSAA8x
-\image{{Difference 09 - MSAA 8x}}
+\image{Difference 09 - MSAA 8x}
 
 Remember, multi-sampling runs a check on whether the fragments within a single pixel's area cover the same object.
 If they do, the color for the pixel is calculated for one sample and then shared across the pixel area, and we can see the impact this has.
@@ -352,17 +352,17 @@ These are to show the difference MLAA has on its own, so not MLAA applied on top
 First up though is what we get when only MLAA is applied:
 
 %MLAA_DIFFERENCE_NONE
-\image{{MLAA Difference 00 - None}}
+\image{MLAA Difference 00 - None}
 
 There are a lot of differences here, including on all of the UI elements.
 In the earlier difference images the icon for in-game messages to check may be present, as it blinks, but now we can see all of the icons because this MLAA application is working on all of them.
 The same is true of the textures, where we see differences in many of the details as well, but not everywhere.
 
 %MLAA_DIFFERENCE_SSAA2x
-\image{{MLAA Difference 01 - SSAA 2x}}
+\image{MLAA Difference 01 - SSAA 2x}
 
 %MLAA_DIFFERENCE_SSAA4x
-\image{{MLAA Difference 02 - SSAA 4x}}
+\image{MLAA Difference 02 - SSAA 4x}
 
 Moving on to the super-sampling options with and without MLAA being applied, and we see even more details are being impacted by MLAA, which makes sense as there are more details in these images.
 This is somewhat disappointing, but hardly unexpected.
@@ -373,29 +373,29 @@ Whether there could be a means of protecting the textures though, I am unsure.
 Next up are the FXAA images, which may be interesting as we have two filtering methods being applied, and both are based solely on spatial characteristics.
 
 %MLAA_DIFFERENCE_FXAA_LOW
-\image{{MLAA Difference 03 - FXAA Low}}
+\image{MLAA Difference 03 - FXAA Low}
 
 %MLAA_DIFFERENCE_FXAA_MEDIUM
-\image{{MLAA Difference 04 - FXAA Medium}}
+\image{MLAA Difference 04 - FXAA Medium}
 
 %MLAA_DIFFERENCE_FXAA_HIGH
-\image{{MLAA Difference 05 - FXAA High}}
+\image{MLAA Difference 05 - FXAA High}
 
 %MLAA_DIFFERENCE_FXAA_ULTRA
-\image{{MLAA Difference 06 - FXAA Ultra}}
+\image{MLAA Difference 06 - FXAA Ultra}
 
 Something interesting here is all of these look very similar to each other.
 They are not identical, but so close it seems MLAA is being applied in nearly identical ways between them.
 Unfortunately we also see, like with the None and MLAA difference image earlier, that some texture detail is altered, apparently in addition to the impact of FXAA.
 
 %MLAA_DIFFERENCE_MSAA2x
-\image{{MLAA Difference 07 - MSAA 2x}}
+\image{MLAA Difference 07 - MSAA 2x}
 
 %MLAA_DIFFERENCE_MSAA4x
-\image{{MLAA Difference 08 - MSAA 4x}}
+\image{MLAA Difference 08 - MSAA 4x}
 
 %MLAA_DIFFERENCE_MSAA8x
-\image{{MLAA Difference 09 - MSAA 8x}}
+\image{MLAA Difference 09 - MSAA 8x}
 
 Last we have the MSAA differences, and within textures, where we already know multi-sampling will not touch, there are differences indicated.
 It is only MLAA that could be causing this effect that we have already observed.
@@ -403,7 +403,7 @@ If we look back to the None and MLAA difference image though, we can see the dif
 With the aliasing removed, it should be less likely for the morphological engine to identify the edges and attempt to blend them as it is supposed to.
 The impact on the textures is identical to the example without MSAA, which is to be expected.
 
-\graphicspath{{Screenshots/SSF2017/Data/}}
+\graphicspath{{Screenshots/SSF2017/Data 1.1/}}
 With the Serious Sam screenshots gone through, time to get to the performance data.
 As is my usual, the data is collected from 300 seconds run on the Hatshepsut map like I first did in the original \href{http://www.overclockersclub.com/reviews/serious_statistics/}{Serious Statistics} article.
 I also collected data with the driver's Performance Monitoring feature, allowing me to see how much VRAM was used, as this is something that should change with the use of SSAA and MSAA.

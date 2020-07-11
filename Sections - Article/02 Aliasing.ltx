@@ -6,19 +6,19 @@ I could explain it directly but I think it would be better to approach it throug
 I can give you a set of coordinate pairs to plot on a graph and if you do that, and connect the dots, you will get what is below:
 
 %ALIAS_EXAMPLE-SINEE_SAMPLES
-\image{{Alias Example - Sine Samples}}
+\image{Alias Example - Sine Samples}
 
 For some you might need to think back a bit to remember math class, but this graph looks a lot like a sine wave with a period of 10, meaning every 10 units on the X-axis gets you to the same Y-value.
 Indeed I can put together a sine function that will fit the drawn lines perfectly: $y = sin(0.1 * X * 2\pi + 0.5)$.
 
 %ALIAS_EXAMPLE-SIN_0.1
-\image{{Alias Example - Sine Samples - 0.1}}
+\image{Alias Example - Sine Samples - 0.1}
 
 If you were trying to analyze a signal with the coordinate pairs from before, this would seem like a perfect fit.
 Unfortunately, it is not the only perfect fit.
 
 %ALIAS_EXAMPLE-SIN_0.9
-\image{{Alias Example - Sine Samples - 0.9}}
+\image{Alias Example - Sine Samples - 0.9}
 
 Here we have another graph that is still of a sine wave, but with a very different period, and yet it gives the same Y-values as before.
 To be specific, this function is $y = sin(0.9 * X * 2\pi + 0.5)$, and for sampling at the halves, it returns the same values as $y = sin(0.1 * X * 2\pi + 0.5)$.
@@ -35,7 +35,7 @@ I have another example of the sine waves, but at the bottom of the graph I have 
 (Technically they are not gradients but rectangles simulating gradients.) I think these gradients can help illustrate the difference between discrete samples and the 'continuous' (remember, I am using rectangles, not an actual gradient) signals or primitives.
 
 %ALIAS_EXAMPLE-SIN_WAVES-GRAD
-\image{{Alias Example - Sine Waves - Grad}}
+\image{Alias Example - Sine Waves - Grad}
 
 Delving a little more deeply into Sampling theory or Nyquist-Shannon theory, aliasing is a kind of artifact when a high frequency signal could be confused for a low frequency signal, exactly like we see above with these two sine waves.
 For video games, and computer graphics in general, a 'high frequency signal' might seem an abstract concept, but perhaps thinking of it as 'short wavelength' would be more helpful.

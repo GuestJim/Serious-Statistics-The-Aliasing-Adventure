@@ -15,14 +15,14 @@ The first location I collected screenshots of was actually the main menu itself.
 Around and behind the UI is a rendered scene at the currently enabled graphics settings, and there is aliasing and sub-pixel details to be spotted.
 
 %MENU
-\image{{Menu}}
+\image{Menu}
 
 Looking at the full-size screenshot, you may notice the aliasing of the netting over the two soldiers' heads in the upper right.
 While this is definitely a good spot to look for aliasing, these two are animated and moving back and forth, which makes it very hard to impossible to identify any changes coming from the anti-aliasing solution within these screenshots.
 Instead the sections I am using are of the guard's body beneath the Menu UI and of Lara, as both bodies are relatively static.
 
 %BODY
-\image{{AA - 02 - Body}}
+\image{AA - 02 - Body}
 
 Though the highlight ring is focused on the guard's chest, where there is aliasing along seams, you can find aliasing in a number of places, including the vegetation and his arms.
 Sadly to my eyes, all of the AA options seem to add a blurring to everything, and this is especially evident on the plants.
@@ -32,7 +32,7 @@ Both the SMAA and TAA options effectively remove this detail, but SMAA T2x still
 You can also see it remains in the SMAA 4x section, but I still feel None does the best job of showing the lighting on the nearby leaves.
 
 %LARA
-\image{{AA - 02 - Lara}}
+\image{AA - 02 - Lara}
 
 Turning to the other area of the scene, we see Lara and one of the guards hunting for her.
 Unfortunately we do not get a consistent view of his netting, but it still appears it takes at least TAA for the aliasing to be removed.
@@ -50,14 +50,14 @@ Overall it appears the best AA option on the game's Main Menu is going to be SMA
 It should be noted though that SMAA 4x comes with a significant hit to performance.
 
 %KUWAQ_YAKU
-\image{{Kuwaq Yaku}}
+\image{Kuwaq Yaku}
 
 The first in-game location I visited to search for aliasing is the village of Kuwaq Yaku, and this specific location is not too far from the bar and nearby campfire.
 As is actually rather often the case, there is aliasing on Lara's bow and hair, but it is that in the background of the bridge that specifically grabbed my attention.
 First though I want to look at the aliasing on Lara:
 
 %BOW_AND_HAIR
-\image{{AA - 01 - Bow and Hair}}
+\image{AA - 01 - Bow and Hair}
 
 Without zooming in past the native resolution of the image, the aliasing of Lara's hair is not too easy to spot in None, but you can see it on cord used as a grip on here knife and in the feathers comprising her outfit, which are both highlighted.
 There is also aliasing along the top of her bow, though I do not have this marked.
@@ -67,7 +67,7 @@ Unfortunately the outfit still looks as softened as earlier, and this remains tr
 I do somewhat feel like SMAA T2x is a little better on the knife than TAA, but it might be a tossup for most people.
 
 %PLANK_AND_SHEET
-\image{{AA - 01 - Planks and Sheet}}
+\image{AA - 01 - Planks and Sheet}
 
 Turning our attention to the background, I did not even bother trying to highlight the aliasing because it should be obvious, at least that of the railings.
 There is also aliasing in the corrugated metal plate near the bird on the right, but there is more going on with that than just aliasing.
@@ -90,14 +90,14 @@ With SMAA 4x it is hard to tell how much detail is there, as the lighting has ch
 However, you can still make out some streaks in the brown, so it appears it is doing a better job of keeping these details than the other methods.
 
 %PERUVIAN_JUNGLE
-\image{{Peruvian Jungle}}
+\image{Peruvian Jungle}
 
 The second place I went searching for aliasing is in the Peruvian Jungle, near where you start the game after the Prologue.
 Initially I thought I had captured several examples of aliasing here, but as I looked more closely, it seemed I was also capturing some other kind of artifacting.
 I only noticed it at a distance so I wonder if it is something about how level of detail is handled by the game's engine, but I felt it inappropriate to focus on these areas, as the artifacting might not be a result of the anti-aliasing setting, but may impact its apparent visual quality.
 
 %SUPPLIES
-\image{{AA - 03 - Supplies}}
+\image{AA - 03 - Supplies}
 
 Actually, if you look above the highlighted area, you can still make out the artifacting I observed, but I want your focus to be on the supplies themselves, though Lara's hair and bow are also good to look at.
 
@@ -119,7 +119,7 @@ To me it seems the blend is sharper between the bow and the background with SMAA
 Curiously SMAA 4x seems a step back in this regard.
 
 %THE_ABANDONED_VILLAGE
-\image{{The Abandoned Village}}
+\image{The Abandoned Village}
 
 For this last set of screenshots, I did something a little different but I also believe it is worth examining.
 \textit{Shadow of the Tomb Raider}, and many other games for that matter, has a mechanic to highlight various elements in the world.
@@ -128,7 +128,7 @@ However, with post-process anti-aliasing methods, the method does not always hav
 I am unsure if SMAA or this implementation of TAA has an 'early exit' function like FXAA does to preserve certain details based on luminance, but there are means, in the abstract at least, of protecting this aliasing.
 
 %VINES
-\image{{AA - 04 - Vines}}
+\image{AA - 04 - Vines}
 
 Looking to the highlighted vines, we can see there is a lot of alias artifacting to them making it look like noise, but as I just said, I think this is intentional for the effect.
 When going to SMAA, a lot of the artifacts remain, which I think is appropriate, but sadly TAA does just blur the noise away.
@@ -136,7 +136,7 @@ SMAA T2x does return a lot of it, but we can still see a softening of edges.
 I think SMAA 4x is doing alright at keeping the aliasing, but I can also see some softening compared to None.
 
 %WALL
-\image{{AA - 04 - Wall}}
+\image{AA - 04 - Wall}
 
 If I am correct about the aliasing in the highlights being desirable, then in this section everything above SMAA is wrong.
 With None we can see a lot of high frequency details and SMAA does not appear to remove much, if any of it.
@@ -156,23 +156,23 @@ For these screenshots though, these environmental differences are far less signi
 The reference image used was that with no method applied.
 
 %DIFFERENCE_SMAA
-\image{{Difference 01 - SMAA}}
+\image{Difference 01 - SMAA}
 
 While it appeared with the original screenshot of SMAA being applied that a lot of detail was preserved in the highlighted areas, we do see here that there was an impact.
 This impact is not enough to remove the noise of the original without filtering, so the impact would be hard to spot if not for this difference image.
 
 %DIFFERENCE_TAA
-\image{{Difference 02 - TAA}}
+\image{Difference 02 - TAA}
 
 Moving to the comparison with TAA and we see what we should actually have expected, as this option had removed a lot of the detail.
 Interestingly the orange highlighted vines are shown here, but were not in the SMAA difference image.
 It would seem SMAA fails to impact these vines, but TAA very much does.
 
 %DIFFERENCE_SMAA_T2x
-\image{{Difference 03 - SMAA T2x}}
+\image{Difference 03 - SMAA T2x}
 
 %DIFFERENCE_SMAA_4x
-\image{{Difference 04 - SMAA 4x}}
+\image{Difference 04 - SMAA 4x}
 
 We already know from the original versions of these screenshots that we should expect differences similar to that we saw with TAA, and that is clearly the case.
 It seems there is more of the original noise left in these difference images than in the screenshots, which shows both the power of temporal filtering, and how it can remove details that are potentially meant to be there.

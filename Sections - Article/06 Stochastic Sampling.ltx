@@ -23,13 +23,13 @@ This makes sense in our eyes as the cells sensing light have a certain size to t
 It is Poisson disks I realized were being applied in a couple examples I supplied earlier, so here they are again:
 
 %MS_STANDARD_PATTERNS
-\image{{Sample Patterns - MS Standard Patterns}}
+\image{Sample Patterns - MS Standard Patterns}
 
 If you look at these standard sampling patterns from Microsoft, you can see the 2x pattern satisfies the 2-Rook problem, and the 4x pattern satisfies the 4-Queen problem, but both the 8x and 16x patterns make less sense.
 After I started reading the paper on Stochastic sampling and got to Poisson disks, I decided to pull up the graphic I made and try something.
 
 %POISSON_DISKS
-\image{{Sample Patterns - Poisson Disks}}
+\image{Sample Patterns - Poisson Disks}
 
 As you can see here, both the 8x and 16x patterns are examples of a Poisson disk pattern, though it helps to have the pattern repeated into a quad.
 We can see the 16x pattern does a better job packing the samples and taps together than the 8x pattern, but both show the samples being a certain minimum distance apart.
@@ -41,21 +41,21 @@ All three graphs use the same list of random values (applied as offsets to regul
 For example, this graph uses just the first twelve points, and the later graphs more, but if you look closely in them you will see the pattern to the gradient is the same at the beginning.
 
 %STOCHASTIC_GRAPH
-\image{{Alias Example - Stochastic}}
+\image{Alias Example - Stochastic}
 
 The top gradient is what you get when sampling at the halves, like has been shown before, and is there just for comparison.
 Clearly the middle gradient, from Stochastic sampling, does not show the same pattern, and indeed no pattern.
 If we pull back to see what happens when we sample at more positions, we get these gradients.
 
 %STOCHASTIC_COMPARISON
-\image{{Alias Example - Stochastic Comparison}}
+\image{Alias Example - Stochastic Comparison}
 
 Again there is clearly no pattern to the Stochastic gradient, and while it might not be able to perfectly recreate the actual signal, it also does not display an alias of it.
 If this were, say, the surface of a circle, it would look very uneven, but the regular sampling gradient would make the circle appear more like a polygon, with vertices evenly distributed along the circumference.
 My guess is we would still interpret the Stochastic circle as a circle, but a rough one, while the other would look like a polygon, and if we contextually expect a circle, that is going to be the less desirable option.
 
 %STOCHASTIC_COMPARISON_PIXEL
-\image{{Alias Example - Stochastic Comparison - Pixel}}
+\image{Alias Example - Stochastic Comparison - Pixel}
 
 For this graph I decided to make it so the width of the sections is two pixels and to make them less tall, so the height does not impact how we interpret them.
 Still kind of looks like a barcode, but the noisiness to it does appear more accurate to the original signal in blue, especially compared to the lower-frequency alias in red and the gradient from regular sampling.

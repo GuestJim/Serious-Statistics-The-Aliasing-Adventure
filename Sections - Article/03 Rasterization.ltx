@@ -20,7 +20,7 @@ Trying to translate that, information is not known within the primitive but at i
 If one vertex is defined as being black and another as white, the interpolated color for a sample between them will be a grey, with the specific shade of grey depending on the position between the vertices.
 
 %FRUSTUM
-\image{{Frustum}}
+\image{Frustum}
 
 If I wanted to keep it really simple I would stop here and say those samples are used to determine the color of the pixel you see then move on to super-sampling, but I want to be more accurate than that.
 The information collected from this sampling is collected together as a fragment\supercite{OpenGLRas, OpenGLFragment}, which is one of the two definitions for fragment I have encountered.
@@ -45,7 +45,7 @@ The resulting fragments are shown as are the fragments after Z-culling, and whil
 I have some examples for later on that might do a better job demonstrating the difference, but these will be in reference to post-processing methods.
 
 %Fragments
-\image{{Fragments}}
+\image{Fragments}
 
 Fortunately, it appears a number of solutions have been developed to overcome some of the potential disadvantages of deferred shading, including that multi-sampling could not be used with it, but there are still certain advantages to using forward shading instead.
 Developers do need to make a decision from the beginning of which method to use.
@@ -55,7 +55,7 @@ Coming back to rasterization itself for a bit, there is a specific kind of alias
 The idea is very simple and is really what the name itself describes, with polygons popping in and out.
 
 %POLYGON_POPPING
-\image{{Polygon Popping}}
+\image{Polygon Popping}
 
 In this image I had the same reference image rendered out at the different resolutions labelled above each example, and then scaled them up to match.
 (This was done with point sampling and it is integer scaling, so there are no distortions from this step.)
@@ -68,12 +68,12 @@ This is especially true in the lower row as one example goes from just blue to j
 Because the polygons popping in and out are stacked, the result is the colors popping in and out.
 
 %COLOR_POPPING
-\image{{Color Popping - H}}
+\image{Color Popping - H}
 
 It is also possible to demonstrate this with the sine waves from earlier, by applying an offset to the sampling positions of just 0.25, both positive and negative.
 
 %ALIAS_EXAMPLE_TEMPORAL
-\image{{Alias Example - Temporal}}
+\image{Alias Example - Temporal}
 
 Despite the offset being a quarter the distance between samples, the gradients appear to shift by double the sampling distance.
 I think this does a pretty good job of demonstrating popping but also a kind of temporal aliasing.
@@ -81,14 +81,14 @@ A shift of just 0.25, which you know by my statement but also by the color-match
 If instead of the sampling position shifting by 0.25 it was the signal itself moving by 0.25 per unit time, the resulting gradient would appear to be moving eight times faster ($2 / 0.25$)!
 
 Returning to spatial aliasing, which allows $sin(0.1x + 0.5)$ and $sin(0.9x + 0.5)$ to be confused, a way to avoid this aliasing is to increase the sampling frequency or resolution.
-There is a frequency at which aliasing can be prevented, and thanks to Nyquist-Shannon sampling theorem we know this to be double the original signal’s frequency.
+There is a frequency at which aliasing can be prevented, and thanks to Nyquist-Shannon sampling theorem we know this to be double the original signal's frequency.
 There are some exceptions to this, with radio broadcasts being one, and the theorem refers to the ability to reconstruct the original signal, not just if it can be visually identified, which are both points I think are worth keeping in mind.
 
 The frequency of the original function, $sin(0.9x + 0.5)$, is 0.9, so doubling the frequency gets us to 1.8.
 Changing this to a length, we get 0.5556 ($1 / 1.8$) as the distance between samples, and as you can see in this graph, it definitely does a better job capturing details of the original function, compared to the sample distance of 1 used earlier.
 
 %NYQUIST_RATE
-\image{{Alias Example - Nyquist - Rate}}
+\image{Alias Example - Nyquist - Rate}
 
 The fact the amplitude of the samples does not match the original signal is not too great an issue.
 It is just caused by starting at 0.5 as opposed to another position, like 0.25.
@@ -97,13 +97,13 @@ It would make the contrast between the sections of the gradients easier to see, 
 Of course increasing the sampling rate even more will produce a still clearer image of the original signal, so I did this by doubling the Nyquist rate to 0.2778 ($1 / 3.6$), producing this graph.
 
 %NYQUIST_RATE_x2
-\image{{Alias Example - Nyquist - Rate x2}}
+\image{Alias Example - Nyquist - Rate x2}
 
 For an easier comparison between these sampling options, I have built another graph just of the gradients, but also added another that may be interesting to consider.
 It is much wider than the graphs shown already, to help show off any long patterns within them.
 
 %RATE_COMPARISON
-\image{{Alias Example - Rate Comparison}}
+\image{Alias Example - Rate Comparison}
 
 At the top we see a gradient in red for the low-frequency signal that can be an alias for the high frequency signal, and below it the gradient where the distance between samples is 1.
 We can see how well it matches the alias signal, even though it is made from the original signal shown at the bottom in blue.

@@ -38,10 +38,10 @@ In either case, we have the maximum number of horizontal and vertical samples wh
 Coming back to 2x, this would be a reason to place the samples on a diagonal line, as you then get two vertical and horizontal samples per pixel and a solution to the 2-Rook problem.
 
 %2X
-\image{{Sample Patterns - 2x}}
+\image{Sample Patterns - 2x}
 
 %4X
-\image{{Sample Patterns - 4x}}
+\image{Sample Patterns - 4x}
 
 There are undoubtedly more potential sampling patterns than those I have discussed and created in these two graphics.
 You may notice a couple odd patterns in those graphics too, which have cyan dots on them, in addition to the red dots elsewhere.
@@ -103,7 +103,7 @@ There are undoubtedly more filters than these, and we will see some additional l
 I have put together a graphic of the shapes of these filter functions that I think will help you understand how they work:
 
 %BLEND_FILTERS
-\image{{Blend Filters}}
+\image{Blend Filters}
 
 The height of these functions would be the weighting of a sample, based on the X-value as this would be the distance from the center of the pixel.
 
@@ -126,28 +126,28 @@ Because it is rasterizing the graphics I made at specific resolutions, it is usi
 The differences between the filters are not always apparent, depending on the original graphic, so you may need to zoom in to spot them.
 
 {\graphicspath{{Media/Filters/}}
-\image{{Composite - Circles - 01 Point}}
-\image{{Composite - Circles - 02 Box}}
-\image{{Composite - Circles - 03 Triangle}}
-\image{{Composite - Circles - 04 Quadratic}}
-\image{{Composite - Circles - 05 Cubic}}
-\image{{Composite - Circles - 06 Gaussian}}
-\image{{Composite - Circles - 07 Catrom}}
-\image{{Composite - Circles - 08 Mitchell}}
+\image{Composite - Circles - 01 Point}
+\image{Composite - Circles - 02 Box}
+\image{Composite - Circles - 03 Triangle}
+\image{Composite - Circles - 04 Quadratic}
+\image{Composite - Circles - 05 Cubic}
+\image{Composite - Circles - 06 Gaussian}
+\image{Composite - Circles - 07 Catrom}
+\image{Composite - Circles - 08 Mitchell}
 }
 
 It may be difficult to spot some of the differences with these circles, which is why I made a second graphic that can also show the Moire pattern and did the same kind of processing on it.
 I think this second pattern does a better job showing differences between the filters, but the circles do demonstrate how large an impact the filters can have compared to not being used.
 
 {\graphicspath{{Media/Filters/}}
-\image{{Composite - Waves - 01 Point}}
-\image{{Composite - Waves - 02 Box}}
-\image{{Composite - Waves - 03 Triangle}}
-\image{{Composite - Waves - 04 Quadratic}}
-\image{{Composite - Waves - 05 Cubic}}
-\image{{Composite - Waves - 06 Gaussian}}
-\image{{Composite - Waves - 07 Catrom}}
-\image{{Composite - Waves - 08 Mitchell}}
+\image{Composite - Waves - 01 Point}
+\image{Composite - Waves - 02 Box}
+\image{Composite - Waves - 03 Triangle}
+\image{Composite - Waves - 04 Quadratic}
+\image{Composite - Waves - 05 Cubic}
+\image{Composite - Waves - 06 Gaussian}
+\image{Composite - Waves - 07 Catrom}
+\image{Composite - Waves - 08 Mitchell}
 }
 
 With all of that covered, time to get to multi-sampling, which is a pretty clever optimization to super-sampling.

@@ -5,6 +5,8 @@
 
 \input{"Preamble.tex"}
 
+\usepackage{multicol}
+
 \usepackage[backend=biber]{biblatex}
 \addbibresource{Sources.bib}
 
@@ -14,6 +16,7 @@
 %\pdfbookmark{\contentsname}{toc}	%adds a bookmark of the TOC to the file but not the list itself
 %\tableofcontents
 
+\cleardoublepage
 \input{"Sections - Article/00 Abstract.ltx"}
 
 \cleardoublepage
@@ -50,20 +53,20 @@
 \input{"Sections - Article/11 Enhanced Sub-Pixel Morphological Filtering.ltx"}
 
 \iffalse
-\graphicspath{{Screenshots/SSF2017/}}
 \cleardoublepage
+\graphicspath{{Screenshots/SSF2017/}}
 \input{"Sections - Article/12 Results - SSF2017.ltx"}
 
-\graphicspath{{Screenshots/SOTTR/}}
 \cleardoublepage
+\graphicspath{{Screenshots/SOTTR/}}
 \input{"Sections - Article/13 Results - SOTTR.ltx"}
 \fi
 
 \cleardoublepage
 \input{"Sections - Article/14 Conclusion.ltx"}
 
-\graphicspath{{Media/Mipmaps/}}
 \cleardoublepage
+\graphicspath{{Media/Mipmaps/}}
 \input{"Sections - Article/15 Mipmaps.ltx"}
 
 \nocite{*}
@@ -72,11 +75,11 @@
 \printbibliography
 
 \vspace{\fill}
-\begin{center}
-	{\changeurlcolor{black}{\qrcode[link, height=2cm, level=Quality]{https://github.com/GuestJim/Serious-Statistics-The-Aliasing-Adventure/releases}}}
+	\begin{center}
+	\vfill
+		{\changeurlcolor{black}\qrcode[height=2cm, level=Quality]{https://github.com/GuestJim/Serious-Statistics-The-Aliasing-Adventure/releases}}
 		
-	\vspace{0.25cm}
-	\href{https://github.com/GuestJim/Serious-Statistics-The-Aliasing-Adventure/releases}{Presentation and Article}
-\end{center}
-
+		\vspace{0.25cm}
+		\href{https://github.com/GuestJim/Serious-Statistics-The-Aliasing-Adventure/releases}{Presentation and Article}
+	\end{center}
 \end{document}
